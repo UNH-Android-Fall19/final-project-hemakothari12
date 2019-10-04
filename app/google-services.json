@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1015791077408",
+    "firebase_url": "https://sugarbroker-652bb.firebaseio.com",
+    "project_id": "sugarbroker-652bb",
+    "storage_bucket": "sugarbroker-652bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015791077408:android:bb240b39da070f8e945445",
+        "android_client_info": {
+          "package_name": "com.example.sugarbroker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015791077408-mcb672mtofu3c546p92b8cdlh80f5nfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4TjhK_NzkW53p2gR91XiXxJEHHw4Y318"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015791077408-mcb672mtofu3c546p92b8cdlh80f5nfp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
