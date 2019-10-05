@@ -8,10 +8,11 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
-
+    lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -56,25 +57,41 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun saveUserDetailsToFirebase() {
-//        val uid = FirebaseAuth.getInstance().uid ?: ""
-//        Log.d("UID", "UID is: $uid")
-//        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-//        val user = User(uid, name_edittext.text.toString(), address_edittext.text.toString(), phone_edittext.text.toString(), "User")
-//        ref.setValue(user)
-//            .addOnSuccessListener {
-//                Log.d("RegisterActivity", "Finally we saved the user to Firebase Database")
-//            }
-//            .addOnFailureListener {
-//                Log.d("RegisterActivity", "Failed to set value to database: ${it.message}")
-//            }
+        // Realtime database
 
-        lateinit var database: DatabaseReference
-// ...
-        database = FirebaseDatabase.getInstance().reference
+//        database = FirebaseDatabase.getInstance().reference
+//
+//
+//        val uid = FirebaseAuth.getInstance().uid ?: ""
+//        val user = User(uid, name_edittext.text.toString(), address_edittext.text.toString(), phone_edittext.text.toString(), "User")
+//        database.child("users").child(uid).setValue(user)
+
+
+        //##############################################
+
+        //Firestore database
 
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val user = User(uid, name_edittext.text.toString(), address_edittext.text.toString(), phone_edittext.text.toString(), "User")
-        database.child("users").child(UId).setValue(user)
+
+        val db = FirebaseFirestore.getInstance()
+
+        val user = hashMapOf(
+            "uid" to uid,
+            "name" to name_edittext.text.toString(),
+            "address" to address_edittext.text.toString(),
+            "phone" to phone_edittext.text.toString(),
+            "type" to "User"
+        )
+
+        db.collection("users")
+            .add(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d("Regi", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w("Regi", "Error adding document", e)
+            }
+
 
 
     }
