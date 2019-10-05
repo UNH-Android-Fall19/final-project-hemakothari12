@@ -57,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun saveUserDetailsToFirebase() {
-        // Realtime database
+        // Realtime database working
 
 //        database = FirebaseDatabase.getInstance().reference
 //
@@ -75,13 +75,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val db = FirebaseFirestore.getInstance()
 
-        val user = hashMapOf(
-            "uid" to uid,
-            "name" to name_edittext.text.toString(),
-            "address" to address_edittext.text.toString(),
-            "phone" to phone_edittext.text.toString(),
-            "type" to "User"
-        )
+        val user = User(uid, name_edittext.text.toString(), address_edittext.text.toString(), phone_edittext.text.toString(), "User")
 
         db.collection("users")
             .add(user)
@@ -91,8 +85,5 @@ class RegisterActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w("Regi", "Error adding document", e)
             }
-
-
-
     }
 }
