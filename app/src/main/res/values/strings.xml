@@ -4,4 +4,7 @@
     <string name="email">Email Address</string>
     <string name="password">Password</string>
     <string name="submit">Submit</string>
+    <string name="title_activity_user_home">UserHomeActivity</string>
+    <string name="tab_text_1">Tender</string>
+    <string name="tab_text_2">Resale</string>
 </resources>

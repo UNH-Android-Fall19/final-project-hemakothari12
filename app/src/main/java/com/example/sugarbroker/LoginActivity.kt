@@ -55,7 +55,8 @@ class LoginActivity : AppCompatActivity() {
                             } else if (value == "Seller") {
                                 Log.d("Values", "Values is seller")
                             } else {
-                                Log.d("Values", "Values is User")
+                                intent = Intent(applicationContext, UserHomeActivity::class.java)
+                                startActivity(intent)
                             }
 
                         } else {
