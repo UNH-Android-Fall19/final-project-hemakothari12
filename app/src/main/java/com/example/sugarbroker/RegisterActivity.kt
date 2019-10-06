@@ -77,10 +77,12 @@ class RegisterActivity : AppCompatActivity() {
 
         val user = User(uid, name_edittext.text.toString(), address_edittext.text.toString(), phone_edittext.text.toString(), "User")
 
+        //Add document with specific ID
         db.collection("users")
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                Log.d("Regi", "DocumentSnapshot added with ID: ${documentReference.id}")
+            .document(uid)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d("Regi", "DocumentSnapshot added with ID")
             }
             .addOnFailureListener { e ->
                 Log.w("Regi", "Error adding document", e)
