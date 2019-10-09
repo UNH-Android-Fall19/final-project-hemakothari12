@@ -66,14 +66,20 @@ class LoginActivity : AppCompatActivity() {
 
                         } else {
                             Log.d("LoginActivity", "No document found")
+
+                            Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                         }
                     }
                     .addOnFailureListener { exception ->
                         Log.d("LoginActivity", "Failed to fetch document: ", exception)
+
+                        Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                     }
             }
             .addOnFailureListener {
                 Log.d("LoginActivity", "Failed to Login: ${it.message}")
+
+                Toast.makeText(this, "Invalid username and password", Toast.LENGTH_SHORT).show()
             }
     }
 }
