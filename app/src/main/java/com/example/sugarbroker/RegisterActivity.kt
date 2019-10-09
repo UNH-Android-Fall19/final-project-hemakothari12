@@ -49,6 +49,9 @@ class RegisterActivity : AppCompatActivity() {
                 //else if successful
                 saveUserDetailsToFirebase()
                 Log.d("Main", "Successfully created user with uid: ${it?.result?.user?.uid} ")
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
             }
             .addOnFailureListener {
                 Log.d("Main", "Failed to create user: ${it.message}")
