@@ -55,11 +55,16 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("Document", "DocumentSnapshot data: ${document.data}")
 
                             if (value == "Admin") {
+                                Log.d("User Logged", "User Logged in is Admin")
                                 intent = Intent(applicationContext, AdminHomeActivity::class.java)
                                 startActivity(intent)
                             } else if (value == "Seller") {
+                                Log.d("User Logged", "User Logged in is Seller")
+
                                 Log.d("Values", "Values is seller")
                             } else {
+                                Log.d("User Logged", "User Logged in is User")
+
                                 intent = Intent(applicationContext, UserHomeActivity::class.java)
                                 startActivity(intent)
                             }

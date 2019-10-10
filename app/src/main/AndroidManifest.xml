@@ -12,10 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ForgotPasswordActivity"></activity>
-        <activity
-            android:name=".UserHomeActivity"
-            android:label="@string/title_activity_user_home"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UserHomeActivity" />
         <activity android:name=".AdminHomeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
