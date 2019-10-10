@@ -1,5 +1,6 @@
 package com.example.sugarbroker
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -10,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.sugarbroker.ui.main.SectionsPagerAdapter
+import com.google.firebase.auth.FirebaseAuth
 
 class UserHomeActivity : AppCompatActivity() {
 
@@ -46,9 +48,17 @@ class UserHomeActivity : AppCompatActivity() {
             R.id.logout -> {
                 //Implement Logout
                 Toast.makeText(this, "Implement Logout", Toast.LENGTH_SHORT).show()
+                performLogout()
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun performLogout() {
+        FirebaseAuth.getInstance().signOut()
+
+        intent = Intent(applicationContext, LoginActivity::class.java)
+        startActivity(intent)
     }
 }

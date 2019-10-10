@@ -1,10 +1,12 @@
 package com.example.sugarbroker
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 
 class AdminHomeActivity : AppCompatActivity() {
 
@@ -30,9 +32,17 @@ class AdminHomeActivity : AppCompatActivity() {
             R.id.logout -> {
                 //Implement Logout
                 Toast.makeText(this, "Implement Logout", Toast.LENGTH_SHORT).show()
+                performLogout()
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun performLogout() {
+        FirebaseAuth.getInstance().signOut()
+
+        intent = Intent(applicationContext, LoginActivity::class.java)
+        startActivity(intent)
     }
 }
