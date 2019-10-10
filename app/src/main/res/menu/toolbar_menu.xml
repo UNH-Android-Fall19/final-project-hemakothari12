@@ -8,7 +8,8 @@
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/logout"
+        android:icon="@drawable/ic_exit_to_app_white_24dp"
         android:title="Logout"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
 </menu>
