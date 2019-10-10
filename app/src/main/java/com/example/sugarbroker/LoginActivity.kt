@@ -22,11 +22,13 @@ class LoginActivity : AppCompatActivity() {
 
         newuser_textview.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
 
         forgotpassword_textview.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
     }
@@ -57,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
                             if (value == "Admin") {
                                 Log.d("User Logged", "User Logged in is Admin")
                                 intent = Intent(applicationContext, AdminHomeActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             } else if (value == "Seller") {
                                 Log.d("User Logged", "User Logged in is Seller")
@@ -66,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("User Logged", "User Logged in is User")
 
                                 intent = Intent(applicationContext, UserHomeActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             }
 

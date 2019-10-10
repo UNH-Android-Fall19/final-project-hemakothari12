@@ -25,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
             Log.d("Mainactivity", "Try to show login activity")
 
             val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
     }
@@ -51,6 +52,7 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d("Main", "Successfully created user with uid: ${it?.result?.user?.uid} ")
 
                 val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
             .addOnFailureListener {
