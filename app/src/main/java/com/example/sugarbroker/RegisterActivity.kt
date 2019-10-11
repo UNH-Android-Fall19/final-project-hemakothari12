@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -62,18 +61,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun saveUserDetailsToFirebase() {
-        // Realtime database working
-
-//        database = FirebaseDatabase.getInstance().reference
-//
-//
-//        val uid = FirebaseAuth.getInstance().uid ?: ""
-//        val user = User(uid, name_edittext.text.toString(), address_edittext.text.toString(), phone_edittext.text.toString(), "User")
-//        database.child("users").child(uid).setValue(user)
-
-
-        //##############################################
-
         //Firestore database
 
         val uid = FirebaseAuth.getInstance().uid ?: ""
