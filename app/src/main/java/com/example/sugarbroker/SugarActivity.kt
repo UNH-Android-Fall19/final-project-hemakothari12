@@ -9,26 +9,26 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sugarbroker.adapter.SugarRecyclerViewAdapter
-import com.example.sugarbroker.model.Sugar
+import com.example.sugarbroker.adapter.ResaleRecyclerViewAdapter
+import com.example.sugarbroker.model.Resale
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import kotlinx.android.synthetic.main.activity_sugar.*
+import kotlinx.android.synthetic.main.activity_resale.*
 
 class SugarActivity : AppCompatActivity() {
 
     private val TAG = "SugarActivity"
 
-    private var mAdapter: SugarRecyclerViewAdapter? = null
+    private var mAdapter: ResaleRecyclerViewAdapter? = null
 
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sugar)
+        setContentView(R.layout.activity_resale)
 
         firestoreDB = FirebaseFirestore.getInstance()
 
@@ -41,15 +41,15 @@ class SugarActivity : AppCompatActivity() {
                     return@EventListener
                 }
 
-                val sugarList = mutableListOf<Sugar>()
+                val sugarList = mutableListOf<Resale>()
 
                 for (doc in documentSnapshots!!) {
-                    val sugar = doc.toObject(Sugar::class.java)
+                    val sugar = doc.toObject(Resale::class.java)
                     sugar.id = doc.id
                     sugarList.add(sugar)
                 }
 
-                mAdapter = SugarRecyclerViewAdapter(sugarList, applicationContext, firestoreDB!!)
+                mAdapter = ResaleRecyclerViewAdapter(sugarList, applicationContext, firestoreDB!!)
                 sugar_list.adapter = mAdapter
             })
     }
@@ -65,15 +65,15 @@ class SugarActivity : AppCompatActivity() {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val sugarList = mutableListOf<Sugar>()
+                    val sugarList = mutableListOf<Resale>()
 
                     for (doc in task.result!!) {
-                        val sugar = doc.toObject<Sugar>(Sugar::class.java)
+                        val sugar = doc.toObject<Resale>(Resale::class.java)
                         sugar.id = doc.id
                         sugarList.add(sugar)
                     }
 
-                    mAdapter = SugarRecyclerViewAdapter(sugarList, applicationContext, firestoreDB!!)
+                    mAdapter = ResaleRecyclerViewAdapter(sugarList, applicationContext, firestoreDB!!)
                     val mLayoutManager = LinearLayoutManager(applicationContext)
                     sugar_list.layoutManager = mLayoutManager
                     sugar_list.itemAnimator = DefaultItemAnimator()
@@ -104,7 +104,7 @@ class SugarActivity : AppCompatActivity() {
                 return true
             }
             R.id.add -> {
-                val intent = Intent(this, AddSugarActivity::class.java)
+                val intent = Intent(this, AddResaleActivity::class.java)
                 startActivity(intent)
             }
         }

@@ -2,7 +2,7 @@ package com.example.sugarbroker.model
 
 import java.util.HashMap
 
-class Sugar {
+class Resale {
     var id: String? = null
     var millName: String? = null
     var price: String? = null

@@ -4,21 +4,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.sugarbroker.model.Sugar
+import com.example.sugarbroker.model.Resale
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_add_sugar.*
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_add_resale.*
 
-class AddSugarActivity : AppCompatActivity() {
+class AddResaleActivity : AppCompatActivity() {
 
-    private val TAG = "AddSugarActivity"
+    private val TAG = "AddResaleActivity"
 
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_sugar)
+        setContentView(R.layout.activity_add_resale)
 
         firestoreDB = FirebaseFirestore.getInstance()
 
@@ -49,7 +48,7 @@ class AddSugarActivity : AppCompatActivity() {
     }
 
     private fun updateSugar(id: String, millName: String, price: String) {
-        val sugar = Sugar(id, millName, price).toMap()
+        val sugar = Resale(id, millName, price).toMap()
 
         firestoreDB!!.collection("resale")
             .document(id)
@@ -65,7 +64,7 @@ class AddSugarActivity : AppCompatActivity() {
     }
 
     private fun addSugar(millName: String, price: String) {
-        val sugar = Sugar(millName, price).toMap()
+        val sugar = Resale(millName, price).toMap()
 
         firestoreDB!!.collection("resale")
             .add(sugar)

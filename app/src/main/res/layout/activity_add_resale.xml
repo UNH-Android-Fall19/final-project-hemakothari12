@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddSugarActivity">
+    tools:context=".AddResaleActivity">
 
     <EditText
         android:id="@+id/mill_name_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:hint="Java Sample Approach"
+        android:hint="Mill Name"
         android:inputType="textPersonName" />
 
     <EditText
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Java technology, Spring Framework - approach to Java by Sample."
+        android:hint="Price"
         android:inputType="textMultiLine" />
 
     <Button

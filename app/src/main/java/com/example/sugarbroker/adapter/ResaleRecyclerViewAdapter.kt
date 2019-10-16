@@ -10,23 +10,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sugarbroker.AddSugarActivity
+import com.example.sugarbroker.AddResaleActivity
 import com.example.sugarbroker.R
-import com.example.sugarbroker.SugarActivity
-import com.example.sugarbroker.model.Sugar
+import com.example.sugarbroker.model.Resale
 import com.google.firebase.firestore.FirebaseFirestore
 
-class SugarRecyclerViewAdapter(private val sugarList: MutableList<Sugar>, private val context: Context,
-                               private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<SugarRecyclerViewAdapter.ViewHolder>() {
+class ResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>, private val context: Context,
+                                private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<ResaleRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_sugar, parent, false)
+        val view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_resale, parent, false)
 
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val sugar= sugarList[position]
+        val sugar= resaleList[position]
 
         holder.millName.text = sugar.millName
         holder.price.text = sugar.price
@@ -36,8 +35,8 @@ class SugarRecyclerViewAdapter(private val sugarList: MutableList<Sugar>, privat
     }
 
     override fun getItemCount(): Int {
-        Log.d("Size", "Size is ${sugarList.size}")
-        return sugarList.size
+        Log.d("Size", "Size is ${resaleList.size}")
+        return resaleList.size
     }
 
 
@@ -56,12 +55,12 @@ class SugarRecyclerViewAdapter(private val sugarList: MutableList<Sugar>, privat
         }
     }
 
-    private fun updateSugar(sugar: Sugar) {
-        val intent = Intent(context, AddSugarActivity::class.java)
+    private fun updateSugar(resale: Resale) {
+        val intent = Intent(context, AddResaleActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra("UpdateSugarId", sugar.id)
-        intent.putExtra("UpdateSugarMillName", sugar.millName)
-        intent.putExtra("UpdateSugarPrice", sugar.price)
+        intent.putExtra("UpdateSugarId", resale.id)
+        intent.putExtra("UpdateSugarMillName", resale.millName)
+        intent.putExtra("UpdateSugarPrice", resale.price)
         context.startActivity(intent)
     }
 
@@ -70,9 +69,9 @@ class SugarRecyclerViewAdapter(private val sugarList: MutableList<Sugar>, privat
             .document(id)
             .delete()
             .addOnCompleteListener {
-                sugarList.removeAt(position)
+                resaleList.removeAt(position)
                 notifyItemRemoved(position)
-                notifyItemRangeChanged(position, sugarList.size)
+                notifyItemRangeChanged(position, resaleList.size)
                 Toast.makeText(context, "Note has been deleted!", Toast.LENGTH_SHORT).show()
             }
     }
