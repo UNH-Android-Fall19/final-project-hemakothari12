@@ -63,19 +63,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun saveUserDetailsToFirebase() {
 
-        // Realtime database working
-
-//        database = FirebaseDatabase.getInstance().reference
-//
-//        val uid = FirebaseAuth.getInstance().uid ?: ""
-//        val user = User(uid, name_edittext.text.toString(), address_edittext.text.toString(), phone_edittext.text.toString(), "User")
-//        database.child("users").child(uid).setValue(user)
-//            .addOnSuccessListener {
-//                Log.d("Register Activity", "User saved to firebase database")
-//            }
-//
-//
-//        //##############################################
         //Firestore database
 
         val uid = FirebaseAuth.getInstance().uid ?: ""

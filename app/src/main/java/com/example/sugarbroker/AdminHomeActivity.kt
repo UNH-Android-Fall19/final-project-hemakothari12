@@ -8,10 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -30,11 +26,6 @@ class AdminHomeActivity : AppCompatActivity() {
 
         fetchUser()
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        documentRef.addSnapshotListener(this, EventListener<DocumentSnapshot>())
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
@@ -69,41 +60,6 @@ class AdminHomeActivity : AppCompatActivity() {
 
     private fun fetchUser() {
         val adapter = GroupAdapter<GroupieViewHolder>()
-
-//        val ref = FirebaseDatabase.getInstance().getReference("/users")
-//        ref.addListenerForSingleValueEvent(object: ValueEventListener {
-//            override fun onDataChange(p0: DataSnapshot) {
-//                userlist_recyclerview.setHasFixedSize(true)
-//                p0.children.forEach {
-//                    Log.d("New Message", it.toString())
-//                    val user = it.getValue(User::class.java)
-//                    if (user != null) {
-//                        adapter.add(UserItem(user))
-//                    }
-//
-//                }
-//                userlist_recyclerview.adapter = adapter
-//                adapter.notifyDataSetChanged()
-//            }
-//
-//            override fun onCancelled(p0: DatabaseError) {
-//            }
-//        })
-
-
-//        documentRef.get()
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    Log.d("Document Fetched", "${document.id} => ${document.data}")
-//                    var user = User(document.getString("uid")!!, document.getString("name")!!, document.getString("address")!!, document.getString("phone")!!, document.getString("type")!!)
-//                    adapter.add(UserItem(user))
-//                }
-//
-//                userlist_recyclerview.adapter = adapter
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d("Document Failed to fetch", "Error getting documents: ", exception)
-//            }
         
         documentRef.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
             if (firebaseFirestoreException!= null) {
