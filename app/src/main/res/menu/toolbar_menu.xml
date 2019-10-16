@@ -12,4 +12,10 @@
         android:title="Logout"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:title="Add"
+        app:showAsAction="ifRoom" />
+
 </menu>

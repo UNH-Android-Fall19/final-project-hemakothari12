@@ -41,6 +41,8 @@ dependencies {
 
     implementation "com.xwray:groupie:2.7.0"
     implementation "com.xwray:groupie-kotlin-android-extensions:2.7.0"
+
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

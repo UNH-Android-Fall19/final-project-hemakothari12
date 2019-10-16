@@ -7,4 +7,8 @@
     <string name="title_activity_user_home">UserHomeActivity</string>
     <string name="tab_text_1">Tender</string>
     <string name="tab_text_2">Resale</string>
+    <string name="price">Price</string>
+    <string name="mill_name">Mill Name</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

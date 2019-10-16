@@ -1,0 +1,81 @@
+package com.example.sugarbroker
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import com.example.sugarbroker.model.Sugar
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_add_sugar.*
+import kotlinx.android.synthetic.main.activity_register.*
+
+class AddSugarActivity : AppCompatActivity() {
+
+    private val TAG = "AddSugarActivity"
+
+    private var firestoreDB: FirebaseFirestore? = null
+    internal var id: String? = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_add_sugar)
+
+        firestoreDB = FirebaseFirestore.getInstance()
+
+        val bundle = intent.extras
+        if (bundle != null) {
+            id = bundle.getString("UpdateSugarId")
+            Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
+
+            mill_name_edittext.setText(bundle.getString("UpdateSugarMillName"))
+            price_edittext.setText(bundle.getString("UpdateSugarPrice"))
+        }
+
+        add_button.setOnClickListener {
+            val millName = mill_name_edittext.text.toString()
+            val price = price_edittext.text.toString()
+
+            if (title.isNotEmpty()) {
+                if (id!!.isNotEmpty()) {
+                    updateSugar(id!!, millName, price)
+                } else {
+                    addSugar(millName, price)
+                }
+            }
+
+            finish()
+
+        }
+    }
+
+    private fun updateSugar(id: String, millName: String, price: String) {
+        val sugar = Sugar(id, millName, price).toMap()
+
+        firestoreDB!!.collection("resale")
+            .document(id)
+            .set(sugar)
+            .addOnSuccessListener {
+                Log.e(TAG, "Note document update successful!")
+                Toast.makeText(applicationContext, "Note has been updated!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error adding Note document", e)
+                Toast.makeText(applicationContext, "Note could not be updated!", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun addSugar(millName: String, price: String) {
+        val sugar = Sugar(millName, price).toMap()
+
+        firestoreDB!!.collection("resale")
+            .add(sugar)
+            .addOnSuccessListener { documentReference ->
+                Log.e(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
+                Toast.makeText(applicationContext, "Note has been added!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error adding Note document", e)
+                Toast.makeText(applicationContext, "Note could not be added!", Toast.LENGTH_SHORT).show()
+            }
+    }
+}

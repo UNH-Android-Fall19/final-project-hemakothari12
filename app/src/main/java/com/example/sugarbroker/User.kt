@@ -7,3 +7,6 @@ data class User(
     var phone: String,
     var type: String
 )
+//{
+//    constructor() : this("", "", "", "", "")
+//}

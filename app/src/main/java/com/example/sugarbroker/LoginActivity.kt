@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
 
                             if (value == "Admin") {
                                 Log.d("User Logged", "User Logged in is Admin")
-                                intent = Intent(applicationContext, AdminHomeActivity::class.java)
+                                intent = Intent(applicationContext, SugarActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             } else if (value == "Seller") {
@@ -83,6 +83,12 @@ class LoginActivity : AppCompatActivity() {
 
                         Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                     }
+
+//
+//                Log.d("User Logged", "User Logged in is Admin")
+//                intent = Intent(applicationContext, AdminHomeActivity::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                startActivity(intent)
             }
             .addOnFailureListener {
                 Log.d("LoginActivity", "Failed to Login: ${it.message}")
