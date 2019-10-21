@@ -11,4 +11,11 @@
     <string name="mill_name">Mill Name</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="title_resale">Resale</string>
+    <string name="title_tender">Tender</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_users">Users</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

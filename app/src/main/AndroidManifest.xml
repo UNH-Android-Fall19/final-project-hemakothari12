@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.AddResaleActivity"></activity>
+        <activity android:name=".activity.AddTenderActivity"></activity>
         <activity android:name=".activity.ResaleActivity" />
         <activity android:name=".activity.ForgotPasswordActivity" />
         <activity android:name=".activity.UserHomeActivity" />
