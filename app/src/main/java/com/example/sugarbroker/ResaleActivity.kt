@@ -17,9 +17,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.activity_resale.*
 
-class SugarActivity : AppCompatActivity() {
+class ResaleActivity : AppCompatActivity() {
 
-    private val TAG = "SugarActivity"
+    private val TAG = "ResaleActivity"
 
     private var mAdapter: ResaleRecyclerViewAdapter? = null
 

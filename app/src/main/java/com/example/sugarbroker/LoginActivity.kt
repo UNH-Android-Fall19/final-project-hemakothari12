@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
 
                             if (value == "Admin") {
                                 Log.d("User Logged", "User Logged in is Admin")
-                                intent = Intent(applicationContext, SugarActivity::class.java)
+                                intent = Intent(applicationContext, ResaleActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             } else if (value == "Seller") {

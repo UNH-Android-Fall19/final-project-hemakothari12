@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AddResaleActivity"></activity>
-        <activity android:name=".SugarActivity" />
+        <activity android:name=".ResaleActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".UserHomeActivity" />
         <activity android:name=".AdminHomeActivity" />
