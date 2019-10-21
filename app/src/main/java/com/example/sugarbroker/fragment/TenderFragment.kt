@@ -31,6 +31,8 @@ class TenderFragment : Fragment() {
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +57,7 @@ class TenderFragment : Fragment() {
                     tenderList.add(tender)
                 }
 
-                mAdapter = TenderRecyclerViewAdapter(tenderList, activity!!.applicationContext, firestoreDB!!)
+                mAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
                 tender_list.adapter = mAdapter
             })
 
@@ -82,8 +84,8 @@ class TenderFragment : Fragment() {
                         tenderList.add(tender)
                     }
 
-                    mAdapter = TenderRecyclerViewAdapter(tenderList, activity!!.applicationContext, firestoreDB!!)
-                    val mLayoutManager = LinearLayoutManager(activity!!.applicationContext)
+                    mAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
+                    val mLayoutManager = LinearLayoutManager(context!!)
                     tender_list.layoutManager = mLayoutManager
                     tender_list.itemAnimator = DefaultItemAnimator()
                     tender_list.adapter = mAdapter
@@ -111,7 +113,7 @@ class TenderFragment : Fragment() {
             }
             R.id.add -> {
                 Log.d("TenderFragment", "Add Tender clicked")
-                val intent = Intent(activity!!.applicationContext, AddTenderActivity::class.java)
+                val intent = Intent(context!!, AddTenderActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -122,7 +124,7 @@ class TenderFragment : Fragment() {
     private fun performLogout() {
         FirebaseAuth.getInstance().signOut()
 
-        val intent = Intent(activity!!.applicationContext, LoginActivity::class.java)
+        val intent = Intent(context!!, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }

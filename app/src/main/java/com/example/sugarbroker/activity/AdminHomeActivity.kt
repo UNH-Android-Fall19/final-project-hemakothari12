@@ -89,6 +89,10 @@ class AdminHomeActivity : AppCompatActivity() {
                 performLogout()
                 return true
             }
+            R.id.add -> {
+                val intent = Intent(this, AddTenderActivity::class.java)
+                startActivity(intent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
