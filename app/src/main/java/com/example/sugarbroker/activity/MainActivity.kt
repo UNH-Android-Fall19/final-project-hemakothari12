@@ -1,8 +1,9 @@
-package com.example.sugarbroker
+package com.example.sugarbroker.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.sugarbroker.R
 
 class MainActivity : AppCompatActivity() {
 

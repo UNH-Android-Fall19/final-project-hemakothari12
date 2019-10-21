@@ -1,9 +1,10 @@
-package com.example.sugarbroker
+package com.example.sugarbroker.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.sugarbroker.R
 import com.example.sugarbroker.model.Resale
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_resale.*

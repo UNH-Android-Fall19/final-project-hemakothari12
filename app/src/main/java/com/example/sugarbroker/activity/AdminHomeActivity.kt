@@ -1,4 +1,4 @@
-package com.example.sugarbroker
+package com.example.sugarbroker.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.sugarbroker.R
+import com.example.sugarbroker.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.xwray.groupie.GroupAdapter
@@ -71,7 +73,13 @@ class AdminHomeActivity : AppCompatActivity() {
                 when (dc.type) {
                     DocumentChange.Type.ADDED -> {
                         Log.d("AdminHomeActivity", "New city: ${dc.document.data}")
-                        var user = User(dc.document.getString("uid")!!, dc.document.getString("name")!!, dc.document.getString("address")!!, dc.document.getString("phone")!!, dc.document.getString("type")!!)
+                        var user = User(
+                            dc.document.getString("uid")!!,
+                            dc.document.getString("name")!!,
+                            dc.document.getString("address")!!,
+                            dc.document.getString("phone")!!,
+                            dc.document.getString("type")!!
+                        )
                         adapter.add(UserItem(user))
                     }
                     DocumentChange.Type.MODIFIED -> {

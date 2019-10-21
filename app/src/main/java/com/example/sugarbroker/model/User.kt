@@ -1,4 +1,4 @@
-package com.example.sugarbroker
+package com.example.sugarbroker.model
 
 data class User(
     var uid: String,

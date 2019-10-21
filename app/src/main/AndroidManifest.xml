@@ -11,14 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddResaleActivity"></activity>
-        <activity android:name=".ResaleActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".UserHomeActivity" />
-        <activity android:name=".AdminHomeActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.AddResaleActivity"></activity>
+        <activity android:name=".activity.ResaleActivity" />
+        <activity android:name=".activity.ForgotPasswordActivity" />
+        <activity android:name=".activity.UserHomeActivity" />
+        <activity android:name=".activity.AdminHomeActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

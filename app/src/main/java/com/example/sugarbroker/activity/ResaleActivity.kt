@@ -1,4 +1,4 @@
-package com.example.sugarbroker
+package com.example.sugarbroker.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sugarbroker.R
 import com.example.sugarbroker.adapter.ResaleRecyclerViewAdapter
 import com.example.sugarbroker.model.Resale
 import com.google.firebase.auth.FirebaseAuth
