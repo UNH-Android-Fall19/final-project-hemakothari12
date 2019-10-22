@@ -20,8 +20,9 @@ class ResaleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_resale, container, false)
         // Inflate the layout for this fragment
+        root = inflater.inflate(R.layout.fragment_resale, container, false)
+
         return root
     }
 
