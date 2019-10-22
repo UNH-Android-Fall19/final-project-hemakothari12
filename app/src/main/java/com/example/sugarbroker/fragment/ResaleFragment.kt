@@ -14,12 +14,15 @@ import com.example.sugarbroker.R
  */
 class ResaleFragment : Fragment() {
 
+    private var root: View? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        root = inflater.inflate(R.layout.fragment_resale, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_resale, container, false)
+        return root
     }
 
 

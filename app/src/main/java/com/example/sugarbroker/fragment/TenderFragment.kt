@@ -8,13 +8,11 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.EventListener
 import com.example.sugarbroker.R
-import com.example.sugarbroker.activity.AddTenderActivity
-import com.example.sugarbroker.activity.LoginActivity
 import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Tender
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.fragment_tender.*
@@ -31,6 +29,7 @@ class TenderFragment : Fragment() {
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
 
+    private var root: View? = null
 
 
     override fun onCreateView(
@@ -39,6 +38,8 @@ class TenderFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         firestoreDB = FirebaseFirestore.getInstance()
+
+        root = inflater.inflate(R.layout.fragment_tender, container, false)
 
         loadTenderList()
 
@@ -58,10 +59,11 @@ class TenderFragment : Fragment() {
                 }
 
                 tenderAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
-                tender_list.adapter = tenderAdapter
+                val tenderListRV = root!!.findViewById<View>(R.id.tender_list) as RecyclerView
+                tenderListRV.adapter = tenderAdapter
             })
 
-        return inflater.inflate(R.layout.fragment_tender, container, false)
+        return root
     }
 
     override fun onDestroy() {
@@ -94,40 +96,4 @@ class TenderFragment : Fragment() {
                 }
             }
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.toolbar_menu, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.search -> {
-//                Log.d("Impletemebt serach", "Implement search")
-//                return true
-//            }
-//            R.id.logout -> {
-//                //Implemented Logout
-//                performLogout()
-//                return true
-//            }
-//            R.id.add -> {
-//                Log.d("TenderFragment", "Add Tender clicked")
-//                val intent = Intent(context!!, AddTenderActivity::class.java)
-//                startActivity(intent)
-//            }
-//        }
-//
-//        return super.onOptionsItemSelected(item)
-//    }
-
-    private fun performLogout() {
-        FirebaseAuth.getInstance().signOut()
-
-        val intent = Intent(context!!, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-    }
-
-
 }
