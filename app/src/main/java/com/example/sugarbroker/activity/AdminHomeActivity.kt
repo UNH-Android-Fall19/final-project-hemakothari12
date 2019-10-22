@@ -31,22 +31,22 @@ class AdminHomeActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.navigation_resale -> {
                 Log.d("AdminHomeActivity", "Resale Clicked")
-                replaceFragment(ResaleFragment())
+                replaceFragment(ResaleFragment(), "Resale")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_tender -> {
                 Log.d("AdminHomeActivity", "Tender Clicked")
-                replaceFragment(TenderFragment())
+                replaceFragment(TenderFragment(), "Tender")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_orders -> {
                 Log.d("AdminHomeActivity", "Orders Clicked")
-                replaceFragment(OrdersFragment())
+                replaceFragment(OrdersFragment(), "Orders")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_users -> {
                 Log.d("AdminHomeActivity", "Users Clicked")
-                replaceFragment(UsersFragment())
+                replaceFragment(UsersFragment(), "Users")
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -61,12 +61,13 @@ class AdminHomeActivity : AppCompatActivity() {
 //        fetchUser()
 
         bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemReselectedListener)
-        replaceFragment(ResaleFragment())
+        replaceFragment(ResaleFragment(), "Resale")
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment, screen: String) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment, screen)
+        fragmentTransaction.addToBackStack(screen)
         fragmentTransaction.commit()
     }
 
@@ -90,8 +91,34 @@ class AdminHomeActivity : AppCompatActivity() {
                 return true
             }
             R.id.add -> {
-                val intent = Intent(this, AddTenderActivity::class.java)
-                startActivity(intent)
+                val tag =
+                    supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+                        .name
+
+                Log.d("Tag vale", "${tag}")
+
+                when(tag) {
+                    "Resale" -> {
+                        val intent = Intent(this, AddResaleActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "Tender" -> {
+                        val intent = Intent(this, AddTenderActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "Orders" -> {
+                        Log.d("AdminHomeActivity", "Implement Add order")
+//                        val intent = Intent(this, AddTenderActivity::class.java)
+//                        startActivity(intent)
+                    }
+                    "Users" -> {
+                        Log.d("AdminHomeActivity", "Implement Add Users")
+//                        val intent = Intent(this, AddTenderActivity::class.java)
+//                        startActivity(intent)
+                    }
+                }
+
+
             }
         }
         return super.onOptionsItemSelected(item)

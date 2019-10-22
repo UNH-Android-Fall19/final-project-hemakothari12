@@ -26,7 +26,7 @@ class TenderFragment : Fragment() {
 
     private val TAG = "TenderFragment"
 
-    private var mAdapter: TenderRecyclerViewAdapter? = null
+    private var tenderAdapter: TenderRecyclerViewAdapter? = null
 
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
@@ -57,8 +57,8 @@ class TenderFragment : Fragment() {
                     tenderList.add(tender)
                 }
 
-                mAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
-                tender_list.adapter = mAdapter
+                tenderAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
+                tender_list.adapter = tenderAdapter
             })
 
         return inflater.inflate(R.layout.fragment_tender, container, false)
@@ -84,42 +84,42 @@ class TenderFragment : Fragment() {
                         tenderList.add(tender)
                     }
 
-                    mAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
+                    tenderAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
                     val mLayoutManager = LinearLayoutManager(context!!)
-                    tender_list.layoutManager = mLayoutManager
+                    tender_list.layoutManager = mLayoutManager!!
                     tender_list.itemAnimator = DefaultItemAnimator()
-                    tender_list.adapter = mAdapter
+                    tender_list.adapter = tenderAdapter
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.exception)
                 }
             }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.toolbar_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.search -> {
-                Log.d("Impletemebt serach", "Implement search")
-                return true
-            }
-            R.id.logout -> {
-                //Implemented Logout
-                performLogout()
-                return true
-            }
-            R.id.add -> {
-                Log.d("TenderFragment", "Add Tender clicked")
-                val intent = Intent(context!!, AddTenderActivity::class.java)
-                startActivity(intent)
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.search -> {
+//                Log.d("Impletemebt serach", "Implement search")
+//                return true
+//            }
+//            R.id.logout -> {
+//                //Implemented Logout
+//                performLogout()
+//                return true
+//            }
+//            R.id.add -> {
+//                Log.d("TenderFragment", "Add Tender clicked")
+//                val intent = Intent(context!!, AddTenderActivity::class.java)
+//                startActivity(intent)
+//            }
+//        }
+//
+//        return super.onOptionsItemSelected(item)
+//    }
 
     private fun performLogout() {
         FirebaseAuth.getInstance().signOut()
