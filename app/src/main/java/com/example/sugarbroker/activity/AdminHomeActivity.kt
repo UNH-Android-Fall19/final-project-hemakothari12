@@ -61,7 +61,30 @@ class AdminHomeActivity : AppCompatActivity() {
 //        fetchUser()
 
         bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemReselectedListener)
-        replaceFragment(ResaleFragment(), "Resale")
+
+
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+                .name
+            when(tag) {
+                "Resale" -> {
+                    replaceFragment(ResaleFragment(), "Resale")
+                }
+                "Tender" -> {
+                    replaceFragment(TenderFragment(), "Tender")
+                }
+                "Orders" -> {
+                    replaceFragment(OrdersFragment(), "Orders")
+                }
+                "Users" -> {
+                    replaceFragment(UsersFragment(), "Users")
+                }
+            }
+        }
+        else {
+            replaceFragment(ResaleFragment(), "Resale")
+        }
+
     }
 
     private fun replaceFragment(fragment: Fragment, screen: String) {

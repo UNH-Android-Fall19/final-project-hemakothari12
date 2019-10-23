@@ -1,7 +1,6 @@
 package com.example.sugarbroker.fragment
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -88,9 +87,10 @@ class TenderFragment : Fragment() {
 
                     tenderAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
                     val mLayoutManager = LinearLayoutManager(context!!)
-                    tender_list.layoutManager = mLayoutManager!!
-                    tender_list.itemAnimator = DefaultItemAnimator()
-                    tender_list.adapter = tenderAdapter
+                    val tenderListRV = root!!.findViewById<View>(R.id.tender_list) as RecyclerView
+                    tenderListRV.layoutManager = mLayoutManager!!
+                    tenderListRV.itemAnimator = DefaultItemAnimator()
+                    tenderListRV.adapter = tenderAdapter
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.exception)
                 }
