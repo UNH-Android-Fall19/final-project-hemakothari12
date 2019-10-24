@@ -98,7 +98,8 @@ class AdminHomeActivity : AppCompatActivity() {
 
         val inflater = menuInflater
         inflater.inflate(R.menu.toolbar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
