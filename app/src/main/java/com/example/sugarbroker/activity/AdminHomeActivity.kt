@@ -12,16 +12,11 @@ import com.example.sugarbroker.R
 import com.example.sugarbroker.fragment.OrdersFragment
 import com.example.sugarbroker.fragment.ResaleFragment
 import com.example.sugarbroker.fragment.TenderFragment
-import com.example.sugarbroker.fragment.UsersFragment
-import com.example.sugarbroker.model.User
+import com.example.sugarbroker.fragment.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_admin_home.*
-import kotlinx.android.synthetic.main.activity_user_row.view.*
 
 
 class AdminHomeActivity : AppCompatActivity() {
@@ -46,7 +41,7 @@ class AdminHomeActivity : AppCompatActivity() {
             }
             R.id.navigation_users -> {
                 Log.d("AdminHomeActivity", "Users Clicked")
-                replaceFragment(UsersFragment(), "Users")
+                replaceFragment(UserFragment(), "Users")
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -77,7 +72,7 @@ class AdminHomeActivity : AppCompatActivity() {
                     replaceFragment(OrdersFragment(), "Orders")
                 }
                 "Users" -> {
-                    replaceFragment(UsersFragment(), "Users")
+                    replaceFragment(UserFragment(), "Users")
                 }
             }
         }
@@ -136,9 +131,8 @@ class AdminHomeActivity : AppCompatActivity() {
 //                        startActivity(intent)
                     }
                     "Users" -> {
-                        Log.d("AdminHomeActivity", "Implement Add Users")
-//                        val intent = Intent(this, AddTenderActivity::class.java)
-//                        startActivity(intent)
+                        Log.d("AdminHomeActivity", "Cannot Add Users but can only update")
+                        Toast.makeText(this, "Cannot Add User but onlu Update", Toast.LENGTH_SHORT).show()
                     }
                 }
 

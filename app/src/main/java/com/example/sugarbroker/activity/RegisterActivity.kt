@@ -8,12 +8,10 @@ import android.widget.Toast
 import com.example.sugarbroker.R
 import com.example.sugarbroker.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
-    lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -52,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
                 saveUserDetailsToFirebase()
                 Log.d("Main", "Successfully created user with uid: ${it?.result?.user?.uid} ")
 
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, UserHomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
@@ -73,6 +71,8 @@ class RegisterActivity : AppCompatActivity() {
         val user = User(
             uid,
             name_edittext.text.toString(),
+            email_edittext.text.toString(),
+            password_edittext.text.toString(),
             address_edittext.text.toString(),
             phone_edittext.text.toString(),
             "User"
