@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SugarBroker</string>
-    <string name="company_name">Jitendra Ramanlal Kothari</string>
+    <string name="company_name">Jeetu Pune</string>
     <string name="email">Email Address</string>
     <string name="password">Password</string>
     <string name="submit">Submit</string>
@@ -17,6 +17,7 @@
     <string name="title_users">Users</string>
     <string name="name">Name</string>
     <string name="phone">Phone</string>
+    <string name="capture_photo">Capture photo...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
