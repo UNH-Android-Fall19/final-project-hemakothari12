@@ -88,7 +88,7 @@ class TenderFragment : Fragment() {
                     tenderAdapter = TenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
                     val mLayoutManager = LinearLayoutManager(context!!)
                     val tenderListRV = root!!.findViewById<View>(R.id.tender_list) as RecyclerView
-                    tenderListRV.layoutManager = mLayoutManager!!
+                    tenderListRV.layoutManager = mLayoutManager
                     tenderListRV.itemAnimator = DefaultItemAnimator()
                     tenderListRV.adapter = tenderAdapter
                 } else {
