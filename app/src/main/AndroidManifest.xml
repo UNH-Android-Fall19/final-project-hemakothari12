@@ -19,6 +19,7 @@
         <activity android:name=".activity.AddResaleActivity"></activity>
         <activity android:name=".activity.AddTenderActivity"></activity>
         <activity android:name=".activity.AddUserActivity"></activity>
+        <activity android:name=".activity.DetailTenderActivity"></activity>
         <activity android:name=".activity.ResaleActivity" />
         <activity android:name=".activity.ForgotPasswordActivity" />
         <activity android:name=".activity.UserHomeActivity" />

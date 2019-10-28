@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.AddTenderActivity
+import com.example.sugarbroker.activity.DetailTenderActivity
 import com.example.sugarbroker.model.Tender
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -31,6 +32,13 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         holder.price.text = tender.price
 
         holder.book.setOnClickListener { updateTender(tender) }
+
+        holder.itemView.setOnClickListener {
+//            Toast.makeText(context, "Clicked on item $position", Toast.LENGTH_SHORT).show()
+
+            //Call Details view
+            detailTender(tender)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -50,6 +58,15 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
 
             book = view.findViewById(R.id.ivbook)
         }
+    }
+
+    private fun detailTender(tender: Tender) {
+        val intent = Intent(context, DetailTenderActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateTenderId", tender.id)
+        intent.putExtra("UpdateTenderMillName", tender.millName)
+        intent.putExtra("UpdateTenderPrice", tender.price)
+        context.startActivity(intent)
     }
 
     private fun updateTender(tender: Tender) {

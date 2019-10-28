@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
@@ -57,6 +58,7 @@ class UserTenderFragment : Fragment() {
                 tenderAdapter = UserTenderRecyclerViewAdapter(tenderList, context!!, firestoreDB!!)
                 val tenderListRV = root!!.findViewById<View>(R.id.user_tender_list) as RecyclerView
                 tenderListRV.adapter = tenderAdapter
+                tenderListRV.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
             })
 
         return root
