@@ -35,7 +35,7 @@
             app:civ_border_width="0dp" />
 
         <TextView
-            android:id="@+id/mill_name_edittext"
+            android:id="@+id/mill_name_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -43,7 +43,7 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/price_edittext"
+            android:id="@+id/price_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -51,7 +51,7 @@
             android:inputType="textMultiLine" />
 
         <TextView
-            android:id="@+id/milladdress_edittext"
+            android:id="@+id/milladdress_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -59,7 +59,7 @@
             android:inputType="textMultiLine" />
 
         <TextView
-            android:id="@+id/millcontact_edittext"
+            android:id="@+id/millcontact_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

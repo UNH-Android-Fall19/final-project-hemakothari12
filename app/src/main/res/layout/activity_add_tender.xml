@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="Price"
+            android:hint="Mill Address"
             android:inputType="textMultiLine" />
 
         <EditText
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="Price"
+            android:hint="Contact"
             android:inputType="textMultiLine" />
 
         <Button

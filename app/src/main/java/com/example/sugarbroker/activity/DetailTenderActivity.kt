@@ -36,8 +36,10 @@ class DetailTenderActivity : AppCompatActivity() {
             id = bundle.getString("UpdateTenderId")
             Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
 
-            mill_name_edittext.setText(bundle.getString("UpdateTenderMillName"))
-            price_edittext.setText(bundle.getString("UpdateTenderPrice"))
+            mill_name_textview.setText(bundle.getString("UpdateTenderMillName"))
+            price_textview.setText(bundle.getString("UpdateTenderPrice"))
+            milladdress_textview.setText(bundle.getString("UpdateTenderAddress"))
+            millcontact_textview.setText(bundle.getString("UpdateTenderContact"))
         }
 
         prepareCroperino()
@@ -48,14 +50,16 @@ class DetailTenderActivity : AppCompatActivity() {
         }
 
         buy_button.setOnClickListener {
-            val millName = mill_name_edittext.text.toString()
-            val price = price_edittext.text.toString()
+            val millName = mill_name_textview.text.toString()
+            val price = price_textview.text.toString()
+            val millAddress = milladdress_textview.text.toString()
+            val millContact = millcontact_textview.text.toString()
 
             if (title.isNotEmpty()) {
                 if (id!!.isNotEmpty()) {
-                    updateTender(id!!, millName, price)
+                    updateTender(id!!, millName, price, millAddress, millContact)
                 } else {
-                    addTender(millName, price)
+                    addTender(millName, price, millAddress, millContact)
                 }
             }
 
@@ -65,8 +69,8 @@ class DetailTenderActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateTender(id: String, millName: String, price: String) {
-        val tender = Tender(id, millName, price).toMap()
+    private fun updateTender(id: String, millName: String, price: String, millAddress: String, millContact: String) {
+        val tender = Tender(id, millName, price, millAddress, millContact)
 
         firestoreDB!!.collection("tender")
             .document(id)
@@ -81,8 +85,8 @@ class DetailTenderActivity : AppCompatActivity() {
             }
     }
 
-    private fun addTender(millName: String, price: String) {
-        val tender = Tender(millName, price).toMap()
+    private fun addTender(millName: String, price: String, millAddress: String, millContact: String) {
+        val tender = Tender(millName, price, millAddress, millContact)
 
         firestoreDB!!.collection("tender")
             .add(tender)

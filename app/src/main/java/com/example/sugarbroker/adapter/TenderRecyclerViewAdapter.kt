@@ -19,7 +19,7 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
                                 private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<TenderRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_tender, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tender, parent, false)
 
         return ViewHolder(view)
     }
@@ -61,6 +61,9 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         intent.putExtra("UpdateTenderId", tender.id)
         intent.putExtra("UpdateTenderMillName", tender.millName)
         intent.putExtra("UpdateTenderPrice", tender.price)
+        intent.putExtra("UpdateTenderAddress", tender.address)
+        intent.putExtra("UpdateTenderContact", tender.contact)
+//        intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
     }
 

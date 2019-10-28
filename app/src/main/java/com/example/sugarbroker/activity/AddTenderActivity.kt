@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_add_tender.*
 import com.mikelau.croperino.CroperinoConfig
 import com.mikelau.croperino.Croperino
 import com.mikelau.croperino.CroperinoFileUtil
+import kotlinx.android.synthetic.main.activity_add_tender.add_button
+import kotlinx.android.synthetic.main.activity_add_user.*
 
 class AddTenderActivity : AppCompatActivity() {
 
@@ -38,6 +40,9 @@ class AddTenderActivity : AppCompatActivity() {
 
             mill_name_edittext.setText(bundle.getString("UpdateTenderMillName"))
             price_edittext.setText(bundle.getString("UpdateTenderPrice"))
+            milladdress_edittext.setText(bundle.getString("UpdateTenderAddress"))
+            millcontact_edittext.setText(bundle.getString("UpdateTenderContact"))
+//            sugar_image.setText(bundle.getString("UpdateTenderUrl"))
         }
 
         prepareCroperino()
@@ -57,12 +62,14 @@ class AddTenderActivity : AppCompatActivity() {
         add_button.setOnClickListener {
             val millName = mill_name_edittext.text.toString()
             val price = price_edittext.text.toString()
+            val millAddress = milladdress_edittext.text.toString()
+            val millContact = millcontact_edittext.text.toString()
 
             if (title.isNotEmpty()) {
                 if (id!!.isNotEmpty()) {
-                    updateTender(id!!, millName, price)
+                    updateTender(id!!, millName, price, millAddress, millContact)
                 } else {
-                    addTender(millName, price)
+                    addTender(millName, price, millAddress, millContact)
                 }
             }
 
@@ -72,8 +79,8 @@ class AddTenderActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateTender(id: String, millName: String, price: String) {
-        val tender = Tender(id, millName, price).toMap()
+    private fun updateTender(id: String, millName: String, price: String, millAddress: String, millContact: String) {
+        val tender = Tender(id, millName, price, millAddress, millContact)
 
         firestoreDB!!.collection("tender")
             .document(id)
@@ -88,8 +95,8 @@ class AddTenderActivity : AppCompatActivity() {
             }
     }
 
-    private fun addTender(millName: String, price: String) {
-        val tender = Tender(millName, price).toMap()
+    private fun addTender(millName: String, price: String, millAddress: String, millContact: String) {
+        val tender = Tender(millName, price, millAddress, millContact)
 
         firestoreDB!!.collection("tender")
             .add(tender)
