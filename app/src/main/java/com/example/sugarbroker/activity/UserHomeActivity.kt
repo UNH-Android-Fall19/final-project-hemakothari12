@@ -33,7 +33,7 @@ class UserHomeActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         val inflater = menuInflater
-        inflater.inflate(R.menu.toolbar_menu, menu)
+        inflater.inflate(R.menu.user_toolbar_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
