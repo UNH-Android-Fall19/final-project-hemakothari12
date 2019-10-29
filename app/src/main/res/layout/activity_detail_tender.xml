@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Mill Name"
-                android:inputType="textPersonName" />
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
@@ -74,34 +74,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Price"
-                android:inputType="textPersonName" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/milladdress_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Price"
                 android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/millcontact_textview"
-                android:layout_width="match_parent"
+                android:id="@+id/milladdress_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Price"
+                android:layout_weight="1"
+                android:text="Mill Address" />
+
+            <TextView
+                android:id="@+id/milladdress_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Mill Address"
+                android:inputType="textMultiLine" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/millcontact_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mill Contact" />
+
+            <TextView
+                android:id="@+id/millcontact_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Mill Contact"
                 android:inputType="textMultiLine" />
         </LinearLayout>
 
@@ -111,8 +127,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Buy" />
-
-
 
     </LinearLayout>
 </ScrollView>
