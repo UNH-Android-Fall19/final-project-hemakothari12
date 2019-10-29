@@ -18,7 +18,6 @@ import com.mikelau.croperino.CroperinoConfig
 import com.mikelau.croperino.Croperino
 import com.mikelau.croperino.CroperinoFileUtil
 import kotlinx.android.synthetic.main.activity_add_tender.add_button
-import kotlinx.android.synthetic.main.activity_add_user.*
 
 class AddTenderActivity : AppCompatActivity() {
 
@@ -114,8 +113,8 @@ class AddTenderActivity : AppCompatActivity() {
         //prepare camera, gallery and ask for storage permissions.
         CroperinoConfig(
             "IMG_" + System.currentTimeMillis() + ".jpg",
-            "/VProperty/Pictures",
-            "/sdcard/VProperty/Pictures"
+            "/SugarMerchant/Pictures",
+            "/sdcard/SugarMerchant/Pictures"
         )
         CroperinoFileUtil.verifyStoragePermissions(this@AddTenderActivity)
         CroperinoFileUtil.setupDirectory(this@AddTenderActivity)
