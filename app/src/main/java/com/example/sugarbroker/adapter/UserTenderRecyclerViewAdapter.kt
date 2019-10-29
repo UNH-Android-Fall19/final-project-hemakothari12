@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.AddTenderActivity
+import com.example.sugarbroker.activity.BuyTenderActivity
 import com.example.sugarbroker.activity.DetailTenderActivity
 import com.example.sugarbroker.model.Tender
 import com.google.firebase.firestore.FirebaseFirestore
@@ -68,7 +69,7 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
     }
 
     private fun updateTender(tender: Tender) {
-        val intent = Intent(context, AddTenderActivity::class.java)
+        val intent = Intent(context, BuyTenderActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.putExtra("UpdateTenderId", tender.id)
         intent.putExtra("UpdateTenderMillName", tender.millName)
