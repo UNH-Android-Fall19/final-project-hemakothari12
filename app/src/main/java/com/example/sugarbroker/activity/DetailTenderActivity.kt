@@ -42,13 +42,6 @@ class DetailTenderActivity : AppCompatActivity() {
             millcontact_textview.setText(bundle.getString("UpdateTenderContact"))
         }
 
-        prepareCroperino()
-
-        sugar_image.setOnClickListener {
-            System.out.println("camera in use")
-            addSugarButtonClicked()
-        }
-
         buy_button.setOnClickListener {
             val millName = mill_name_textview.text.toString()
             val price = price_textview.text.toString()
@@ -59,7 +52,7 @@ class DetailTenderActivity : AppCompatActivity() {
                 if (id!!.isNotEmpty()) {
                     updateTender(id!!, millName, price, millAddress, millContact)
                 } else {
-                    addTender(millName, price, millAddress, millContact)
+//                    addTender(millName, price, millAddress, millContact)
                 }
             }
 
@@ -100,26 +93,9 @@ class DetailTenderActivity : AppCompatActivity() {
             }
     }
 
-    private fun prepareCroperino() {
-        //prepare camera, gallery and ask for storage permissions.
-        CroperinoConfig(
-            "IMG_" + System.currentTimeMillis() + ".jpg",
-            "/VProperty/Pictures",
-            "/sdcard/VProperty/Pictures"
-        )
-        CroperinoFileUtil.verifyStoragePermissions(this@DetailTenderActivity)
-        CroperinoFileUtil.setupDirectory(this@DetailTenderActivity)
 
-    }
 
-    private fun addSugarButtonClicked() {
-        Log.d("Camera in use", "Camera in use")
-        Croperino.prepareChooser(
-            this@DetailTenderActivity,
-            "" + resources.getString(R.string.capture_photo),
-            ContextCompat.getColor(this@DetailTenderActivity, android.R.color.background_dark)
-        )
-    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

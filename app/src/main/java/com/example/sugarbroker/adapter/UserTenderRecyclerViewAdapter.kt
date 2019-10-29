@@ -33,11 +33,7 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
 
         holder.book.setOnClickListener { updateTender(tender) }
 
-        holder.itemView.setOnClickListener {
-//            Toast.makeText(context, "Clicked on item $position", Toast.LENGTH_SHORT).show()
-
-            //Call Details view
-            detailTender(tender)
+        holder.itemView.setOnClickListener { detailTender(tender)
         }
     }
 
@@ -66,6 +62,8 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         intent.putExtra("UpdateTenderId", tender.id)
         intent.putExtra("UpdateTenderMillName", tender.millName)
         intent.putExtra("UpdateTenderPrice", tender.price)
+        intent.putExtra("UpdateTenderAddress", tender.address)
+        intent.putExtra("UpdateTenderContact", tender.contact)
         context.startActivity(intent)
     }
 
@@ -75,20 +73,10 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         intent.putExtra("UpdateTenderId", tender.id)
         intent.putExtra("UpdateTenderMillName", tender.millName)
         intent.putExtra("UpdateTenderPrice", tender.price)
+        intent.putExtra("UpdateTenderAddress", tender.address)
+        intent.putExtra("UpdateTenderContact", tender.contact)
         context.startActivity(intent)
     }
-
-//    private fun deleteTender(id: String, position: Int) {
-//        firestoreDB.collection("tender")
-//            .document(id)
-//            .delete()
-//            .addOnCompleteListener {
-//                tenderList.removeAt(position)
-//                notifyItemRemoved(position)
-//                notifyItemRangeChanged(position, tenderList.size)
-//                Toast.makeText(context, "Note has been deleted!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 
 }
 

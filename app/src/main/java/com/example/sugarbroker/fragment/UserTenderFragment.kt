@@ -19,7 +19,7 @@ import com.google.firebase.firestore.ListenerRegistration
 
 class UserTenderFragment : Fragment() {
 
-    private val TAG = "TenderFragment"
+    private val TAG = "UserTenderFragment"
 
     private var tenderAdapter: UserTenderRecyclerViewAdapter? = null
 
