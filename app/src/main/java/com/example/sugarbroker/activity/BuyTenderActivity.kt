@@ -50,7 +50,7 @@ class BuyTenderActivity : AppCompatActivity() {
             val price = price_edittext.text.toString()
             val quantity = quantity_edittext.text.toString()
 
-            val intent = Intent(applicationContext, DetailTenderActivity::class.java)
+            val intent = Intent(applicationContext, ReviewTenderActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("UpdateTenderId", id)
             intent.putExtra("UpdateTenderMillName", millName)

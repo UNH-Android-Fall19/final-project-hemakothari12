@@ -126,9 +126,8 @@ class AdminHomeActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     "Orders" -> {
-                        Log.d("AdminHomeActivity", "Implement Add order")
-//                        val intent = Intent(this, AddTenderActivity::class.java)
-//                        startActivity(intent)
+                        val intent = Intent(this, AddOrderActivity::class.java)
+                        startActivity(intent)
                     }
                     "Users" -> {
                         Log.d("AdminHomeActivity", "Cannot Add Users but can only update")

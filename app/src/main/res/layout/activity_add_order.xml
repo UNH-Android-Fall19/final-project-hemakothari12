@@ -24,17 +24,7 @@
             android:layout_marginBottom="30dp"
             android:inputType="textPersonName" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/sugar_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:clickable="true"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/photoplaceholder"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="0dp" />
-
-        <TextView
+        <EditText
             android:id="@+id/mill_name_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,13 +32,13 @@
             android:hint="Mill Name"
             android:inputType="textPersonName" />
 
-        <TextView
+        <EditText
             android:id="@+id/price_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Price"
-            android:inputType="textPersonName" />
+            android:inputType="textMultiLine" />
 
         <EditText
             android:id="@+id/quantity_edittext"
@@ -56,13 +46,61 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Quantity"
-            android:inputType="textPersonName" />
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/quantityPrice_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Quantity Price"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/GST_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="GST"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/totalPrice_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Total Price"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/userName_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Name"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/userAddress_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Address"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/status_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Status"
+            android:inputType="textMultiLine" />
 
         <Button
-            android:id="@+id/review_button"
+            android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Review" />
+            android:text="Add" />
     </LinearLayout>
 </ScrollView>

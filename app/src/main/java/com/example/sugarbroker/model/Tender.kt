@@ -25,7 +25,6 @@ class Tender {
     constructor(millName: String, price: String, address: String, contact: String) {
         this.millName = millName
         this.price = price
-        this.price = price
         this.address = address
         this.contact = contact
 //        this.tenderUrl = tenderUrl
