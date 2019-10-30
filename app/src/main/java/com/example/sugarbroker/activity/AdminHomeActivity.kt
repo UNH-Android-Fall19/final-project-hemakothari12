@@ -131,7 +131,7 @@ class AdminHomeActivity : AppCompatActivity() {
                     }
                     "Users" -> {
                         Log.d("AdminHomeActivity", "Cannot Add Users but can only update")
-                        Toast.makeText(this, "Cannot Add User but onlu Update", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Cannot Add User but only Update", Toast.LENGTH_SHORT).show()
                     }
                 }
 

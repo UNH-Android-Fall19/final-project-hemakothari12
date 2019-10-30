@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sugarbroker.R
@@ -86,16 +85,15 @@ class DetailTenderActivity : AppCompatActivity() {
             .addOnSuccessListener { documentReference ->
                 Log.e(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
                 Toast.makeText(applicationContext, "Tender has been added!", Toast.LENGTH_SHORT).show()
+                firestoreDB!!.collection("tender").document(documentReference.id).update("id", documentReference.id)
+                    .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error updating ID", e) }
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Error adding Note document", e)
                 Toast.makeText(applicationContext, "Tender could not be added!", Toast.LENGTH_SHORT).show()
             }
     }
-
-
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

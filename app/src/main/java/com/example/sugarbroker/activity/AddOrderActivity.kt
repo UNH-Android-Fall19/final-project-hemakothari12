@@ -89,11 +89,16 @@ class AddOrderActivity : AppCompatActivity() {
             .addOnSuccessListener { documentReference ->
                 Log.e(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
                 Toast.makeText(applicationContext, "Order has been added!", Toast.LENGTH_SHORT).show()
+                firestoreDB!!.collection("orders").document(documentReference.id).update("id", documentReference.id)
+                    .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error updating ID", e) }
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Error adding Note document", e)
                 Toast.makeText(applicationContext, "Order could not be added!", Toast.LENGTH_SHORT).show()
             }
+
+
     }
 
 }
