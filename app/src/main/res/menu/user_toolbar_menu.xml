@@ -9,8 +9,11 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
     <item android:id="@+id/logout"
-        android:icon="@drawable/ic_exit_to_app_white_24dp"
         android:title="Logout"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="collapseActionView" />
+
+    <item android:id="@+id/profile"
+        android:title="Update Profile"
+        app:showAsAction="collapseActionView" />
 
 </menu>

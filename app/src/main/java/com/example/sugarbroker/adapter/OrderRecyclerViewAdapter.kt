@@ -29,6 +29,7 @@ class OrderRecyclerViewAdapter(private val orderList: MutableList<Orders>, priva
 
         holder.userName.text = order.name
         holder.quantity.text = order.quantity
+        holder.millName.text = order.millName
 
         holder.edit.setOnClickListener { updateOrder(order) }
         holder.delete.setOnClickListener { deleteOrder(order.id!!, position) }
@@ -43,12 +44,14 @@ class OrderRecyclerViewAdapter(private val orderList: MutableList<Orders>, priva
     inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         internal var userName: TextView
         internal var quantity: TextView
+        internal var millName: TextView
         internal var edit: ImageView
         internal var delete: ImageView
 
         init {
             userName = view.findViewById(R.id.user_name_textview)
             quantity = view.findViewById(R.id.quantity_textview)
+            millName = view.findViewById(R.id.mill_name_textview)
 
             edit = view.findViewById(R.id.ivEdit)
             delete = view.findViewById(R.id.ivDelete)

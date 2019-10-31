@@ -8,18 +8,16 @@
         app:showAsAction="ifRoom"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
-    <item
-        android:id="@+id/add"
-        android:icon="@drawable/ic_add_black_24dp"
-        android:title="Add"
-        app:showAsAction="ifRoom" />
-
     <item android:id="@+id/logout"
         android:title="Logout"
         app:showAsAction="collapseActionView" />
 
     <item android:id="@+id/profile"
         android:title="Update Profile"
+        app:showAsAction="collapseActionView" />
+
+    <item android:id="@+id/updateprice"
+        android:title="Update Price"
         app:showAsAction="collapseActionView" />
 
 </menu>
