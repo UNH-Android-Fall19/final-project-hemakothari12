@@ -24,15 +24,6 @@
             android:layout_marginBottom="30dp"
             android:inputType="textPersonName" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/sugar_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/photoplaceholder"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="0dp" />
-
         <TextView
             android:id="@+id/mill_name_textview"
             android:layout_width="match_parent"
