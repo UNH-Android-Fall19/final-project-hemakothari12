@@ -23,6 +23,7 @@
         <activity android:name=".activity.BuyTenderActivity"></activity>
         <activity android:name=".activity.ReviewTenderActivity"></activity>
         <activity android:name=".activity.AddOrderActivity"></activity>
+        <activity android:name=".activity.SellerHomeActivity"></activity>
         <activity android:name=".activity.ResaleActivity" />
         <activity android:name=".activity.ForgotPasswordActivity" />
         <activity android:name=".activity.UserHomeActivity" />

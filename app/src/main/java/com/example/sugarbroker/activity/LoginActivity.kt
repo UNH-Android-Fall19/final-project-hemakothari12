@@ -63,8 +63,10 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                             } else if (value == "Seller") {
                                 Log.d("User Logged", "User Logged in is Seller")
+                                intent = Intent(applicationContext, SellerHomeActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
 
-                                Log.d("Values", "Values is seller")
                             } else {
                                 Log.d("User Logged", "User Logged in is User")
 
