@@ -65,6 +65,7 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
         intent.putExtra("UpdateUserAddress", user.address)
         intent.putExtra("UpdateUserPhone", user.phone)
         intent.putExtra("UpdateUserType", user.type)
+        intent.putExtra("UpdateUserProfileType", "Admin")
         context.startActivity(intent)
     }
 

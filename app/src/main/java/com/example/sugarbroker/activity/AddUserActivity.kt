@@ -3,6 +3,7 @@ package com.example.sugarbroker.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.sugarbroker.R
 import com.example.sugarbroker.model.Tender
@@ -29,6 +30,14 @@ class AddUserActivity : AppCompatActivity() {
         if (bundle != null) {
             uid = bundle.getString("UpdateUserId")
             Toast.makeText(applicationContext, "ID ${uid}", Toast.LENGTH_SHORT).show()
+
+            val userType = bundle.getString("UpdateUserProfileType")
+
+            if (userType == "Admin") {
+                type_edittext.visibility = View.VISIBLE
+            } else {
+                type_edittext.visibility = View.GONE
+            }
 
             name_textview.setText(bundle.getString("UpdateUserName"))
             email_textview.setText(bundle.getString("UpdateUserEmail"))

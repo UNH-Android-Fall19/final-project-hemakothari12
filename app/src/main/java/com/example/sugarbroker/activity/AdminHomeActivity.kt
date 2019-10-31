@@ -21,7 +21,16 @@ import kotlinx.android.synthetic.main.activity_admin_home.*
 
 class AdminHomeActivity : AppCompatActivity() {
 
-    val documentRef = FirebaseFirestore.getInstance().collection("users")
+    private val TAG = "AdminHomeActivity"
+
+    private var firestoreDB: FirebaseFirestore? = null
+    internal var name: Any? = null
+    internal var email: Any? = null
+    internal var password: Any? = null
+    internal var address: Any? = null
+    internal var phone: Any? = null
+    internal var type: Any? = null
+
     private val onNavigationItemReselectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item->
         when(item.itemId) {
             R.id.navigation_resale -> {
@@ -53,7 +62,7 @@ class AdminHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home)
 
-//        fetchUser()
+        firestoreDB = FirebaseFirestore.getInstance()
 
         bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemReselectedListener)
 
@@ -109,6 +118,11 @@ class AdminHomeActivity : AppCompatActivity() {
                 performLogout()
                 return true
             }
+            R.id.profile -> {
+                val uid = FirebaseAuth.getInstance().uid
+                updateProfile(uid!!)
+                return true
+            }
             R.id.add -> {
                 val tag =
                     supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
@@ -149,52 +163,44 @@ class AdminHomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-//    private fun fetchUser() {
-//        val adapter = GroupAdapter<GroupieViewHolder>()
-//
-//        documentRef.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-//            if (firebaseFirestoreException!= null) {
-//                Log.w("AdminHomeActivity", "listen:error", firebaseFirestoreException)
-//                return@addSnapshotListener
-//            }
-//
-//            for (dc in querySnapshot!!.documentChanges) {
-//                when (dc.type) {
-//                    DocumentChange.Type.ADDED -> {
-//                        Log.d("AdminHomeActivity", "New city: ${dc.document.data}")
-//                        var user = User(
-//                            dc.document.getString("uid")!!,
-//                            dc.document.getString("name")!!,
-//                            dc.document.getString("address")!!,
-//                            dc.document.getString("phone")!!,
-//                            dc.document.getString("type")!!
-//                        )
-//                        adapter.add(UserItem(user))
-//                    }
-//                    DocumentChange.Type.MODIFIED -> {
-//                        Log.d("AdminHomeActivity", "Modified city: ${dc.document.data}")
-////                        var user = User(dc.document.getString("uid")!!, dc.document.getString("name")!!, dc.document.getString("address")!!, dc.document.getString("phone")!!, dc.document.getString("type")!!)
-////                        adapter.add(UserItem(user))
-//                        adapter.removeGroupAtAdapterPosition(1)
-//                    }
-//                    DocumentChange.Type.REMOVED -> Log.d("AdminHomeActivity", "Removed city: ${dc.document.data}")
-//                }
-//                userlist_recyclerview.adapter = adapter
-//            }
-//        }
-//    }
+    private fun updateProfile(uid: Any ) {
+        val intent = Intent(applicationContext, AddUserActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        Log.d("UID in function", "uid in function ${uid}")
+
+        firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+                    for (document in documents) {
+                        name = document.get("name")
+                        email = document.get("email")
+                        password = document.get("password")
+                        address = document.get("address")
+                        phone = document.get("phone")
+                        type = document.get("type")
+
+                        intent.putExtra("UpdateUserId", uid.toString())
+                        intent.putExtra("UpdateUserName", name.toString())
+                        intent.putExtra("UpdateUserEmail", email.toString())
+                        intent.putExtra("UpdateUserPassword", password.toString())
+                        intent.putExtra("UpdateUserAddress", address.toString())
+                        intent.putExtra("UpdateUserPhone", phone.toString())
+                        intent.putExtra("UpdateUserType", type.toString())
+                        intent.putExtra("UpdateUserProfileType", "Admin")
+
+                        applicationContext.startActivity(intent)
+                    }
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
+
+
+    }
 
 }
-
-//class UserItem(val user: User): Item<GroupieViewHolder>() {
-//
-//
-//    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-//        viewHolder.itemView.name_textview.text = user.name
-//    }
-//
-//    override fun getLayout(): Int {
-//        return R.layout.activity_user_row
-//    }
-//}
 
