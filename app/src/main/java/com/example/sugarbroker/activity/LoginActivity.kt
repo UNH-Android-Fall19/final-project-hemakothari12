@@ -65,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("User Logged", "User Logged in is Seller")
                                 intent = Intent(applicationContext, SellerHomeActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                intent.putExtra("LoggedInUserEmail",login_email_edittext.text.toString())
                                 startActivity(intent)
 
                             } else {

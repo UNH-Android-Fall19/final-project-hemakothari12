@@ -20,16 +20,28 @@ class SellerHomeActivity : AppCompatActivity() {
 
     private var firestoreDB: FirebaseFirestore? = null
 
+    internal var id: Any? = null
     internal var name: Any? = null
     internal var email: Any? = null
     internal var password: Any? = null
     internal var address: Any? = null
     internal var phone: Any? = null
     internal var type: Any? = null
+    internal var LoggedInUserEmail: Any? = null
+    internal var millName: Any? = null
+    internal var price: Any? = null
+    internal var millAddress: Any? = null
+    internal var contact: Any? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home)
+
+        val bundle = intent.extras
+        if (bundle != null) {
+            LoggedInUserEmail = bundle.getString("LoggedInUserEmail")
+        }
+
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
@@ -60,6 +72,7 @@ class SellerHomeActivity : AppCompatActivity() {
             }
             R.id.updateprice -> {
                 Toast.makeText(this, "Implement Update Price", Toast.LENGTH_SHORT).show()
+                updatePrice(LoggedInUserEmail!!)
                 return true
             }
             R.id.logout -> {
@@ -114,5 +127,39 @@ class SellerHomeActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d(TAG, "get failed with ", exception)
             }
+    }
+
+    private fun updatePrice(LoggedInUserEmail: Any) {
+        Log.d("LoggedInUserEmail", "LoggedInUserEmail ${LoggedInUserEmail}")
+
+        val intent = Intent(applicationContext, AddTenderActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        firestoreDB!!.collection("tender").whereEqualTo("contact", LoggedInUserEmail).get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+                    for (document in documents) {
+                        id = document.get("id")
+                        millName = document.get("millName")
+                        price = document.get("price")
+                        millAddress = document.get("address")
+                        contact = document.get("contact")
+
+                        intent.putExtra("UpdateTenderId", id.toString())
+                        intent.putExtra("UpdateTenderMillName", millName.toString())
+                        intent.putExtra("UpdateTenderPrice", price.toString())
+                        intent.putExtra("UpdateTenderAddress", millAddress.toString())
+                        intent.putExtra("UpdateTenderContact", contact.toString())
+
+                        applicationContext.startActivity(intent)
+                    }
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
+
     }
 }
