@@ -22,8 +22,8 @@ class ReviewTenderActivity : AppCompatActivity() {
     internal var quantityPrice: Int? = 0
     internal var GST: Float? = 0f
     internal var totalPrice: Float? = 0f
-//    internal var name: Any? = ""
-//    internal var address: Any? = ""
+    var name: Any? = null
+    var address: Any? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +58,7 @@ class ReviewTenderActivity : AppCompatActivity() {
             val millName = mill_name_textview.text.toString()
             val currentUser = FirebaseAuth.getInstance().currentUser
             val uid = FirebaseAuth.getInstance().uid
-            var name: Any? = null
-            var address: Any? = null
+
 
             Log.d(TAG, "currentUser ${currentUser}")
             Log.d(TAG, "uid ${uid}")
@@ -68,14 +67,8 @@ class ReviewTenderActivity : AppCompatActivity() {
                 .addOnSuccessListener { documents ->
                     if (documents != null) {
                         for (document in documents) {
-//                            Log.d(TAG, "${document.id} => ${document.data}")
-//                            Log.d(TAG, "DocumentSnapshot data Name: ${document.get("name")}")
-//                            Log.d(TAG, "DocumentSnapshot data Name: ${document.data}")
-//                            Log.d(TAG, "DocumentSnapshot data Address: ${document.get("address")}")
                             name = document.get("name")
                             address = document.get("address")
-//                            Log.d(TAG, "Name: ${name}")
-//                            Log.d(TAG, "Address: ${address}")
                             addOrder(millName, price.toString(), quantity.toString(), quantityPrice.toString(), GST.toString(), totalPrice.toString(), name.toString(), address.toString())
 
                         }
