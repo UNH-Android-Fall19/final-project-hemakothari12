@@ -77,10 +77,6 @@ class UserHomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
-
-
-
     private fun updateProfile(uid: Any ) {
         val intent = Intent(applicationContext, AddUserActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -116,7 +112,5 @@ class UserHomeActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d(TAG, "get failed with ", exception)
             }
-
-
     }
 }
