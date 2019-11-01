@@ -63,7 +63,7 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         intent.putExtra("UpdateTenderPrice", tender.price)
         intent.putExtra("UpdateTenderAddress", tender.address)
         intent.putExtra("UpdateTenderContact", tender.contact)
-//        intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
+        intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
     }
 
@@ -75,7 +75,7 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
                 tenderList.removeAt(position)
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, tenderList.size)
-                Toast.makeText(context, "Note has been deleted!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
             }
     }
 

@@ -32,7 +32,7 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         holder.millName.text = tender.millName
         holder.price.text = tender.price
 
-        holder.book.setOnClickListener { updateTender(tender) }
+        holder.book.setOnClickListener { buyTender(tender) }
 
         holder.itemView.setOnClickListener { detailTender(tender)
         }
@@ -65,10 +65,11 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         intent.putExtra("UpdateTenderPrice", tender.price)
         intent.putExtra("UpdateTenderAddress", tender.address)
         intent.putExtra("UpdateTenderContact", tender.contact)
+        intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
     }
 
-    private fun updateTender(tender: Tender) {
+    private fun buyTender(tender: Tender) {
         val intent = Intent(context, BuyTenderActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.putExtra("UpdateTenderId", tender.id)
@@ -76,6 +77,7 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         intent.putExtra("UpdateTenderPrice", tender.price)
         intent.putExtra("UpdateTenderAddress", tender.address)
         intent.putExtra("UpdateTenderContact", tender.contact)
+        intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
     }
 

@@ -2,6 +2,8 @@ package com.example.sugarbroker.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,12 +14,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sugarbroker.R
 import com.example.sugarbroker.model.Tender
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_tender.*
 import com.mikelau.croperino.CroperinoConfig
 import com.mikelau.croperino.Croperino
 import com.mikelau.croperino.CroperinoFileUtil
 import kotlinx.android.synthetic.main.activity_add_tender.add_button
+import java.io.ByteArrayOutputStream
+import java.util.*
 
 class AddTenderActivity : AppCompatActivity() {
 
@@ -26,11 +34,14 @@ class AddTenderActivity : AppCompatActivity() {
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""
 
+    lateinit var storage: FirebaseStorage
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_tender)
 
         firestoreDB = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
 
         val bundle = intent.extras
         if (bundle != null) {
@@ -41,7 +52,12 @@ class AddTenderActivity : AppCompatActivity() {
             price_edittext.setText(bundle.getString("UpdateTenderPrice"))
             milladdress_edittext.setText(bundle.getString("UpdateTenderAddress"))
             millcontact_edittext.setText(bundle.getString("UpdateTenderContact"))
-//            sugar_image.setText(bundle.getString("UpdateTenderUrl"))
+            Glide.with(this@AddTenderActivity).load(bundle.getString("UpdateTenderUrl"))
+                .placeholder(R.drawable.photoplaceholder)
+                .apply(RequestOptions.circleCropTransform())
+                .into(
+                    sugar_image
+                )
         }
 
         prepareCroperino()
@@ -64,22 +80,54 @@ class AddTenderActivity : AppCompatActivity() {
             val millAddress = milladdress_edittext.text.toString()
             val millContact = millcontact_edittext.text.toString()
 
-            if (title.isNotEmpty()) {
-                if (id!!.isNotEmpty()) {
-                    updateTender(id!!, millName, price, millAddress, millContact)
+            val storageRef = storage.reference
+            var x = UUID.randomUUID()
+            val mountainsRef = storageRef.child("" + (x) + ".jpg")
+            val mountainImagesRef = storageRef.child("images/" + x + ".jpg")
+            mountainsRef.name == mountainImagesRef.name // true
+            mountainsRef.path == mountainImagesRef.path // false
+            val bitmap = (sugar_image.drawable as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+
+            var uploadTask = mountainsRef.putBytes(data)
+            uploadTask = storageRef.child("images/" + x + ".jpg").putBytes(data)
+
+            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                return@Continuation mountainImagesRef.downloadUrl
+            }).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val downloadUri = task.result
+
+                    if (title.isNotEmpty()) {
+                        if (id!!.isNotEmpty()) {
+                            Log.d("downloadUri", "downloadUri is ${downloadUri}")
+                            updateTender(id!!, millName, price, millAddress, millContact, downloadUri.toString())
+                        } else {
+                            addTender(millName, price, millAddress, millContact, downloadUri.toString())
+                        }
+                    }
                 } else {
-                    addTender(millName, price, millAddress, millContact)
+                    Toast.makeText(applicationContext, "Upload unsuccesfull", Toast.LENGTH_SHORT).show()
                 }
             }
-
 
             finish()
 
         }
     }
 
-    private fun updateTender(id: String, millName: String, price: String, millAddress: String, millContact: String) {
-        val tender = Tender(id, millName, price, millAddress, millContact)
+    private fun updateTender(id: String, millName: String, price: String, millAddress: String, millContact: String, url: String? = null) {
+        val tender = Tender(id, millName, price, millAddress, millContact, url)
+
+        Log.d("downloadUri", "downloadUri is url ${url}")
+
 
         firestoreDB!!.collection("tender")
             .document(id)
@@ -94,8 +142,8 @@ class AddTenderActivity : AppCompatActivity() {
             }
     }
 
-    private fun addTender(millName: String, price: String, millAddress: String, millContact: String) {
-        val tender = Tender(millName, price, millAddress, millContact)
+    private fun addTender(millName: String, price: String, millAddress: String, millContact: String, url: String? = null) {
+        val tender = Tender(millName, price, millAddress, millContact, url)
 
         firestoreDB!!.collection("tender")
             .add(tender)

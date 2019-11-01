@@ -9,7 +9,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.sugarbroker.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detail_tender.*
-import kotlinx.android.synthetic.main.activity_detail_tender.sugar_image
 
 class DetailTenderActivity : AppCompatActivity() {
 
@@ -37,7 +36,7 @@ class DetailTenderActivity : AppCompatActivity() {
                 .placeholder(R.drawable.photoplaceholder)
                 .apply(RequestOptions.circleCropTransform())
                 .into(
-                    sugar_image
+                    detail_sugar_image
                 )
         }
 

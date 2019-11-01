@@ -25,7 +25,7 @@
             android:inputType="textPersonName" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/sugar_image"
+            android:id="@+id/detail_sugar_image"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
