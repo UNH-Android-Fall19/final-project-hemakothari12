@@ -1,4 +1,4 @@
-package com.example.sugarbroker.activity
+package com.example.sugarbroker.activity.tender
 
 import android.app.Activity
 import android.content.Intent

@@ -8,12 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
-import com.example.sugarbroker.activity.AddTenderActivity
-import com.example.sugarbroker.activity.BuyTenderActivity
-import com.example.sugarbroker.activity.DetailTenderActivity
+import com.example.sugarbroker.activity.tender.BuyTenderActivity
+import com.example.sugarbroker.activity.tender.DetailTenderActivity
 import com.example.sugarbroker.model.Tender
 import com.google.firebase.firestore.FirebaseFirestore
 

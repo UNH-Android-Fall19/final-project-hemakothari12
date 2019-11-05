@@ -1,4 +1,4 @@
-package com.example.sugarbroker.activity
+package com.example.sugarbroker.activity.resale
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

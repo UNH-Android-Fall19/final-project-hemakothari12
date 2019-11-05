@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
-import com.example.sugarbroker.activity.AddOrderActivity
+import com.example.sugarbroker.activity.order.AddOrderActivity
 import com.example.sugarbroker.model.Orders
 import com.google.firebase.firestore.FirebaseFirestore
 

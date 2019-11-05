@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.account.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 

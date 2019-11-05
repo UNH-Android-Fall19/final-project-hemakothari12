@@ -1,4 +1,4 @@
-package com.example.sugarbroker.activity
+package com.example.sugarbroker.activity.account
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

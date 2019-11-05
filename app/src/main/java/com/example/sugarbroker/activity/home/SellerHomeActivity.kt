@@ -1,4 +1,4 @@
-package com.example.sugarbroker.activity
+package com.example.sugarbroker.activity.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.account.LoginActivity
+import com.example.sugarbroker.activity.tender.AddTenderActivity
+import com.example.sugarbroker.activity.users.AddUserActivity
 import com.example.sugarbroker.ui.main.SectionsPagerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

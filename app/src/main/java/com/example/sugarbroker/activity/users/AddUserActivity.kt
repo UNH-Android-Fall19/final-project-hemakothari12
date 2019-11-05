@@ -1,4 +1,4 @@
-package com.example.sugarbroker.activity
+package com.example.sugarbroker.activity.users
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,10 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.sugarbroker.R
-import com.example.sugarbroker.model.Tender
 import com.example.sugarbroker.model.User
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_add_tender.*
 import kotlinx.android.synthetic.main.activity_add_tender.add_button
 import kotlinx.android.synthetic.main.activity_add_user.*
 

@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/holo_green_light"
         android:orientation="vertical"
-        tools:context=".activity.RegisterActivity">
+        tools:context=".activity.account.RegisterActivity">
 
         <EditText
             android:id="@+id/name_edittext"

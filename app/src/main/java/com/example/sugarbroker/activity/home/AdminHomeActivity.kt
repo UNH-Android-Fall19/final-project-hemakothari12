@@ -1,4 +1,4 @@
-package com.example.sugarbroker.activity
+package com.example.sugarbroker.activity.home
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.account.LoginActivity
+import com.example.sugarbroker.activity.order.AddOrderActivity
+import com.example.sugarbroker.activity.resale.AddResaleActivity
+import com.example.sugarbroker.activity.tender.AddTenderActivity
+import com.example.sugarbroker.activity.users.AddUserActivity
 import com.example.sugarbroker.fragment.OrdersFragment
 import com.example.sugarbroker.fragment.ResaleFragment
 import com.example.sugarbroker.fragment.TenderFragment
