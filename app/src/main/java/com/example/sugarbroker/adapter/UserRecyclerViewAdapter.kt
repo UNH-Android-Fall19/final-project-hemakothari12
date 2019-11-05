@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.users.AddUserActivity
+import com.example.sugarbroker.activity.users.DetailUserActivity
 import com.example.sugarbroker.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -32,6 +33,7 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
 
         holder.edit.setOnClickListener { updateUser(users) }
         holder.delete.setOnClickListener { deleteUser(users.uid!!, position) }
+        holder.itemView.setOnClickListener { detailUser(users) }
     }
 
     override fun getItemCount(): Int {
@@ -53,6 +55,19 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
             edit = view.findViewById(R.id.ivEdit)
             delete = view.findViewById(R.id.ivDelete)
         }
+    }
+
+    private fun detailUser(user: User) {
+        val intent = Intent(context, DetailUserActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateUserId", user.uid)
+        intent.putExtra("UpdateUserName", user.name)
+        intent.putExtra("UpdateUserEmail", user.email)
+        intent.putExtra("UpdateUserPassword", user.password)
+        intent.putExtra("UpdateUserAddress", user.address)
+        intent.putExtra("UpdateUserPhone", user.phone)
+        intent.putExtra("UpdateUserType", user.type)
+        context.startActivity(intent)
     }
 
     private fun updateUser(user: User) {
