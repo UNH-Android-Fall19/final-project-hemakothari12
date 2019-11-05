@@ -26,6 +26,7 @@ class UserOrdersFragment : Fragment() {
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
 
+    internal var LoggedInUserEmail: Any? = null
     private var root: View? = null
 
     override fun onCreateView(
@@ -38,9 +39,14 @@ class UserOrdersFragment : Fragment() {
 
         root = inflater.inflate(R.layout.fragment_user_orders, container, false)
 
+        val bundle = activity!!.intent.extras
+        if (bundle != null) {
+            LoggedInUserEmail = bundle.getString("LoggedInUserEmail")
+        }
+
         loadOrderList()
 
-        firestoreListener = firestoreDB!!.collection("orders")
+        firestoreListener = firestoreDB!!.collection("orders").whereEqualTo("email", LoggedInUserEmail)
             .addSnapshotListener(EventListener { documentSnapshots, e ->
                 if (e != null) {
                     Log.e(TAG, "Listen failed!", e)
@@ -74,7 +80,7 @@ class UserOrdersFragment : Fragment() {
     }
 
     private fun loadOrderList() {
-        firestoreDB!!.collection("orders")
+        firestoreDB!!.collection("orders").whereEqualTo("email",LoggedInUserEmail)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
