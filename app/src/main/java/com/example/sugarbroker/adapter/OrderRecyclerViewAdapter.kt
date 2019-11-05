@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.order.AddOrderActivity
+import com.example.sugarbroker.activity.order.DetailOrderActivity
 import com.example.sugarbroker.model.Orders
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -33,6 +34,7 @@ class OrderRecyclerViewAdapter(private val orderList: MutableList<Orders>, priva
 
         holder.edit.setOnClickListener { updateOrder(order) }
         holder.delete.setOnClickListener { deleteOrder(order.id!!, position) }
+        holder.itemView.setOnClickListener { detailOrder(order) }
     }
 
     override fun getItemCount(): Int {
@@ -56,6 +58,22 @@ class OrderRecyclerViewAdapter(private val orderList: MutableList<Orders>, priva
             edit = view.findViewById(R.id.ivEdit)
             delete = view.findViewById(R.id.ivDelete)
         }
+    }
+
+    private fun detailOrder(order: Orders) {
+        val intent = Intent(context, DetailOrderActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateOrderId", order.id)
+        intent.putExtra("UpdateOrderMillName", order.millName)
+        intent.putExtra("UpdateOrderPrice", order.price)
+        intent.putExtra("UpdateOrderQuantity", order.quantity)
+        intent.putExtra("UpdateOrderQuantityPrice", order.quantityPrice)
+        intent.putExtra("UpdateOrderGST", order.GST)
+        intent.putExtra("UpdateOrderTotalPrice", order.totalPrice)
+        intent.putExtra("UpdateOrderUsername", order.name)
+        intent.putExtra("UpdateOrderUserAddress", order.address)
+        intent.putExtra("UpdateOrderStatus", order.status)
+        context.startActivity(intent)
     }
 
     private fun updateOrder(order: Orders) {

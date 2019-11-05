@@ -32,8 +32,7 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
 
         holder.book.setOnClickListener { buyTender(tender) }
 
-        holder.itemView.setOnClickListener { detailTender(tender)
-        }
+        holder.itemView.setOnClickListener { detailTender(tender) }
     }
 
     override fun getItemCount(): Int {
