@@ -13,11 +13,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.users.AddUserActivity
 import com.example.sugarbroker.activity.users.DetailUserActivity
+import com.example.sugarbroker.fragment.UserFragment
 import com.example.sugarbroker.model.User
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private val context: Context,
                               private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<UserRecyclerViewAdapter.ViewHolder>() {
+
+    private val arraylist: ArrayList<User>
+
+    init {
+
+        this.arraylist = ArrayList<User>()
+        this.arraylist.addAll(usersList)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_user, parent, false)
@@ -94,6 +105,22 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
                 notifyItemRangeChanged(position, usersList.size)
                 Toast.makeText(context, "User has been deleted!", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    fun filter(charText: String) {
+        var charText = charText
+        charText = charText.toLowerCase(Locale.getDefault())
+        usersList.clear()
+        if (charText.length == 0) {
+            usersList.addAll(arraylist)
+        } else {
+            for (wp in arraylist) {
+                if (wp.name!!.toLowerCase(Locale.getDefault()).contains(charText)) {
+                    usersList.add(wp)
+                }
+            }
+        }
+        notifyDataSetChanged()
     }
 
 }

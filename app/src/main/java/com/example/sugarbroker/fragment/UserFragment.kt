@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +21,7 @@ import com.google.firebase.firestore.ListenerRegistration
 /**
  * [Orders Fragment] subclass.
  */
-class UserFragment : Fragment() {
+class UserFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "UserFragment"
 
@@ -28,6 +29,7 @@ class UserFragment : Fragment() {
 
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
+    lateinit var editsearch: SearchView
 
     private var root: View? = null
 
@@ -62,7 +64,19 @@ class UserFragment : Fragment() {
                 userListRV.adapter = userAdapter
             })
 
+        editsearch = root!!.findViewById(R.id.searchuser_sv) as SearchView
+        editsearch!!.setOnQueryTextListener(this)
+
         return root
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        userAdapter!!.filter(newText)
+        return false
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
     }
 
     override fun onDestroy() {
