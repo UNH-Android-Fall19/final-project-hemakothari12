@@ -55,8 +55,6 @@ class AddUserActivity : AppCompatActivity() {
             if (title.isNotEmpty()) {
                 if (uid!!.isNotEmpty()) {
                     updateUser(uid!!, name, email, password, address, phone, type)
-//                } else {
-//                    addUser(name, email, password, address, phone, type)
                 }
             }
 
@@ -80,19 +78,4 @@ class AddUserActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "User could not be updated!", Toast.LENGTH_SHORT).show()
             }
     }
-
-//    private fun addUser(name: String, email: String, password: String, address: String, phone: String, type: String) {
-//        val user = User(name, email, password, address, phone, type)
-//
-//        firestoreDB!!.collection("tender")
-//            .add(user)
-//            .addOnSuccessListener { documentReference ->
-//                Log.e(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
-//                Toast.makeText(applicationContext, "Tender has been added!", Toast.LENGTH_SHORT).show()
-//            }
-//            .addOnFailureListener { e ->
-//                Log.e(TAG, "Error adding Note document", e)
-//                Toast.makeText(applicationContext, "Tender could not be added!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 }

@@ -10,22 +10,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.sugarbroker.R
-import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
 import com.example.sugarbroker.adapter.UserRecyclerViewAdapter
-import com.example.sugarbroker.model.Tender
 import com.example.sugarbroker.model.User
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 
 /**
- * A simple [Fragment] subclass.
+ * [Orders Fragment] subclass.
  */
 class UserFragment : Fragment() {
 
-    private val TAG = "TenderFragment"
+    private val TAG = "UserFragment"
 
     private var userAdapter: UserRecyclerViewAdapter? = null
 

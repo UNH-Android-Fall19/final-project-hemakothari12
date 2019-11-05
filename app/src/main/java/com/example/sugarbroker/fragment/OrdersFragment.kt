@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.sugarbroker.R
 import com.example.sugarbroker.adapter.OrderRecyclerViewAdapter
 import com.example.sugarbroker.model.Orders
@@ -19,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 
 /**
- * A simple [Fragment] subclass.
+ * [Orders Fragment] subclass.
  */
 class OrdersFragment : Fragment() {
 
@@ -97,6 +96,4 @@ class OrdersFragment : Fragment() {
                 }
             }
     }
-
-
 }

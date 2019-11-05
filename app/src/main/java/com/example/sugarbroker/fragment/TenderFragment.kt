@@ -14,10 +14,9 @@ import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Tender
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import kotlinx.android.synthetic.main.fragment_tender.*
 
 /**
- * A simple [Fragment] subclass.
+ * [Tender Fragment] subclass.
  */
 class TenderFragment : Fragment() {
 

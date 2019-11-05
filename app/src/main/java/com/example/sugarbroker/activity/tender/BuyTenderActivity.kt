@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_buy_tender.*
 
 class BuyTenderActivity : AppCompatActivity() {
 
-    private val TAG = "AddTenderActivity"
+    private val TAG = "BuyTenderActivity"
 
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""

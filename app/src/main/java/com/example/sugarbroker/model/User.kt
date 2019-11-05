@@ -1,7 +1,5 @@
 package com.example.sugarbroker.model
 
-import java.util.HashMap
-
 class User {
     var uid: String? = null
     var name: String? = null
@@ -30,19 +28,6 @@ class User {
         this.address = address
         this.phone = phone
         this.type = type
-    }
-
-    fun toMap(): Map<String, Any> {
-
-        val result = HashMap<String, Any>()
-        result.put("name", name!!)
-        result.put("email", email!!)
-//        result.put("password", password!!)
-        result.put("address", address!!)
-        result.put("phone", phone!!)
-        result.put("type", type!!)
-
-        return result
     }
 
 }

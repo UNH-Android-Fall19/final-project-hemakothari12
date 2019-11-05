@@ -20,7 +20,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         submit_button.setOnClickListener {
-            Log.d("Email id is", "Email: ${email_edittext.text.toString()}")
 
             var email = email_edittext.text.toString()
 

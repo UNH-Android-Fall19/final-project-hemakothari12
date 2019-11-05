@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class SellerHomeActivity : AppCompatActivity() {
 
-    private val TAG = "UserHomeActivity"
+    private val TAG = "SellerHomeActivity"
 
     private var firestoreDB: FirebaseFirestore? = null
 
@@ -163,6 +163,5 @@ class SellerHomeActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d(TAG, "get failed with ", exception)
             }
-
     }
 }

@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.example.sugarbroker.R
 
 /**
- * A simple [Fragment] subclass.
+ * [Resale Fragment] subclass.
  */
 class ResaleFragment : Fragment() {
 
