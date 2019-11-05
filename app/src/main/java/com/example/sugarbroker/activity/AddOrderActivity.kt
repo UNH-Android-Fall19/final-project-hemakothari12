@@ -38,6 +38,14 @@ class AddOrderActivity : AppCompatActivity() {
             status_edittext.setText(bundle.getString("UpdateOrderStatus"))
         }
 
+        if (title.isNotEmpty()) {
+            if (id!!.isNotEmpty()) {
+                add_button.text = "Update"
+            } else {
+                add_button.text = "Add"
+            }
+        }
+
         add_button.setOnClickListener {
             val millName = mill_name_edittext.text.toString()
             val price = price_edittext.text.toString()
