@@ -57,6 +57,7 @@ class UserOrdersRecyclerViewAdapter(private val orderList: MutableList<Orders>, 
         intent.putExtra("UpdateOrderQuantityPrice", order.quantityPrice)
         intent.putExtra("UpdateOrderGST", order.GST)
         intent.putExtra("UpdateOrderTotalPrice", order.totalPrice)
+        intent.putExtra("UpdateOrderEmail", order.email)
         intent.putExtra("UpdateOrderUsername", order.name)
         intent.putExtra("UpdateOrderUserAddress", order.address)
         intent.putExtra("UpdateOrderStatus", order.status)

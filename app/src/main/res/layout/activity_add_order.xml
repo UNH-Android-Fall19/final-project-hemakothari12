@@ -73,6 +73,14 @@
             android:inputType="textMultiLine" />
 
         <EditText
+            android:id="@+id/email_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Email"
+            android:inputType="textMultiLine" />
+
+        <EditText
             android:id="@+id/userName_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

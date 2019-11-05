@@ -33,6 +33,7 @@ class AddOrderActivity : AppCompatActivity() {
             quantityPrice_edittext.setText(bundle.getString("UpdateOrderQuantityPrice"))
             GST_edittext.setText(bundle.getString("UpdateOrderGST"))
             totalPrice_edittext.setText(bundle.getString("UpdateOrderTotalPrice"))
+            email_edittext.setText(bundle.getString("UpdateOrderEmail"))
             userName_edittext.setText(bundle.getString("UpdateOrderUsername"))
             userAddress_edittext.setText(bundle.getString("UpdateOrderUserAddress"))
             status_edittext.setText(bundle.getString("UpdateOrderStatus"))
@@ -53,15 +54,16 @@ class AddOrderActivity : AppCompatActivity() {
             val quantityPrice = quantityPrice_edittext.text.toString()
             val GST = GST_edittext.text.toString()
             val totalPrice = totalPrice_edittext.text.toString()
+            val email = email_edittext.text.toString()
             val userName = userName_edittext.text.toString()
             val userAddress = userAddress_edittext.text.toString()
             val status = status_edittext.text.toString()
 
             if (title.isNotEmpty()) {
                 if (id!!.isNotEmpty()) {
-                    updateOrder(id!!, millName, price, quantity, quantityPrice, GST, totalPrice, userName, userAddress, status)
+                    updateOrder(id!!, millName, price, quantity, quantityPrice, GST, totalPrice, email, userName, userAddress, status)
                 } else {
-                    addOrder(millName, price, quantity, quantityPrice, GST, totalPrice, userName, userAddress, status)
+                    addOrder(millName, price, quantity, quantityPrice, GST, totalPrice, email, userName, userAddress, status)
                 }
             }
 
@@ -72,8 +74,8 @@ class AddOrderActivity : AppCompatActivity() {
     }
 
     private fun updateOrder(id: String, millName: String, price: String, quantity: String, quantityPrice: String, GST: String,
-                            totalPrice: String, userName: String, userAddress: String, status: String) {
-        val order = Orders(id, millName, price, quantity, quantityPrice, GST, totalPrice, userName, userAddress, status)
+                            totalPrice: String, email: String, userName: String, userAddress: String, status: String) {
+        val order = Orders(id, millName, price, quantity, quantityPrice, GST, totalPrice, email, userName, userAddress, status)
 
         firestoreDB!!.collection("orders")
             .document(id)
@@ -89,8 +91,8 @@ class AddOrderActivity : AppCompatActivity() {
     }
 
     private fun addOrder(millName: String, price: String, quantity: String, quantityPrice: String, GST: String,
-                         totalPrice: String, userName: String, userAddress: String, status: String) {
-        val order = Orders(millName, price, quantity, quantityPrice, GST, totalPrice, userName, userAddress, status)
+                         totalPrice: String, email: String, userName: String, userAddress: String, status: String) {
+        val order = Orders(millName, price, quantity, quantityPrice, GST, totalPrice, email, userName, userAddress, status)
 
         firestoreDB!!.collection("orders")
             .add(order)

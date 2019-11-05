@@ -24,6 +24,7 @@ class ReviewTenderActivity : AppCompatActivity() {
     internal var totalPrice: Float? = 0f
     var name: Any? = null
     var address: Any? = null
+    var email: Any? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +70,8 @@ class ReviewTenderActivity : AppCompatActivity() {
                         for (document in documents) {
                             name = document.get("name")
                             address = document.get("address")
-                            addOrder(millName, price.toString(), quantity.toString(), quantityPrice.toString(), GST.toString(), totalPrice.toString(), name.toString(), address.toString())
+                            email = document.get("email")
+                            addOrder(millName, price.toString(), quantity.toString(), quantityPrice.toString(), GST.toString(), totalPrice.toString(), email.toString(), name.toString(), address.toString())
 
                         }
                     } else {
@@ -88,8 +90,9 @@ class ReviewTenderActivity : AppCompatActivity() {
         }
     }
 
-    private fun addOrder(millName: String, price: String, quantity: String, quantityPrice: String, GST: String, totalPrice: String, name: String, address: String) {
-        val order = Orders(millName, price, quantity, quantityPrice, GST, totalPrice, name, address, "Open")
+    private fun addOrder(millName: String, price: String, quantity: String, quantityPrice: String, GST: String,
+                         totalPrice: String, email: String, name: String, address: String) {
+        val order = Orders(millName, price, quantity, quantityPrice, GST, totalPrice, email, name, address, "Open")
 
         firestoreDB!!.collection("orders")
             .add(order)

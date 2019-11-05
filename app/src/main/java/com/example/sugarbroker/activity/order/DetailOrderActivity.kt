@@ -31,6 +31,7 @@ class DetailOrderActivity : AppCompatActivity() {
             quantityPrice_textview.setText(bundle.getString("UpdateOrderQuantityPrice"))
             GST_textview.setText(bundle.getString("UpdateOrderGST"))
             totalPrice_textview.setText(bundle.getString("UpdateOrderTotalPrice"))
+            email_textview.setText(bundle.getString("UpdateOrderEmail"))
             userName_textview.setText(bundle.getString("UpdateOrderUsername"))
             userAddress_textview.setText(bundle.getString("UpdateOrderUserAddress"))
             status_textview.setText(bundle.getString("UpdateOrderStatus"))
