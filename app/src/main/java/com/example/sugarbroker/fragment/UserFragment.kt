@@ -71,7 +71,9 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu_user, menu);
+        inflater.inflate(R.menu.toolbar_menu_user, menu)
+
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
