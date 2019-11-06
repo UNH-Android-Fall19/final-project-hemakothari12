@@ -2,10 +2,8 @@ package com.example.sugarbroker.fragment
 
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 
 import com.example.sugarbroker.R
 
@@ -23,7 +21,14 @@ class ResaleFragment : Fragment() {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_resale, container, false)
 
+        setHasOptionsMenu(true)
+
         return root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 

@@ -39,6 +39,8 @@ class TenderFragment : Fragment() {
 
         root = inflater.inflate(R.layout.fragment_tender, container, false)
 
+        setHasOptionsMenu(true)
+
         loadTenderList()
 
         firestoreListener = firestoreDB!!.collection("tender")
@@ -68,6 +70,11 @@ class TenderFragment : Fragment() {
         super.onDestroy()
 
         firestoreListener!!.remove()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 

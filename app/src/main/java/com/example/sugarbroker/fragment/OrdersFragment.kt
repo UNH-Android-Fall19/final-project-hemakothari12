@@ -3,10 +3,8 @@ package com.example.sugarbroker.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +38,8 @@ class OrdersFragment : Fragment() {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_orders, container, false)
 
+        setHasOptionsMenu(true)
+
         loadOrderList()
 
         firestoreListener = firestoreDB!!.collection("orders")
@@ -69,6 +69,11 @@ class OrdersFragment : Fragment() {
         super.onDestroy()
 
         firestoreListener!!.remove()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 

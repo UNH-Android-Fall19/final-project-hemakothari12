@@ -3,10 +3,8 @@ package com.example.sugarbroker.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,6 +40,8 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_users, container, false)
 
+        setHasOptionsMenu(true)
+
         loadUserList()
 
         firestoreListener = firestoreDB!!.collection("users")
@@ -68,6 +68,11 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         editsearch!!.setOnQueryTextListener(this)
 
         return root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_menu_user, menu);
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
