@@ -16,7 +16,7 @@
             android:id="@+id/companyname_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Tender Details"
+            android:text="Review Tender Details"
             android:textStyle="bold"
             android:textSize="@dimen/appbar_padding"
             android:layout_marginLeft="100dp"
