@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -102,14 +101,6 @@ class AdminHomeActivity : AppCompatActivity() {
         fragmentTransaction.addToBackStack(screen)
         fragmentTransaction.commit()
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//
-//        val inflater = menuInflater
-//        inflater.inflate(R.menu.toolbar_menu, menu)
-//
-//        return true
-//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
