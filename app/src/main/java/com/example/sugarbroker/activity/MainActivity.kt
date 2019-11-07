@@ -3,17 +3,73 @@ package com.example.sugarbroker.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.account.LoginActivity
+import com.example.sugarbroker.activity.home.AdminHomeActivity
+import com.example.sugarbroker.activity.home.SellerHomeActivity
+import com.example.sugarbroker.activity.home.UserHomeActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        intent = Intent(applicationContext, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        auth = FirebaseAuth.getInstance()
+
+        if (auth.currentUser != null) {
+            val db = FirebaseFirestore.getInstance()
+            val uid = FirebaseAuth.getInstance().uid ?: ""
+            val documentRef = db.collection("users").document(uid)
+            documentRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val value = document.getString("type")
+                        Log.d("Document", "DocumentSnapshot data: ${document.data}")
+
+                        if (value == "Admin") {
+                            Log.d("User Logged", "User Logged in is Admin")
+                            intent = Intent(applicationContext, AdminHomeActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                        } else if (value == "Seller") {
+                            Log.d("User Logged", "User Logged in is Seller")
+                            intent = Intent(applicationContext, SellerHomeActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            intent.putExtra("LoggedInUserEmail",document.getString("email"))
+                            startActivity(intent)
+
+                        } else {
+                            Log.d("User Logged", "User Logged in is User")
+
+                            intent = Intent(applicationContext, UserHomeActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            intent.putExtra("LoggedInUserEmail",document.getString("email"))
+                            startActivity(intent)
+                        }
+
+                    } else {
+                        Log.d("LoginActivity", "No document found")
+
+                        Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d("LoginActivity", "Failed to fetch document: ", exception)
+
+                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                }
+
+        } else {
+            intent = Intent(applicationContext, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 }
