@@ -1,6 +1,7 @@
 package com.example.sugarbroker.fragment
 
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -15,6 +16,12 @@ import com.example.sugarbroker.model.User
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import android.view.Gravity
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuItemCompat.getActionView
+import kotlinx.android.synthetic.main.fragment_users.*
+
 
 /**
  * [Orders Fragment] subclass.
@@ -40,7 +47,8 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_users, container, false)
 
-        setHasOptionsMenu(true)
+//        setHasOptionsMenu(true)
+//        setUpToolbar()
 
         loadUserList()
 
@@ -70,12 +78,24 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         return root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu_user, menu)
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.toolbar_menu_user, menu)
+//
+//
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    private fun setUpToolbar() {
+//
+//        if(activity is AppCompatActivity){
+//            (activity as AppCompatActivity).setSupportActionBar(toolbar)
+//        }
+//        (activity as AppCompatActivity).supportActionBar?.title = "Users"
+//        (activity as AppCompatActivity).supportActionBar?.elevation = 4.0F
+//        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
+//        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(true)
+//        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
+//    }
 
     override fun onQueryTextChange(newText: String): Boolean {
         userAdapter!!.filter(newText)

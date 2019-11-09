@@ -7,17 +7,34 @@
     android:orientation="vertical"
     tools:context=".fragment.UserFragment">
 
-    <SearchView
-        android:id="@+id/searchuser_sv"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="50dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Users"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/white" >
+
+        <SearchView
+            android:id="@+id/searchuser_sv"
+            android:layoutDirection="rtl"
+            android:iconifiedByDefault="true"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:clickable="true" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:paddingBottom="50dp"
         android:scrollbars="vertical" />
 
