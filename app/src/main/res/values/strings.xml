@@ -19,6 +19,13 @@
     <string name="name">Name</string>
     <string name="phone">Phone</string>
     <string name="capture_photo">Capture photo...</string>
+    <string name="default_notification_channel_id">sugarbroker</string>
+    <string name="notifications_admin_channel_description">Message Sugar Broker</string>
+    <string name="default_notification_channel_name" translatable="true">sugarbroker</string>
+    <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
+    <string name="fcm_message">FCM Message</string>
+    <string name="msg_subscribed">Subscribed to sugarbroker topic</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
