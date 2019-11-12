@@ -3,6 +3,7 @@ package com.example.sugarbroker.activity.tender
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -20,6 +21,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detail_tender.*
 
+
+
 class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val TAG = "DetailTenderActivity"
@@ -29,6 +32,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
+    var address: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +44,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
         if (bundle != null) {
             id = bundle.getString("UpdateTenderId")
             Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
+            address = bundle.getString("UpdateTenderAddress")
 
             mill_name_textview.setText(bundle.getString("UpdateTenderMillName"))
             price_textview.setText(bundle.getString("UpdateTenderPrice"))
@@ -78,28 +83,16 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
         map = googleMap
 
         //These coordinates represent the latitude and longitude of the Googleplex.
-        val latitude = 37.422160
-        val longitude = -122.084270
         val zoomLevel = 4f
 
-        val homeLatLng = LatLng(latitude, longitude)
+        val add = Geocoder(this).getFromLocationName(address!!, 5)
+
+        val location = add[0]
+        val homeLatLng = LatLng(location.getLatitude(), location.getLongitude())
+
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
         map.addMarker(MarkerOptions().position(homeLatLng).title("Tender5"))
     }
-
-//    override fun onLocationChanged(location: Location?) {
-//        // create message for toast with updated latitude and longitudefa
-//        var msg = "Updated Location: " + location!!.latitude + " , " + location.longitude
-//
-//        // show toast message with updated location
-//        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-//        val location = LatLng(location!!.latitude, location.longitude)
-//        map.clear()
-//
-//        map.addMarker(MarkerOptions().position(location).title("Current Location"))
-//        map.moveCamera(CameraUpdateFactory.newLatLng(location))
-//        map.animateCamera(CameraUpdateFactory.zoomTo(11f))
-//    }
 
     private fun isPermissionGranted() : Boolean {
         return ContextCompat.checkSelfPermission(
