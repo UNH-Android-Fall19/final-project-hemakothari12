@@ -3,6 +3,7 @@ package com.example.sugarbroker.activity.account
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import com.example.sugarbroker.R
@@ -18,6 +19,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        val createAccount = "Don't have an account? " + "<font><b>" + "Sign up" + "<b></font>"
+        newuser_textview.setText(Html.fromHtml(createAccount))
 
         login_button.setOnClickListener {
             performLogin()
