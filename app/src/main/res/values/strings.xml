@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Jitu Pune</string>
     <string name="company_name">Jeetu Pune</string>
-    <string name="email">Email Address</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="address">Address</string>
     <string name="submit">Submit</string>
     <string name="title_activity_user_home">UserHomeActivity</string>
     <string name="tab_text_1">Tender</string>
@@ -18,6 +19,8 @@
     <string name="title_users">Users</string>
     <string name="name">Name</string>
     <string name="phone">Phone</string>
+    <string name="register">Register</string>
+    <string name="already_account">Already Have an Account?</string>
     <string name="capture_photo">Capture photo...</string>
     <string name="default_notification_channel_id">sugarbroker</string>
     <string name="notifications_admin_channel_description">Message Sugar Broker</string>

@@ -41,8 +41,10 @@
         <activity android:name=".activity.home.AdminHomeActivity" />
 
         <activity android:name=".activity.account.LoginActivity" />
-        <activity android:name=".activity.account.RegisterActivity" />
-        <activity android:name=".activity.account.ForgotPasswordActivity" />
+        <activity android:name=".activity.account.RegisterActivity"
+            android:parentActivityName=".activity.account.LoginActivity" />/>
+        <activity android:name=".activity.account.ForgotPasswordActivity"
+            android:parentActivityName=".activity.account.LoginActivity"/>
 
         <activity android:name=".activity.MainActivity">
             <intent-filter>
