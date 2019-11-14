@@ -11,7 +11,12 @@
         android:id="@+id/companylogo_iv"
         android:layout_width="wrap_content"
         android:layout_height="213dp"
-        android:src="@drawable/companylogo" />
+        android:src="@drawable/companylogo"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:contentDescription="@string/company_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -26,14 +31,14 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:theme="@style/TextInputLayoutStyle"
-        android:hint="Email">
+        android:hint="@string/email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_email_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:drawableLeft="@drawable/ic_email_black_24dp"/>
+            android:drawableStart="@drawable/ic_email_black_24dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -50,51 +55,15 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:theme="@style/TextInputLayoutStyle"
-        android:hint="Password">
+        android:hint="@string/password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_password_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textWebPassword"
-            android:drawableLeft="@drawable/ic_password_outline_black_24dp"/>
+            android:drawableStart="@drawable/ic_password_outline_black_24dp"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-<!--    <com.google.android.material.button.MaterialButton-->
-<!--        android:id="@+id/material_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Login"/>-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/login_email_edittext1"-->
-<!--        android:layout_width="318dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginStart="32dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        android:background="@drawable/rounded_edittext"-->
-<!--        android:ems="10"-->
-<!--        android:hint="Email"-->
-<!--        android:inputType="textEmailAddress"-->
-<!--        android:paddingLeft="20dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        tools:layout_editor_absoluteY="320dp" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/login_password_edittext"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="65dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:background="@drawable/rounded_edittext"-->
-<!--        android:ems="10"-->
-<!--        android:hint="Password"-->
-<!--        android:inputType="textPassword"-->
-<!--        android:paddingLeft="20dp"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/login_email_edittext"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/login_email_edittext"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/login_email_edittext" />-->
 
     <Button
         android:id="@+id/login_button"
@@ -104,7 +73,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="Login" />
+        android:text="@string/login" />
 
     <TextView
         android:id="@+id/forgotpassword_textview"
@@ -113,7 +82,7 @@
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:text="Forgot your password?"
+        android:text="@string/forgot_password"
         android:textSize="16sp" />
 
     <TextView
@@ -121,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:paddingTop="130dp"
+        android:paddingTop="180dp"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp" />
 
