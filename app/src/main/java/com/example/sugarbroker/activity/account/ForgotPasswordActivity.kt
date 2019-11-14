@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.sugarbroker.R
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +17,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
+
+        setUpToolbar()
 
         auth = FirebaseAuth.getInstance()
 
@@ -44,5 +47,18 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     }
             }
         }
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.title = resources.getString(R.string.forgot_password)
+        actionBar.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            super.onBackPressed()
+        })
     }
 }
