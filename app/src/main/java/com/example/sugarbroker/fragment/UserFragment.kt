@@ -63,7 +63,13 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         backIcon = root!!.findViewById(R.id.back_button) as ImageView
         backIcon!!.visibility = View.GONE
         backIcon!!.setOnClickListener {
-            //pending back call
+            editsearch.setQuery("",false)
+            editsearch.clearFocus()
+            backIcon!!.visibility = View.GONE
+            editsearch!!.visibility = View.GONE
+            heading!!.visibility = View.VISIBLE
+            searchIcon!!.visibility = View.VISIBLE
+            logout!!.visibility = View.VISIBLE
         }
         logout = root!!.findViewById(R.id.logout) as ImageView
         logout!!.visibility = View.VISIBLE
