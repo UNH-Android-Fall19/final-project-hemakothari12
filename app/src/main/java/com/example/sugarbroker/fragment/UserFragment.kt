@@ -1,6 +1,7 @@
 package com.example.sugarbroker.fragment
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -17,9 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.fragment_users.*
+import com.example.sugarbroker.activity.account.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
 
 
 /**
@@ -52,7 +53,7 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         root = inflater.inflate(R.layout.fragment_users, container, false)
 
 //        setHasOptionsMenu(true)
-        setUpToolbar()
+//        setUpToolbar()
 
         mainToolbar = root!!.findViewById<View>(R.id.toolbar) as Toolbar
         mainToolbar!!.visibility = View.VISIBLE
@@ -62,15 +63,6 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         editsearch.visibility = View.GONE
         backIcon = root!!.findViewById(R.id.back_button) as ImageView
         backIcon!!.visibility = View.GONE
-        backIcon!!.setOnClickListener {
-            editsearch.setQuery("",false)
-            editsearch.clearFocus()
-            backIcon!!.visibility = View.GONE
-            editsearch!!.visibility = View.GONE
-            heading!!.visibility = View.VISIBLE
-            searchIcon!!.visibility = View.VISIBLE
-            logout!!.visibility = View.VISIBLE
-        }
         logout = root!!.findViewById(R.id.logout) as ImageView
         logout!!.visibility = View.VISIBLE
 
@@ -99,6 +91,16 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
 
         editsearch!!.setOnQueryTextListener(this)
 
+        backIcon!!.setOnClickListener {
+            editsearch.setQuery("",false)
+            editsearch.clearFocus()
+            backIcon!!.visibility = View.GONE
+            editsearch!!.visibility = View.GONE
+            heading!!.visibility = View.VISIBLE
+            searchIcon!!.visibility = View.VISIBLE
+            logout!!.visibility = View.VISIBLE
+        }
+
         searchIcon = root!!.findViewById<View>(R.id.search_icon) as ImageView
         searchIcon!!.setOnClickListener {
             backIcon!!.visibility = View.VISIBLE
@@ -107,6 +109,10 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
             searchIcon!!.visibility = View.GONE
             logout!!.visibility = View.GONE
             editsearch!!.requestFocus()
+        }
+
+        logout!!.setOnClickListener {
+            performLogout()
         }
 
         return root
@@ -119,18 +125,18 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
 //        super.onCreateOptionsMenu(menu, inflater)
 //    }
 
-    private fun setUpToolbar() {
-        setHasOptionsMenu(true)
-
-        if(activity is AppCompatActivity){
-            (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        }
-        (activity as AppCompatActivity).supportActionBar?.title = "Users"
-        (activity as AppCompatActivity).supportActionBar?.elevation = 4.0F
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-    }
+//    private fun setUpToolbar() {
+//        setHasOptionsMenu(true)
+//
+//        if(activity is AppCompatActivity){
+//            (activity as AppCompatActivity).setSupportActionBar(toolbar)
+//        }
+//        (activity as AppCompatActivity).supportActionBar?.title = "Users"
+//        (activity as AppCompatActivity).supportActionBar?.elevation = 4.0F
+//        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(true)
+//        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
+//    }
 
     override fun onQueryTextChange(newText: String): Boolean {
         userAdapter!!.filter(newText)
@@ -172,5 +178,11 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
             }
     }
 
+    private fun performLogout() {
+        FirebaseAuth.getInstance().signOut()
 
+        val intent = Intent(activity!!.applicationContext, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+    }
 }
