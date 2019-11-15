@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.sugarbroker.activity.account.LoginActivity
@@ -189,7 +190,7 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         val uid = users.uid
         firestoreDB!!.collection("users").document(uid!!).delete()
             .addOnCompleteListener {
-//                userAdapter!!.removeAt(position)
+                 Toast.makeText(context, "User has been deleted!", Toast.LENGTH_SHORT).show()
             }
     }
 }
