@@ -43,7 +43,7 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
         holder.phone.text = users.phone
 
         holder.edit.setOnClickListener { updateUser(users) }
-        holder.delete.setOnClickListener { deleteUser(users.uid!!, position) }
+//        holder.delete.setOnClickListener { deleteUser(users.uid!!, position) }
         holder.itemView.setOnClickListener { detailUser(users) }
     }
 
@@ -95,17 +95,17 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
         context.startActivity(intent)
     }
 
-    private fun deleteUser(id: String, position: Int) {
-        firestoreDB.collection("users")
-            .document(id)
-            .delete()
-            .addOnCompleteListener {
-                usersList.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, usersList.size)
-                Toast.makeText(context, "User has been deleted!", Toast.LENGTH_SHORT).show()
-            }
-    }
+//    private fun deleteUser(id: String, position: Int) {
+//        firestoreDB.collection("users")
+//            .document(id)
+//            .delete()
+//            .addOnCompleteListener {
+//                usersList.removeAt(position)
+//                notifyItemRemoved(position)
+//                notifyItemRangeChanged(position, usersList.size)
+//                Toast.makeText(context, "User has been deleted!", Toast.LENGTH_SHORT).show()
+//            }
+//    }
 
     fun filter(charText: String) {
         var charText = charText
@@ -121,6 +121,13 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
             }
         }
         notifyDataSetChanged()
+    }
+
+    fun removeAt(position: Int) {
+        Log.d("Position is : ", "position is ${position}")
+        usersList.removeAt(position)
+//        notifyItemRemoved(position)
+//        notifyItemRangeChanged(position, usersList.size)
     }
 
 }

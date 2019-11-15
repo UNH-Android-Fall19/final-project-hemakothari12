@@ -19,14 +19,18 @@ import com.google.firebase.firestore.ListenerRegistration
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.sugarbroker.activity.account.LoginActivity
+import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
+import com.example.sugarbroker.activity.interfaces.ListClick
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_users.view.*
 
 
 /**
  * [Orders Fragment] subclass.
  */
-class UserFragment : Fragment(), SearchView.OnQueryTextListener {
+class UserFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
 
     private val TAG = "UserFragment"
 
@@ -42,6 +46,8 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
     private var logout: ImageView? = null
 
     private var root: View? = null
+
+    var userList = mutableListOf<User>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +81,7 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
                     return@EventListener
                 }
 
-                val userList = mutableListOf<User>()
+                userList = mutableListOf<User>()
 
                 for (doc in documentSnapshots!!) {
                     val user = doc.toObject(User::class.java)
@@ -138,7 +144,7 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val userList = mutableListOf<User>()
+                    userList = mutableListOf<User>()
 
                     for (doc in task.result!!) {
                         val user = doc.toObject<User>(User::class.java)
@@ -152,6 +158,17 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
                     userListRV.layoutManager = mLayoutManager
                     userListRV.itemAnimator = DefaultItemAnimator()
                     userListRV.adapter = userAdapter
+
+                    val swipeHandler = object : SwipeToDeleteCallback(context!!) {
+                        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                            deleteRow(viewHolder.adapterPosition)
+                        }
+                    }
+
+                    val itemTouchHelper = ItemTouchHelper(swipeHandler)
+                    itemTouchHelper.attachToRecyclerView(root?.user_list!!)
+
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.exception)
                 }
@@ -164,5 +181,16 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         val intent = Intent(activity!!.applicationContext, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+    }
+
+    override fun deleteRow(position: Int) {
+        Log.d("Position is delete row: ", "position is ${position}")
+        val users = userList[position]
+        val uid = users.uid
+//        val uid = FirebaseAuth.getInstance().uid ?: ""
+        firestoreDB!!.collection("users").document(uid!!).delete()
+            .addOnCompleteListener {
+                userAdapter!!.removeAt(position)
+            }
     }
 }
