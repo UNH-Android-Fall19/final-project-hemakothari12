@@ -125,7 +125,7 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
 
     fun removeAt(position: Int) {
         Log.d("Position is : ", "position is ${position}")
-        usersList.removeAt(position)
+//        usersList.removeAt(position)
 //        notifyItemRemoved(position)
 //        notifyItemRangeChanged(position, usersList.size)
     }

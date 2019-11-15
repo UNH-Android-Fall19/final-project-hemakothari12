@@ -187,10 +187,9 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         Log.d("Position is delete row: ", "position is ${position}")
         val users = userList[position]
         val uid = users.uid
-//        val uid = FirebaseAuth.getInstance().uid ?: ""
         firestoreDB!!.collection("users").document(uid!!).delete()
             .addOnCompleteListener {
-                userAdapter!!.removeAt(position)
+//                userAdapter!!.removeAt(position)
             }
     }
 }
