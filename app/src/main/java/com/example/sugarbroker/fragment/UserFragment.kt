@@ -118,26 +118,6 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         return root
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.toolbar_menu_user, menu)
-//
-//
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
-
-//    private fun setUpToolbar() {
-//        setHasOptionsMenu(true)
-//
-//        if(activity is AppCompatActivity){
-//            (activity as AppCompatActivity).setSupportActionBar(toolbar)
-//        }
-//        (activity as AppCompatActivity).supportActionBar?.title = "Users"
-//        (activity as AppCompatActivity).supportActionBar?.elevation = 4.0F
-//        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(true)
-//        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-//    }
-
     override fun onQueryTextChange(newText: String): Boolean {
         userAdapter!!.filter(newText)
         return false
