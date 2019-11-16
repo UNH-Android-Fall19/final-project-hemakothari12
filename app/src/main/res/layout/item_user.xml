@@ -41,7 +41,7 @@
                 android:layout_toRightOf="@+id/tvIcon"
                 android:text="@string/name"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,7 +55,8 @@
                 android:layout_toEndOf="@+id/tvIcon"
                 android:layout_toRightOf="@+id/tvIcon"
                 android:text="@string/phone"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimaryLight"
+                 />
 
             <Button
                 android:id="@+id/ivEdit"
