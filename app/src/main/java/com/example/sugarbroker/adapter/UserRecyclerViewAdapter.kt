@@ -41,6 +41,7 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
 
         holder.name.text = users.name
         holder.phone.text = users.phone
+        holder.tvIcon.text = users.name!!.get(0).toUpperCase().toString()
 
         holder.edit.setOnClickListener { updateUser(users) }
 //        holder.delete.setOnClickListener { deleteUser(users.uid!!, position) }
@@ -57,14 +58,15 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
         internal var name: TextView
         internal var phone: TextView
         internal var edit: ImageView
-        internal var delete: ImageView
+        internal var tvIcon: TextView
+//        internal var delete: ImageView
 
         init {
             name = view.findViewById(R.id.name_textview)
             phone = view.findViewById(R.id.phone_textview)
 
             edit = view.findViewById(R.id.ivEdit)
-            delete = view.findViewById(R.id.ivDelete)
+            tvIcon = view.findViewById(R.id.tvIcon)
         }
     }
 
