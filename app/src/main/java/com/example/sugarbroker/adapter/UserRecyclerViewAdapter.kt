@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -57,7 +58,7 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
     inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         internal var name: TextView
         internal var phone: TextView
-        internal var edit: ImageView
+        internal var edit: Button
         internal var tvIcon: TextView
 //        internal var delete: ImageView
 
