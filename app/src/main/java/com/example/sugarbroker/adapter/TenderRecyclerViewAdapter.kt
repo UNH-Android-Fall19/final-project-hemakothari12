@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,9 +16,19 @@ import com.example.sugarbroker.activity.tender.AddTenderActivity
 import com.example.sugarbroker.activity.tender.DetailTenderActivity
 import com.example.sugarbroker.model.Tender
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, private val context: Context,
                                 private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<TenderRecyclerViewAdapter.ViewHolder>() {
+
+    private val listTender: ArrayList<Tender>
+
+    init {
+
+        this.listTender = ArrayList<Tender>()
+        this.listTender.addAll(tenderList)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tender, parent, false)
@@ -30,9 +41,9 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
 
         holder.millName.text = tender.millName
         holder.price.text = tender.price
+        holder.tvIcon.text = tender.millName!!.get(0).toUpperCase().toString()
 
         holder.edit.setOnClickListener { updateTender(tender) }
-        holder.delete.setOnClickListener { deleteTender(tender.id!!, position) }
         holder.itemView.setOnClickListener { detailTender(tender) }
     }
 
@@ -45,15 +56,15 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
     inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         internal var millName: TextView
         internal var price: TextView
-        internal var edit: ImageView
-        internal var delete: ImageView
+        internal var edit: Button
+        internal var tvIcon: TextView
 
         init {
             millName = view.findViewById(R.id.mill_name_textview)
             price = view.findViewById(R.id.price_textview)
 
             edit = view.findViewById(R.id.ivEdit)
-            delete = view.findViewById(R.id.ivDelete)
+            tvIcon = view.findViewById(R.id.tvIcon)
         }
     }
 
@@ -81,17 +92,33 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         context.startActivity(intent)
     }
 
-    private fun deleteTender(id: String, position: Int) {
-        firestoreDB.collection("tender")
-            .document(id)
-            .delete()
-            .addOnCompleteListener {
-                tenderList.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, tenderList.size)
-                Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
+    fun filter(charText: String) {
+        var charText = charText
+        charText = charText.toLowerCase(Locale.getDefault())
+        tenderList.clear()
+        if (charText.length == 0) {
+            tenderList.addAll(listTender)
+        } else {
+            for (wp in listTender) {
+                if (wp.millName!!.toLowerCase(Locale.getDefault()).contains(charText)) {
+                    tenderList.add(wp)
+                }
             }
+        }
+        notifyDataSetChanged()
     }
+
+//    private fun deleteTender(id: String, position: Int) {
+//        firestoreDB.collection("tender")
+//            .document(id)
+//            .delete()
+//            .addOnCompleteListener {
+//                tenderList.removeAt(position)
+//                notifyItemRemoved(position)
+//                notifyItemRangeChanged(position, tenderList.size)
+//                Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
+//            }
+//    }
 
 }
 

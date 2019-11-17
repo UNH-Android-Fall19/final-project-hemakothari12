@@ -45,7 +45,6 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
         holder.tvIcon.text = users.name!!.get(0).toUpperCase().toString()
 
         holder.edit.setOnClickListener { updateUser(users) }
-//        holder.delete.setOnClickListener { deleteUser(users.uid!!, position) }
         holder.itemView.setOnClickListener { detailUser(users) }
     }
 
@@ -60,7 +59,6 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
         internal var phone: TextView
         internal var edit: Button
         internal var tvIcon: TextView
-//        internal var delete: ImageView
 
         init {
             name = view.findViewById(R.id.name_textview)
@@ -97,18 +95,6 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
         intent.putExtra("UpdateUserProfileType", "Admin")
         context.startActivity(intent)
     }
-
-//    private fun deleteUser(id: String, position: Int) {
-//        firestoreDB.collection("users")
-//            .document(id)
-//            .delete()
-//            .addOnCompleteListener {
-//                usersList.removeAt(position)
-//                notifyItemRemoved(position)
-//                notifyItemRangeChanged(position, usersList.size)
-//                Toast.makeText(context, "User has been deleted!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 
     fun filter(charText: String) {
         var charText = charText
