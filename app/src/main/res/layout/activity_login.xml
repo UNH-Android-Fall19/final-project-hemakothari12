@@ -22,6 +22,8 @@
             android:paddingRight="20dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="50dp"
             android:contentDescription="@string/company_logo" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -96,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:paddingTop="180dp"
+            android:paddingTop="100dp"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 

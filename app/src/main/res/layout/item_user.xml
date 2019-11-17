@@ -71,6 +71,7 @@
                 android:contentDescription="@string/edit"
                 android:visibility="visible"
                 tools:visibility="visible"
+                android:backgroundTint="@color/colorPrimaryLight2"
                 android:text="@string/edit"
                 />
 
