@@ -23,6 +23,9 @@
 
         <activity android:name=".activity.resale.AddResaleActivity"></activity>
         <activity android:name=".activity.resale.ResaleActivity" />
+        <activity android:name=".activity.resale.DetailResaleActivity" />
+        <activity android:name=".activity.resale.BuyResaleActivity" />
+        <activity android:name=".activity.resale.ReviewResaleActivity" />
 
         <activity android:name=".activity.tender.AddTenderActivity"></activity>
         <activity android:name=".activity.tender.DetailTenderActivity"></activity>

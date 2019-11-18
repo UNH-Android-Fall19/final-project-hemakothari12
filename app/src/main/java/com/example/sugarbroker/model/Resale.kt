@@ -1,32 +1,31 @@
 package com.example.sugarbroker.model
 
-import java.util.HashMap
 
 class Resale {
     var id: String? = null
     var millName: String? = null
     var price: String? = null
+    var address: String? = null
+    var contact: String? = null
+    var resaleUrl: String? = null
 
     constructor() {}
 
-    constructor(id: String, millName: String, price: String) {
+    constructor(id: String, millName: String, price: String, address: String, contact: String, url: String? = null) {
         this.id = id
         this.millName = millName
         this.price = price
+        this.address = address
+        this.contact = contact
+        this.resaleUrl = url
     }
 
-    constructor(millName: String, price: String) {
+    constructor(millName: String, price: String, address: String, contact: String, url: String? = null) {
         this.millName = millName
         this.price = price
-    }
-
-    fun toMap(): Map<String, Any> {
-
-        val result = HashMap<String, Any>()
-        result.put("millName", millName!!)
-        result.put("price", price!!)
-
-        return result
+        this.address = address
+        this.contact = contact
+        this.resaleUrl = url
     }
 
 }
