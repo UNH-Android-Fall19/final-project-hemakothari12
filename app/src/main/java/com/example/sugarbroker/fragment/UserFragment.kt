@@ -59,9 +59,6 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_users, container, false)
 
-//        setHasOptionsMenu(true)
-//        setUpToolbar()
-
         mainToolbar = root!!.findViewById<View>(R.id.toolbar) as Toolbar
         mainToolbar!!.visibility = View.VISIBLE
         heading = root!!.findViewById<View>(R.id.heading_textview) as TextView
