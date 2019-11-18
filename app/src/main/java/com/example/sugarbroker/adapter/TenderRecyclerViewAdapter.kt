@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.tender.AddTenderActivity
@@ -44,13 +42,6 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
 
         holder.millName.text = tender.millName
         holder.price.text = tender.price
-//        holder.tvIcon.text = tender.millName!!.get(0).toUpperCase().toString()
-//        Glide.with(this@TenderRecyclerViewAdapter).load(tender.tenderUrl.toString())
-//            .placeholder(R.drawable.photoplaceholder)
-//            .apply(RequestOptions.circleCropTransform())
-//            .into(
-//                holder.tvIcon
-//            )
 
         Glide.with(context).load(tender.tenderUrl.toString())
             .placeholder(R.drawable.photoplaceholder)
@@ -123,18 +114,6 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         }
         notifyDataSetChanged()
     }
-
-//    private fun deleteTender(id: String, position: Int) {
-//        firestoreDB.collection("tender")
-//            .document(id)
-//            .delete()
-//            .addOnCompleteListener {
-//                tenderList.removeAt(position)
-//                notifyItemRemoved(position)
-//                notifyItemRangeChanged(position, tenderList.size)
-//                Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 
 }
 
