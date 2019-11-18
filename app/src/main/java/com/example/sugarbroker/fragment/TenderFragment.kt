@@ -20,8 +20,10 @@ import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
 import com.example.sugarbroker.activity.interfaces.ListClick
+import com.example.sugarbroker.activity.tender.AddTenderActivity
 import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Tender
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -44,6 +46,7 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
     private var backIcon: ImageView? = null
     private var heading: TextView? = null
     private var logout: ImageView? = null
+    private var tenderAdd: FloatingActionButton? = null
 
     private var root: View? = null
 
@@ -68,6 +71,7 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         backIcon!!.visibility = View.GONE
         logout = root!!.findViewById(R.id.logout) as ImageView
         logout!!.visibility = View.VISIBLE
+        tenderAdd = root!!.findViewById<View>(R.id.tenderAdd) as FloatingActionButton
 
         loadTenderList()
 
@@ -115,6 +119,11 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
 
         logout!!.setOnClickListener {
             performLogout()
+        }
+
+        tenderAdd!!.setOnClickListener {
+            val intent = Intent(context, AddTenderActivity::class.java)
+            startActivity(intent)
         }
 
         return root

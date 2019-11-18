@@ -87,7 +87,11 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
         //These coordinates represent the latitude and longitude of the Googleplex.
         val zoomLevel = 4f
 
-        val add = Geocoder(this).getFromLocationName(address!!, 5)
+        if (address == null || address!!.length == 0) {
+            address = "126 Nana Peth, Kamal Mohan Society, Pune - 411002"
+        }
+
+        var add = Geocoder(this).getFromLocationName(address!!, 5)
 
         val location = add[0]
         val homeLatLng = LatLng(location.getLatitude(), location.getLongitude())
