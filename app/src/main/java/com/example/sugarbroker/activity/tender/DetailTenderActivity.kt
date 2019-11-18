@@ -33,6 +33,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
     var address: String? = null
+    var mapTitle: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
             id = bundle.getString("UpdateTenderId")
             Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
             address = bundle.getString("UpdateTenderAddress")
+            mapTitle = bundle.getString("UpdateTenderMillName")
 
             mill_name_textview.setText(bundle.getString("UpdateTenderMillName"))
             price_textview.setText(bundle.getString("UpdateTenderPrice"))
@@ -91,7 +93,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
         val homeLatLng = LatLng(location.getLatitude(), location.getLongitude())
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
-        map.addMarker(MarkerOptions().position(homeLatLng).title("Tender5"))
+        map.addMarker(MarkerOptions().position(homeLatLng).title(mapTitle))
     }
 
     private fun isPermissionGranted() : Boolean {

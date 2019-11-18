@@ -20,14 +20,19 @@ import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
 import com.example.sugarbroker.activity.interfaces.ListClick
+import com.example.sugarbroker.activity.resale.AddResaleActivity
 import com.example.sugarbroker.adapter.ResaleRecyclerViewAdapter
 import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Resale
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import kotlinx.android.synthetic.main.fragment_resale.*
 import kotlinx.android.synthetic.main.fragment_resale.view.*
+import kotlinx.android.synthetic.main.fragment_resale.view.resaleAdd
 
 /**
  * [Resale Fragment] subclass.
@@ -46,6 +51,7 @@ class ResaleFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
     private var backIcon: ImageView? = null
     private var heading: TextView? = null
     private var logout: ImageView? = null
+    private var resaleAdd: FloatingActionButton? = null
 
     private var root: View? = null
 
@@ -70,6 +76,7 @@ class ResaleFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         backIcon!!.visibility = View.GONE
         logout = root!!.findViewById(R.id.logout) as ImageView
         logout!!.visibility = View.VISIBLE
+        resaleAdd = root!!.findViewById<View>(R.id.resaleAdd) as FloatingActionButton
 
         loadResaleList()
 
@@ -117,6 +124,11 @@ class ResaleFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
 
         logout!!.setOnClickListener {
             performLogout()
+        }
+
+        resaleAdd!!.setOnClickListener {
+            val intent = Intent(context, AddResaleActivity::class.java)
+            startActivity(intent)
         }
 
 
