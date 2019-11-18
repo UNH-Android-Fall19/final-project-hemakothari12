@@ -16,8 +16,11 @@ import com.example.sugarbroker.activity.tender.AddTenderActivity
 import com.example.sugarbroker.activity.tender.DetailTenderActivity
 import com.example.sugarbroker.model.Tender
 import com.google.firebase.firestore.FirebaseFirestore
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 import kotlin.collections.ArrayList
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, private val context: Context,
                                 private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<TenderRecyclerViewAdapter.ViewHolder>() {
@@ -41,7 +44,20 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
 
         holder.millName.text = tender.millName
         holder.price.text = tender.price
-        holder.tvIcon.text = tender.millName!!.get(0).toUpperCase().toString()
+//        holder.tvIcon.text = tender.millName!!.get(0).toUpperCase().toString()
+//        Glide.with(this@TenderRecyclerViewAdapter).load(tender.tenderUrl.toString())
+//            .placeholder(R.drawable.photoplaceholder)
+//            .apply(RequestOptions.circleCropTransform())
+//            .into(
+//                holder.tvIcon
+//            )
+
+        Glide.with(context).load(tender.tenderUrl.toString())
+            .placeholder(R.drawable.photoplaceholder)
+            .apply(RequestOptions.circleCropTransform())
+            .into(
+                holder.tvIcon
+            )
 
         holder.edit.setOnClickListener { updateTender(tender) }
         holder.itemView.setOnClickListener { detailTender(tender) }
@@ -57,7 +73,7 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         internal var millName: TextView
         internal var price: TextView
         internal var edit: Button
-        internal var tvIcon: TextView
+        internal var tvIcon: CircleImageView
 
         init {
             millName = view.findViewById(R.id.mill_name_textview)

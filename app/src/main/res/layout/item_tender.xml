@@ -21,15 +21,24 @@
         android:paddingEnd="10dp"
         android:paddingBottom="5dp">
 
-        <TextView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/tvIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_drawable"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/photoplaceholder"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="0dp" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvIcon"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/rounded_drawable"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="20sp" />-->
 
         <TextView
             android:id="@+id/mill_name_textview"
