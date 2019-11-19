@@ -112,5 +112,17 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
         notifyDataSetChanged()
     }
 
+    fun removeItem(position: Int) {
+        usersList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, usersList.size)
+    }
+
+    fun restoreItem(model: User, position: Int) {
+        usersList.add(position, model)
+        // notify item added by position
+        notifyItemInserted(position)
+    }
+
 }
 

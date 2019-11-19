@@ -123,5 +123,17 @@ class OrderRecyclerViewAdapter(private val orderList: MutableList<Orders>, priva
         notifyDataSetChanged()
     }
 
+    fun removeItem(position: Int) {
+        orderList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, orderList.size)
+    }
+
+    fun restoreItem(model: Orders, position: Int) {
+        orderList.add(position, model)
+        // notify item added by position
+        notifyItemInserted(position)
+    }
+
 }
 

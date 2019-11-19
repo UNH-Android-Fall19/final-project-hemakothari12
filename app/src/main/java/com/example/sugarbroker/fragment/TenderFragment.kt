@@ -11,7 +11,6 @@ import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,7 +20,6 @@ import com.google.firebase.firestore.EventListener
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
-import com.example.sugarbroker.activity.interfaces.ListClick
 import com.example.sugarbroker.activity.tender.AddTenderActivity
 import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Tender
@@ -50,7 +48,6 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener {
     private var heading: TextView? = null
     private var logout: ImageView? = null
     private var tenderAdd: FloatingActionButton? = null
-    private var coordinatorLayoutForSnackBar: CoordinatorLayout? = null
 
     private var root: View? = null
 
@@ -206,8 +203,6 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener {
                             }
                             snackbar.setActionTextColor(Color.YELLOW)
                             snackbar.show()
-
-
                         }
                     }
 

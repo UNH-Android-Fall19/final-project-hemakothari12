@@ -2,6 +2,7 @@ package com.example.sugarbroker.fragment
 
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
 import com.example.sugarbroker.activity.interfaces.ListClick
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_users.view.*
 
@@ -31,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_users.view.*
 /**
  * [Orders Fragment] subclass.
  */
-class UserFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
+class UserFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "UserFragment"
 
@@ -160,7 +162,39 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
                     val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                            deleteRow(viewHolder.adapterPosition)
+//                            deleteRow(viewHolder.adapterPosition)
+                            val position = viewHolder.adapterPosition
+                            val deletedModel = userList!![position]
+                            val uid = deletedModel.uid
+                            firestoreDB!!.collection("tender").document(uid!!).delete()
+                                .addOnCompleteListener {
+                                    Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
+                                }
+                            userAdapter!!.removeItem(position)
+                            // showing snack bar with Undo option
+                            val snackbar = Snackbar.make(
+                                view!!,
+                                " removed from Recyclerview!",
+                                Snackbar.LENGTH_LONG
+                            )
+                            snackbar.setAction("UNDO") {
+                                // undo is selected, restore the deleted item
+                                firestoreDB!!.collection("tender")
+                                    .document(uid)
+                                    .set(deletedModel)
+                                    .addOnSuccessListener {
+                                        Log.e(TAG, "Tender document Added successful!")
+                                        Toast.makeText(context, "Tender has been updated!", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.e(TAG, "Error adding Tender document", e)
+                                        Toast.makeText(context, "Tender could not be updated!", Toast.LENGTH_SHORT).show()
+                                    }
+                                userAdapter!!.restoreItem(deletedModel, position)
+
+                            }
+                            snackbar.setActionTextColor(Color.YELLOW)
+                            snackbar.show()
                         }
                     }
 
@@ -181,13 +215,13 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         startActivity(intent)
     }
 
-    override fun deleteRow(position: Int) {
-        Log.d("Position is delete row: ", "position is ${position}")
-        val users = userList[position]
-        val uid = users.uid
-        firestoreDB!!.collection("users").document(uid!!).delete()
-            .addOnCompleteListener {
-                 Toast.makeText(context, "User has been deleted!", Toast.LENGTH_SHORT).show()
-            }
-    }
+//    override fun deleteRow(position: Int) {
+//        Log.d("Position is delete row: ", "position is ${position}")
+//        val users = userList[position]
+//        val uid = users.uid
+//        firestoreDB!!.collection("users").document(uid!!).delete()
+//            .addOnCompleteListener {
+//                 Toast.makeText(context, "User has been deleted!", Toast.LENGTH_SHORT).show()
+//            }
+//    }
 }

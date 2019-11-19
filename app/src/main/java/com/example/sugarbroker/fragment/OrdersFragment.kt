@@ -2,6 +2,7 @@ package com.example.sugarbroker.fragment
 
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -15,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
-import com.example.sugarbroker.activity.interfaces.ListClick
 import com.example.sugarbroker.activity.order.AddOrderActivity
 import com.example.sugarbroker.adapter.OrderRecyclerViewAdapter
 import com.example.sugarbroker.model.Orders
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_orders.view.*
 /**
  * [Orders Fragment] subclass.
  */
-class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
+class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "OrdersFragment"
 
@@ -210,7 +211,40 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
                     val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                            deleteRow(viewHolder.adapterPosition)
+//                            deleteRow(viewHolder.adapterPosition)
+                            val position = viewHolder.adapterPosition
+                            val deletedModel = orderList!![position]
+                            val uid = deletedModel.id
+                            firestoreDB!!.collection("orders").document(uid!!).delete()
+                                .addOnCompleteListener {
+                                    Toast.makeText(context, "Order has been deleted!", Toast.LENGTH_SHORT).show()
+                                }
+                            orderAdapter!!.removeItem(position)
+                            // showing snack bar with Undo option
+                            val snackbar = Snackbar.make(
+                                view!!,
+                                " removed from Recyclerview!",
+                                Snackbar.LENGTH_LONG
+                            )
+                            snackbar.setAction("UNDO") {
+                                // undo is selected, restore the deleted item
+                                firestoreDB!!.collection("orders")
+                                    .document(uid)
+                                    .set(deletedModel)
+                                    .addOnSuccessListener {
+                                        Log.e(TAG, "Order document Added successful!")
+                                        Toast.makeText(context, "Order has been updated!", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.e(TAG, "Error adding Order document", e)
+                                        Toast.makeText(context, "Order could not be updated!", Toast.LENGTH_SHORT).show()
+                                    }
+                                orderAdapter!!.restoreItem(deletedModel, position)
+
+                            }
+                            snackbar.setActionTextColor(Color.YELLOW)
+                            snackbar.show()
+
                         }
                     }
 
@@ -230,13 +264,13 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         startActivity(intent)
     }
 
-    override fun deleteRow(position: Int) {
-        Log.d("Position is delete row: ", "position is ${position}")
-        val users = orderList[position]
-        val uid = users.id
-        firestoreDB!!.collection("orders").document(uid!!).delete()
-            .addOnCompleteListener {
-                Toast.makeText(context, "Order has been deleted!", Toast.LENGTH_SHORT).show()
-            }
-    }
+//    override fun deleteRow(position: Int) {
+//        Log.d("Position is delete row: ", "position is ${position}")
+//        val users = orderList[position]
+//        val uid = users.id
+//        firestoreDB!!.collection("orders").document(uid!!).delete()
+//            .addOnCompleteListener {
+//                Toast.makeText(context, "Order has been deleted!", Toast.LENGTH_SHORT).show()
+//            }
+//    }
 }
