@@ -28,8 +28,6 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_orders.view.*
 
-
-
 /**
  * [Orders Fragment] subclass.
  */
@@ -50,7 +48,8 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
     private var orderAdd: FloatingActionButton? = null
     private var toggle: RadioGroup? = null
     private var open: RadioButton? = null
-    private var all: RadioButton? = null
+    private var transit: RadioButton? = null
+    private var closed: RadioButton? = null
 
     private var root: View? = null
 
@@ -78,7 +77,8 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
         orderAdd = root!!.findViewById<View>(R.id.ordersAdd) as FloatingActionButton
         toggle = root!!.findViewById<View>(R.id.toggle) as RadioGroup
         open = root!!.findViewById<View>(R.id.open) as RadioButton
-        all = root!!.findViewById<View>(R.id.all) as RadioButton
+        transit = root!!.findViewById<View>(R.id.transit) as RadioButton
+        closed = root!!.findViewById<View>(R.id.closed) as RadioButton
         val userRef = firestoreDB!!.collection("orders")
 
         checkRadionButton()
@@ -87,16 +87,23 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
             val radio: RadioButton = root!!.findViewById(checkedId)
             if (radio.text.equals("Open")) {
                 radio.setTextColor(resources.getColor(R.color.transparent))
-                all!!.setTextColor(resources.getColor((R.color.colorPrimary)))
+                transit!!.setTextColor(resources.getColor((R.color.colorPrimary)))
+                closed!!.setTextColor(resources.getColor((R.color.colorPrimary)))
                 loadOrderList("Open")
-            } else {
+            } else if (radio.text.equals("Transit")) {
                 radio.setTextColor(resources.getColor(R.color.transparent))
                 open!!.setTextColor(resources.getColor(R.color.colorPrimary))
-                loadOrderList()
+                closed!!.setTextColor(resources.getColor(R.color.colorPrimary))
+                loadOrderList("Transit")
+            } else if (radio.text.equals("Closed")) {
+                radio.setTextColor(resources.getColor(R.color.transparent))
+                open!!.setTextColor(resources.getColor(R.color.colorPrimary))
+                transit!!.setTextColor(resources.getColor(R.color.colorPrimary))
+                loadOrderList("Closed")
             }
         }
 
-        firestoreListener = userRef.whereEqualTo("status", "Open")
+        firestoreListener = userRef
             .addSnapshotListener(EventListener { documentSnapshots, e ->
                 if (e != null) {
                     Log.e(TAG, "Listen failed!", e)
@@ -159,8 +166,12 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
             val radio: RadioButton = root!!.findViewById(selectedId)
             if (radio.text.equals("Open")) {
                 loadOrderList("Open")
-            } else {
-                loadOrderList()
+            }
+            if (radio.text.equals("Transit")) {
+                loadOrderList("Transit")
+            }
+            if (radio.text.equals("Closed")) {
+                loadOrderList("Closed")
             }
 
         }
@@ -184,11 +195,8 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun loadOrderList(typeOrder: String? = null) {
         val userRef: Query
-        if (typeOrder.equals("Open")){
-            userRef = firestoreDB!!.collection("orders").whereEqualTo("status",typeOrder)
-        } else {
-            userRef = firestoreDB!!.collection("orders")
-        }
+
+        userRef = firestoreDB!!.collection("orders").whereEqualTo("status",typeOrder)
 
         userRef.get()
             .addOnCompleteListener { task ->
@@ -211,7 +219,6 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
                     val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-//                            deleteRow(viewHolder.adapterPosition)
                             val position = viewHolder.adapterPosition
                             val deletedModel = orderList!![position]
                             val uid = deletedModel.id
@@ -264,13 +271,4 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
         startActivity(intent)
     }
 
-//    override fun deleteRow(position: Int) {
-//        Log.d("Position is delete row: ", "position is ${position}")
-//        val users = orderList[position]
-//        val uid = users.id
-//        firestoreDB!!.collection("orders").document(uid!!).delete()
-//            .addOnCompleteListener {
-//                Toast.makeText(context, "Order has been deleted!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 }
