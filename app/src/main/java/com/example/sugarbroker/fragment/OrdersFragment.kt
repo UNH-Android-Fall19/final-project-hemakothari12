@@ -5,10 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -27,7 +24,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_orders.view.*
+
+
 
 /**
  * [Orders Fragment] subclass.
@@ -47,6 +47,9 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
     private var heading: TextView? = null
     private var logout: ImageView? = null
     private var orderAdd: FloatingActionButton? = null
+    private var toggle: RadioGroup? = null
+    private var open: RadioButton? = null
+    private var all: RadioButton? = null
 
     private var root: View? = null
 
@@ -72,10 +75,27 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         logout = root!!.findViewById(R.id.logout) as ImageView
         logout!!.visibility = View.VISIBLE
         orderAdd = root!!.findViewById<View>(R.id.ordersAdd) as FloatingActionButton
+        toggle = root!!.findViewById<View>(R.id.toggle) as RadioGroup
+        open = root!!.findViewById<View>(R.id.open) as RadioButton
+        all = root!!.findViewById<View>(R.id.all) as RadioButton
+        val userRef = firestoreDB!!.collection("orders")
 
-        loadOrderList()
+        checkRadionButton()
 
-        firestoreListener = firestoreDB!!.collection("orders")
+        toggle!!.setOnCheckedChangeListener { group, checkedId ->
+            val radio: RadioButton = root!!.findViewById(checkedId)
+            if (radio.text.equals("Open")) {
+                radio.setTextColor(resources.getColor(R.color.transparent))
+                all!!.setTextColor(resources.getColor((R.color.colorPrimary)))
+                loadOrderList("Open")
+            } else {
+                radio.setTextColor(resources.getColor(R.color.transparent))
+                open!!.setTextColor(resources.getColor(R.color.colorPrimary))
+                loadOrderList()
+            }
+        }
+
+        firestoreListener = userRef.whereEqualTo("status", "Open")
             .addSnapshotListener(EventListener { documentSnapshots, e ->
                 if (e != null) {
                     Log.e(TAG, "Listen failed!", e)
@@ -93,6 +113,9 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
                 orderAdapter = OrderRecyclerViewAdapter(orderList, context!!, firestoreDB!!)
                 val orderListRV = root!!.findViewById<View>(R.id.order_list) as RecyclerView
                 orderListRV.adapter = orderAdapter
+
+                checkRadionButton()
+
             })
 
         editsearch!!.setOnQueryTextListener(this)
@@ -129,6 +152,19 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         return root
     }
 
+    fun checkRadionButton() {
+        if (toggle!!.checkedRadioButtonId != -1) {
+            val selectedId = toggle!!.getCheckedRadioButtonId()
+            val radio: RadioButton = root!!.findViewById(selectedId)
+            if (radio.text.equals("Open")) {
+                loadOrderList("Open")
+            } else {
+                loadOrderList()
+            }
+
+        }
+    }
+
     override fun onQueryTextChange(newText: String): Boolean {
         orderAdapter!!.filter(newText)
         return false
@@ -145,9 +181,15 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
     }
 
 
-    private fun loadOrderList() {
-        firestoreDB!!.collection("orders")
-            .get()
+    private fun loadOrderList(typeOrder: String? = null) {
+        val userRef: Query
+        if (typeOrder.equals("Open")){
+            userRef = firestoreDB!!.collection("orders").whereEqualTo("status",typeOrder)
+        } else {
+            userRef = firestoreDB!!.collection("orders")
+        }
+
+        userRef.get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     orderList = mutableListOf<Orders>()
