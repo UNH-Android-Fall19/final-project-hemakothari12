@@ -2,6 +2,7 @@ package com.example.sugarbroker.fragment
 
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -10,6 +11,7 @@ import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -24,6 +26,7 @@ import com.example.sugarbroker.activity.tender.AddTenderActivity
 import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Tender
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -32,7 +35,7 @@ import kotlinx.android.synthetic.main.fragment_tender.view.*
 /**
  * [Tender Fragment] subclass.
  */
-class TenderFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
+class TenderFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "TenderFragment"
 
@@ -47,6 +50,7 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
     private var heading: TextView? = null
     private var logout: ImageView? = null
     private var tenderAdd: FloatingActionButton? = null
+    private var coordinatorLayoutForSnackBar: CoordinatorLayout? = null
 
     private var root: View? = null
 
@@ -168,7 +172,42 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
                     val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                            deleteRow(viewHolder.adapterPosition)
+//                            deleteRow(viewHolder.adapterPosition)
+
+                            val position = viewHolder.adapterPosition
+                            val deletedModel = tenderList!![position]
+                            val uid = deletedModel.id
+                            firestoreDB!!.collection("tender").document(uid!!).delete()
+                                .addOnCompleteListener {
+                                    Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
+                                }
+                            tenderAdapter!!.removeItem(position)
+                            // showing snack bar with Undo option
+                            val snackbar = Snackbar.make(
+                                view!!,
+                                " removed from Recyclerview!",
+                                Snackbar.LENGTH_LONG
+                            )
+                            snackbar.setAction("UNDO") {
+                                // undo is selected, restore the deleted item
+                                firestoreDB!!.collection("tender")
+                                    .document(uid)
+                                    .set(deletedModel)
+                                    .addOnSuccessListener {
+                                        Log.e(TAG, "Tender document Added successful!")
+                                        Toast.makeText(context, "Tender has been updated!", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.e(TAG, "Error adding Tender document", e)
+                                        Toast.makeText(context, "Tender could not be updated!", Toast.LENGTH_SHORT).show()
+                                    }
+                                tenderAdapter!!.restoreItem(deletedModel, position)
+
+                            }
+                            snackbar.setActionTextColor(Color.YELLOW)
+                            snackbar.show()
+
+
                         }
                     }
 
@@ -189,13 +228,13 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         startActivity(intent)
     }
 
-    override fun deleteRow(position: Int) {
-        Log.d("Position is delete row: ", "position is ${position}")
-        val tender = tenderList[position]
-        val uid = tender.id
-        firestoreDB!!.collection("tender").document(uid!!).delete()
-            .addOnCompleteListener {
-                Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
-            }
-    }
+//    override fun deleteRow(position: Int) {
+//        Log.d("Position is delete row: ", "position is ${position}")
+//        val tender = tenderList[position]
+//        val uid = tender.id
+//        firestoreDB!!.collection("tender").document(uid!!).delete()
+//            .addOnCompleteListener {
+//                Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
+//            }
+//    }
 }

@@ -115,5 +115,17 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         notifyDataSetChanged()
     }
 
+    fun removeItem(position: Int) {
+        tenderList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, tenderList.size)
+    }
+
+    fun restoreItem(model: Tender, position: Int) {
+        tenderList.add(position, model)
+        // notify item added by position
+        notifyItemInserted(position)
+    }
+
 }
 

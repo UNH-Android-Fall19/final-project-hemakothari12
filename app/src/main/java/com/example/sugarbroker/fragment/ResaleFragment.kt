@@ -2,6 +2,7 @@ package com.example.sugarbroker.fragment
 
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -10,6 +11,7 @@ import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -37,7 +39,7 @@ import kotlinx.android.synthetic.main.fragment_resale.view.resaleAdd
 /**
  * [Resale Fragment] subclass.
  */
-class ResaleFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
+class ResaleFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "ResaleFragment"
 
@@ -52,6 +54,7 @@ class ResaleFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
     private var heading: TextView? = null
     private var logout: ImageView? = null
     private var resaleAdd: FloatingActionButton? = null
+    private var coordinatorLayoutForSnackBar: CoordinatorLayout? = null
 
     private var root: View? = null
 
@@ -174,7 +177,39 @@ class ResaleFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
                     val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                            deleteRow(viewHolder.adapterPosition)
+//                            deleteRow(viewHolder.adapterPosition)
+                            val position = viewHolder.adapterPosition
+                            val deletedModel = resaleList!![position]
+                            val uid = deletedModel.id
+                            firestoreDB!!.collection("resale").document(uid!!).delete()
+                                .addOnCompleteListener {
+                                    Toast.makeText(context, "Resale has been deleted!", Toast.LENGTH_SHORT).show()
+                                }
+                            resaleAdapter!!.removeItem(position)
+                            // showing snack bar with Undo option
+                            val snackbar = Snackbar.make(
+                                view!!,
+                                " removed from Recyclerview!",
+                                Snackbar.LENGTH_LONG
+                            )
+                            snackbar.setAction("UNDO") {
+                                // undo is selected, restore the deleted item
+                                firestoreDB!!.collection("resale")
+                                    .document(uid)
+                                    .set(deletedModel)
+                                    .addOnSuccessListener {
+                                        Log.e(TAG, "Resale document Added successful!")
+                                        Toast.makeText(context, "Resale has been updated!", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.e(TAG, "Error adding Resale document", e)
+                                        Toast.makeText(context, "Resale could not be updated!", Toast.LENGTH_SHORT).show()
+                                    }
+                                resaleAdapter!!.restoreItem(deletedModel, position)
+
+                            }
+                            snackbar.setActionTextColor(Color.YELLOW)
+                            snackbar.show()
                         }
                     }
 
@@ -195,15 +230,15 @@ class ResaleFragment : Fragment(), SearchView.OnQueryTextListener, ListClick {
         startActivity(intent)
     }
 
-    override fun deleteRow(position: Int) {
-        Log.d("Position is delete row: ", "position is ${position}")
-        val resale = resaleList[position]
-        val uid = resale.id
-        firestoreDB!!.collection("resale").document(uid!!).delete()
-            .addOnCompleteListener {
-                Toast.makeText(context, "Resale has been deleted!", Toast.LENGTH_SHORT).show()
-            }
-    }
+//    override fun deleteRow(position: Int) {
+//        Log.d("Position is delete row: ", "position is ${position}")
+//        val resale = resaleList[position]
+//        val uid = resale.id
+//        firestoreDB!!.collection("resale").document(uid!!).delete()
+//            .addOnCompleteListener {
+//                Toast.makeText(context, "Resale has been deleted!", Toast.LENGTH_SHORT).show()
+//            }
+//    }
 
 
 }

@@ -117,5 +117,17 @@ class ResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>, pri
         notifyDataSetChanged()
     }
 
+    fun removeItem(position: Int) {
+        resaleList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, resaleList.size)
+    }
+
+    fun restoreItem(model: Resale, position: Int) {
+        resaleList.add(position, model)
+        // notify item added by position
+        notifyItemInserted(position)
+    }
+
 }
 
