@@ -3,22 +3,26 @@
 
     <item android:id="@+id/navigation_resale"
         android:title="@string/title_resale"
-        android:icon="@drawable/ic_resale_black_24dp" />
+        android:icon="@drawable/ic_resale_black_24dp"
+        android:enabled="true"/>
 
     <item
         android:id="@+id/navigation_tender"
         android:icon="@drawable/ic_tender_black_24dp"
-        android:title="@string/title_tender" />
+        android:title="@string/title_tender"
+        android:enabled="true"/>
 
     <item
         android:id="@+id/navigation_orders"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_orders" />
+        android:title="@string/title_orders"
+        android:enabled="true"/>
 
     <item
         android:id="@+id/navigation_users"
         android:icon="@drawable/ic_people_black_24dp"
-        android:title="@string/title_users" />
+        android:title="@string/title_users"
+        android:enabled="true"/>
 
 
 </menu>
