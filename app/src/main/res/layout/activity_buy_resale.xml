@@ -65,6 +65,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:drawableStart="@drawable/ic_mill_name_primary_color_24dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +93,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:drawableStart="@drawable/ic_rupee_symbol"/>
         </com.google.android.material.textfield.TextInputLayout>
 

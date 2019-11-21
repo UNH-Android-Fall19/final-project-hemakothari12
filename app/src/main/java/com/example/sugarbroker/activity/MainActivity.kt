@@ -40,14 +40,14 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                         } else if (value == "Seller") {
                             Log.d("User Logged", "User Logged in is Seller")
+                            userType = "Seller"
                             intent = Intent(applicationContext, SellerHomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                             intent.putExtra("LoggedInUserEmail",document.getString("email"))
                             startActivity(intent)
-
                         } else {
                             Log.d("User Logged", "User Logged in is User")
-
+                            userType = "User"
                             intent = Intent(applicationContext, UserHomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                             intent.putExtra("LoggedInUserEmail",document.getString("email"))
