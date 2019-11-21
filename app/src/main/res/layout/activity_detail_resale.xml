@@ -6,133 +6,233 @@
     android:fillViewport="true"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".activity.resale.AddResaleActivity">
+        tools:context=".activity.resale.DetailResaleActivity">
 
-        <TextView
-            android:id="@+id/companyname_textview"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Resale Details"
-            android:textStyle="bold"
-            android:textSize="@dimen/appbar_padding"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:inputType="textPersonName" />
+            android:background="@color/colorPrimary"
+            android:minHeight="50dp"
+            app:title="Resale Details"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/detail_sugar_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/photoplaceholder"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="0dp" />
+        <View
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/colorPrimaryLight2" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
-            <TextView
-                android:id="@+id/millName_tv"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mill_name" />
+                android:layout_marginTop="60dp">
 
-            <TextView
-                android:id="@+id/mill_name_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Mill Name"
-                android:inputType="textMultiLine" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/detail_sugar_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/photoplaceholder"
+                    android:elevation="1dp"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="0dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="90dp"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="85dp"
+                        app:contentPaddingTop="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingBottom="15dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                app:boxCornerRadiusTopStart="10dp"
+                                app:boxCornerRadiusBottomEnd="10dp"
+                                app:boxCornerRadiusBottomStart="10dp"
+                                app:boxCornerRadiusTopEnd="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorPrimary"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                android:layout_marginTop="10dp"
+                                android:theme="@style/TextInputLayoutStyle"
+                                android:hint="@string/mill_name">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/mill_name_textview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textPersonName"
+                                    android:drawableStart="@drawable/ic_mill_name_primary_color_24dp"
+                                    android:drawablePadding="5dp"
+                                    android:enabled="false"
+                                    android:drawableTint="@color/colorAccent"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="18sp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                app:boxCornerRadiusTopStart="10dp"
+                                app:boxCornerRadiusBottomEnd="10dp"
+                                app:boxCornerRadiusBottomStart="10dp"
+                                app:boxCornerRadiusTopEnd="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorPrimary"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                android:layout_marginTop="10dp"
+                                android:theme="@style/TextInputLayoutStyle"
+                                android:hint="@string/price">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/price_textview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:drawableStart="@drawable/ic_rupee_symbol"
+                                    android:drawablePadding="5dp"
+                                    android:enabled="false"
+                                    android:drawableTint="@color/colorAccent"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="18sp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                app:boxCornerRadiusTopStart="10dp"
+                                app:boxCornerRadiusBottomEnd="10dp"
+                                app:boxCornerRadiusBottomStart="10dp"
+                                app:boxCornerRadiusTopEnd="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorPrimary"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                android:layout_marginTop="10dp"
+                                android:theme="@style/TextInputLayoutStyle"
+                                android:hint="@string/address">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/milladdress_textview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textPostalAddress"
+                                    android:drawableStart="@drawable/ic_address_blue_24dp"
+                                    android:drawablePadding="5dp"
+                                    android:enabled="false"
+                                    android:drawableTint="@color/colorAccent"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="18sp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                app:boxCornerRadiusTopStart="10dp"
+                                app:boxCornerRadiusBottomEnd="10dp"
+                                app:boxCornerRadiusBottomStart="10dp"
+                                app:boxCornerRadiusTopEnd="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorPrimary"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                android:layout_marginTop="10dp"
+                                android:theme="@style/TextInputLayoutStyle"
+                                android:hint="@string/contact">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/millcontact_textview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:drawableStart="@drawable/ic_contact_blue_24dp"
+                                    android:drawablePadding="5dp"
+                                    android:enabled="false"
+                                    android:drawableTint="@color/colorAccent"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="18sp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Button
+                                android:id="@+id/buy_button"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="@string/buy"
+                                />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <fragment
+                        android:id="@+id/map"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginBottom="30dp"/>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/price_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/price" />
 
-            <TextView
-                android:id="@+id/price_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Price"
-                android:inputType="textMultiLine" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/virtualtour"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="12dp"-->
+<!--            android:hint="@string/mill_name"-->
+<!--            app:boxCornerRadiusBottomStart="16dp"-->
+<!--            app:boxCornerRadiusTopStart="16dp"-->
+<!--            app:boxStrokeColor="@color/colorAccent">-->
 
-            <TextView
-                android:id="@+id/milladdress_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mill Address" />
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/mill_name_textview"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableStart="@drawable/ic_person_blue_24dp"-->
+<!--                android:drawablePadding="5dp"-->
+<!--                android:enabled="false"-->
+<!--                android:drawableTint="@color/colorAccent"-->
+<!--                android:inputType="textUri"-->
+<!--                android:textColor="@color/colorPrimary"-->
+<!--                android:textSize="14sp" />-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
-            <TextView
-                android:id="@+id/milladdress_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Mill Address"
-                android:inputType="textMultiLine" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/millcontact_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mill Contact" />
-
-            <TextView
-                android:id="@+id/millcontact_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Mill Contact"
-                android:inputType="textMultiLine" />
-        </LinearLayout>
-
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
-
-        <Button
-            android:id="@+id/buy_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Buy" />
-
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

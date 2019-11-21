@@ -19,13 +19,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_detail_tender.*
-
+import kotlinx.android.synthetic.main.activity_detail_resale.*
 
 
 class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private val TAG = "DetailTenderActivity"
+    private val TAG = "DetailResaleActivity"
 
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""
@@ -37,7 +36,7 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_tender)
+        setContentView(R.layout.activity_detail_resale)
 
         firestoreDB = FirebaseFirestore.getInstance()
 
