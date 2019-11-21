@@ -24,6 +24,8 @@ class AddUserActivity : AppCompatActivity() {
 
         firestoreDB = FirebaseFirestore.getInstance()
 
+        setUpToolbar()
+
         val bundle = intent.extras
         if (bundle != null) {
             uid = bundle.getString("UpdateUserId")
@@ -77,5 +79,22 @@ class AddUserActivity : AppCompatActivity() {
                 Log.e(TAG, "Error updating User document", e)
                 Toast.makeText(applicationContext, "User could not be updated!", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.title = "Update User Details"
+        actionBar!!.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        val count = supportFragmentManager.backStackEntryCount
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            if (count == 0)
+                super.onBackPressed()
+            else
+                supportFragmentManager.popBackStack()
+        })
     }
 }
