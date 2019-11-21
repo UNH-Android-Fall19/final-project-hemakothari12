@@ -8,6 +8,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -60,13 +61,14 @@ class AddResaleActivity : AppCompatActivity() {
         }
 
         prepareCroperino()
+        setUpToolbar()
         if (title.isNotEmpty()) {
             if (id!!.isNotEmpty()) {
                 add_button.text = "Update"
-                pageTitle.text = "Update Resale Details"
+//                pageTitle.text = "Update Resale Details"
             } else {
                 add_button.text = "Add"
-                pageTitle.text = "Add Resale Details"
+//                pageTitle.text = "Add Resale Details"
             }
         }
 
@@ -223,6 +225,19 @@ class AddResaleActivity : AppCompatActivity() {
                         )
                 }
         }
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.title = resources.getString(R.string.title_resale)
+        actionBar!!.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            super.onBackPressed()
+        })
     }
 
 }

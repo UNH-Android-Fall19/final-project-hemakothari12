@@ -21,7 +21,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA-d9Gv_H5AOlQofgeRWPbmegUR-OwNt9k"/>
 
-        <activity android:name=".activity.resale.AddResaleActivity"></activity>
+        <activity android:name=".activity.resale.AddResaleActivity"
+            android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
         <activity android:name=".activity.resale.ResaleActivity" />
         <activity android:name=".activity.resale.DetailResaleActivity" />
         <activity android:name=".activity.resale.BuyResaleActivity" />
