@@ -8,6 +8,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -33,6 +34,7 @@ class AddTenderActivity : AppCompatActivity() {
 
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""
+    var toolbarTitle: String? = "Add Tender Details"
 
     lateinit var storage: FirebaseStorage
 
@@ -64,9 +66,13 @@ class AddTenderActivity : AppCompatActivity() {
         if (title.isNotEmpty()) {
             if (id!!.isNotEmpty()) {
                 add_button.text = "Update"
+                toolbarTitle = "Update Tender Details"
+
             } else {
                 add_button.text = "Add"
+                toolbarTitle = "Add Tender Details"
             }
+            setUpToolbar(toolbarTitle!!)
         }
 
         sugar_image.setOnClickListener {
@@ -222,6 +228,23 @@ class AddTenderActivity : AppCompatActivity() {
                         )
                 }
         }
+    }
+
+    private fun setUpToolbar(toolbarTitle: String) {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.title = toolbarTitle
+        actionBar!!.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        val count = supportFragmentManager.backStackEntryCount
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            if (count == 0)
+                super.onBackPressed()
+            else
+                supportFragmentManager.popBackStack()
+        })
     }
 
 }

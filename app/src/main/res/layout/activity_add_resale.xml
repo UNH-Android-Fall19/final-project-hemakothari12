@@ -22,20 +22,6 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>
 
-<!--        <TextView-->
-<!--            android:id="@+id/pageTitle"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:fontFamily="sans-serif-medium"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="@color/transparent"-->
-<!--            android:textStyle="bold"-->
-<!--            android:paddingTop="20dp"-->
-<!--            android:textAlignment="center"-->
-<!--            android:background="@color/colorPrimaryLight2"-->
-<!--            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"-->
-<!--            android:inputType="textPersonName" />-->
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/sugar_image"
             android:layout_width="match_parent"

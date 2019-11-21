@@ -28,15 +28,18 @@
         <activity android:name=".activity.resale.BuyResaleActivity" />
         <activity android:name=".activity.resale.ReviewResaleActivity" />
 
-        <activity android:name=".activity.tender.AddTenderActivity"></activity>
+        <activity android:name=".activity.tender.AddTenderActivity"
+            android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
         <activity android:name=".activity.tender.DetailTenderActivity"></activity>
         <activity android:name=".activity.tender.BuyTenderActivity"></activity>
         <activity android:name=".activity.tender.ReviewTenderActivity"></activity>
 
-        <activity android:name=".activity.users.AddUserActivity"></activity>
+        <activity android:name=".activity.users.AddUserActivity"
+            android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
         <activity android:name=".activity.users.DetailUserActivity"></activity>
 
-        <activity android:name=".activity.order.AddOrderActivity"></activity>
+        <activity android:name=".activity.order.AddOrderActivity"
+            android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
         <activity android:name=".activity.order.DetailOrderActivity"></activity>
 
 

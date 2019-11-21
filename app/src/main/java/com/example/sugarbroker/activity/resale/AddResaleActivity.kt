@@ -66,11 +66,9 @@ class AddResaleActivity : AppCompatActivity() {
         if (title.isNotEmpty()) {
             if (id!!.isNotEmpty()) {
                 add_button.text = "Update"
-//                pageTitle.text = "Update Resale Details"
                 toolbarTitle = "Update Resale Details"
             } else {
                 add_button.text = "Add"
-//                pageTitle.text = "Add Resale Details"
                 toolbarTitle = "Add Resale Details"
             }
             setUpToolbar(toolbarTitle!!)
