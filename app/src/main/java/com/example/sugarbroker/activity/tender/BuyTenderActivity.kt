@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.sugarbroker.R
+import com.example.sugarbroker.fragment.TenderFragment
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_buy_tender.*
 
@@ -46,6 +47,12 @@ class BuyTenderActivity : AppCompatActivity() {
 
             finish()
 
+        }
+
+        cancel_button.setOnClickListener {
+
+            val intent = Intent(applicationContext, TenderFragment::class.java)
+            applicationContext.startActivity(intent)
         }
     }
 
