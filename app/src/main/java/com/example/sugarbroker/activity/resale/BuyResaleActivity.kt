@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.home.SellerHomeActivity
+import com.example.sugarbroker.activity.home.UserHomeActivity
+import com.example.sugarbroker.activity.userType
 import com.example.sugarbroker.fragment.ResaleFragment
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_buy_resale.*
@@ -50,10 +53,15 @@ class BuyResaleActivity : AppCompatActivity() {
         }
 
         cancel_button.setOnClickListener {
-//            val intent = Intent(applicationContext, supportFragmentManager.popBackStack())
-//            applicationContext.startActivity(intent)
-
-
+            if(userType == "Seller") {
+                val intent = Intent(applicationContext, SellerHomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                applicationContext.startActivity(intent)
+            } else {
+                val intent = Intent(applicationContext, UserHomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                applicationContext.startActivity(intent)
+            }
         }
     }
 
