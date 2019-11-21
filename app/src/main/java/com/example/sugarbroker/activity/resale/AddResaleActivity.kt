@@ -33,6 +33,7 @@ class AddResaleActivity : AppCompatActivity() {
 
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""
+    var toolbarTitle: String? = "Add Resale Details"
 
     lateinit var storage: FirebaseStorage
 
@@ -61,15 +62,18 @@ class AddResaleActivity : AppCompatActivity() {
         }
 
         prepareCroperino()
-        setUpToolbar()
+
         if (title.isNotEmpty()) {
             if (id!!.isNotEmpty()) {
                 add_button.text = "Update"
 //                pageTitle.text = "Update Resale Details"
+                toolbarTitle = "Update Resale Details"
             } else {
                 add_button.text = "Add"
 //                pageTitle.text = "Add Resale Details"
+                toolbarTitle = "Add Resale Details"
             }
+            setUpToolbar(toolbarTitle!!)
         }
 
         sugar_image.setOnClickListener {
@@ -227,16 +231,20 @@ class AddResaleActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpToolbar() {
+    private fun setUpToolbar(toolbarTitle: String) {
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
-        actionBar!!.title = resources.getString(R.string.title_resale)
+        actionBar!!.title = toolbarTitle
         actionBar!!.elevation = 4.0F
         actionBar.setDisplayShowHomeEnabled(true)
         actionBar.setDisplayUseLogoEnabled(true)
         actionBar.setDisplayHomeAsUpEnabled(true)
+        val count = supportFragmentManager.backStackEntryCount
         toolbar.setNavigationOnClickListener(View.OnClickListener {
-            super.onBackPressed()
+            if (count == 0)
+                super.onBackPressed()
+            else
+                supportFragmentManager.popBackStack()
         })
     }
 
