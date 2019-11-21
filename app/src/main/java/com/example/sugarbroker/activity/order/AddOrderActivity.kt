@@ -3,6 +3,7 @@ package com.example.sugarbroker.activity.order
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.sugarbroker.model.Orders
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,6 +16,7 @@ class AddOrderActivity : AppCompatActivity() {
 
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""
+    var toolbarTitle: String? = "Add Order Details"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +44,12 @@ class AddOrderActivity : AppCompatActivity() {
         if (title.isNotEmpty()) {
             if (id!!.isNotEmpty()) {
                 add_button.text = "Update"
+                toolbarTitle = "Update Order Details"
             } else {
                 add_button.text = "Add"
+                toolbarTitle = "Add Order Details"
             }
+            setUpToolbar(toolbarTitle!!)
         }
 
         add_button.setOnClickListener {
@@ -109,6 +114,23 @@ class AddOrderActivity : AppCompatActivity() {
             }
 
 
+    }
+
+    private fun setUpToolbar(toolbarTitle: String) {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.title = toolbarTitle
+        actionBar!!.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        val count = supportFragmentManager.backStackEntryCount
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            if (count == 0)
+                super.onBackPressed()
+            else
+                supportFragmentManager.popBackStack()
+        })
     }
 
 }
