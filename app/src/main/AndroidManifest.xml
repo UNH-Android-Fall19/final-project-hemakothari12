@@ -23,14 +23,15 @@
 
         <activity android:name=".activity.resale.AddResaleActivity"
             android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
-        <activity android:name=".activity.resale.ResaleActivity" />
-        <activity android:name=".activity.resale.DetailResaleActivity" />
+        <activity android:name=".activity.resale.DetailResaleActivity"
+            android:parentActivityName=".activity.home.UserHomeActivity"/>
         <activity android:name=".activity.resale.BuyResaleActivity" />
         <activity android:name=".activity.resale.ReviewResaleActivity" />
 
         <activity android:name=".activity.tender.AddTenderActivity"
             android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
-        <activity android:name=".activity.tender.DetailTenderActivity"></activity>
+        <activity android:name=".activity.tender.DetailTenderActivity"
+            android:parentActivityName=".activity.home.UserHomeActivity"></activity>
         <activity android:name=".activity.tender.BuyTenderActivity"></activity>
         <activity android:name=".activity.tender.ReviewTenderActivity"></activity>
 
