@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:minHeight="50dp"
-            app:title="@string/tender_detail"
+            app:title="@string/user_detail"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>

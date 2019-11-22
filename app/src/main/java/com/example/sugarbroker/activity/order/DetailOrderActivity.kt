@@ -2,6 +2,7 @@ package com.example.sugarbroker.activity.order
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.example.sugarbroker.R
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,6 +21,8 @@ class DetailOrderActivity : AppCompatActivity() {
 
         firestoreDB = FirebaseFirestore.getInstance()
 
+        setUpToolbar()
+
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateOrderId")
@@ -35,7 +38,25 @@ class DetailOrderActivity : AppCompatActivity() {
             userName_textview.setText(bundle.getString("UpdateOrderUsername"))
             userAddress_textview.setText(bundle.getString("UpdateOrderUserAddress"))
             status_textview.setText(bundle.getString("UpdateOrderStatus"))
+            tvIcon.setText(bundle.getString("UpdateOrderUsername")!!.get(0).toUpperCase().toString())
+
         }
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        val count = supportFragmentManager.backStackEntryCount
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            if (count == 0)
+                super.onBackPressed()
+            else
+                supportFragmentManager.popBackStack()
+        })
     }
 
 }
