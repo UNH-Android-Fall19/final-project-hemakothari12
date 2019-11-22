@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -51,6 +52,21 @@ class ResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>, pri
             .into(
                 holder.tvIcon
             )
+
+        holder.tvIcon.setOnClickListener {
+            val mBuilder = AlertDialog.Builder(context)
+            val mView = View.inflate(context,R.layout.dialog_custom_layout, null)
+            val photoView = mView.findViewById<View>(R.id.imageView) as ImageView
+            Glide.with(context).load(resale.resaleUrl)
+                .placeholder(R.drawable.photoplaceholder)
+                .apply(RequestOptions.circleCropTransform())
+                .into(
+                    photoView
+                )
+            mBuilder.setView(mView)
+            val mDialog = mBuilder.create()
+            mDialog.show()
+        }
 
         holder.edit.setOnClickListener { updateResale(resale) }
         holder.itemView.setOnClickListener { detailResale(resale) }

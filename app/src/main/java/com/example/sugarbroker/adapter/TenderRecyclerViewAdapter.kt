@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.tender.AddTenderActivity
@@ -49,6 +51,21 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
             .into(
                 holder.tvIcon
             )
+
+        holder.tvIcon.setOnClickListener {
+            val mBuilder = AlertDialog.Builder(context)
+            val mView = View.inflate(context,R.layout.dialog_custom_layout, null)
+            val photoView = mView.findViewById<View>(R.id.imageView) as ImageView
+            Glide.with(context).load(tender.tenderUrl)
+                .placeholder(R.drawable.photoplaceholder)
+                .apply(RequestOptions.circleCropTransform())
+                .into(
+                    photoView
+                )
+            mBuilder.setView(mView)
+            val mDialog = mBuilder.create()
+            mDialog.show()
+        }
 
         holder.edit.setOnClickListener { updateTender(tender) }
         holder.itemView.setOnClickListener { detailTender(tender) }
