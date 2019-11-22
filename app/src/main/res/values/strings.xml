@@ -43,6 +43,8 @@
     <string name="review">Review</string>
     <string name="cancel">Cancel</string>
     <string name="buy">Buy</string>
+    <string name="resale_detail">Resale Details</string>
+    <string name="tender_detail">Tender Details</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

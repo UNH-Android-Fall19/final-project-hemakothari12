@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -39,6 +40,8 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_detail_resale)
 
         firestoreDB = FirebaseFirestore.getInstance()
+
+        setUpToolbar()
 
         val bundle = intent.extras
         if (bundle != null) {
@@ -129,6 +132,22 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
                 enableMyLocation()
             }
         }
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        val count = supportFragmentManager.backStackEntryCount
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            if (count == 0)
+                super.onBackPressed()
+            else
+                supportFragmentManager.popBackStack()
+        })
     }
 
 }

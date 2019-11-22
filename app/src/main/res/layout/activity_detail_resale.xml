@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:minHeight="50dp"
-            app:title="Resale Details"
+            app:title="@string/resale_detail"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>
