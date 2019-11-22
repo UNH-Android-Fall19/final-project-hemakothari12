@@ -7,6 +7,7 @@ import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detail_resale.*
+import androidx.appcompat.app.AlertDialog
 
 
 class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -81,6 +83,22 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
             finish()
 
         }
+
+        detail_sugar_image.setOnClickListener(View.OnClickListener {
+            val mBuilder = AlertDialog.Builder(this@DetailResaleActivity)
+            val mView = layoutInflater.inflate(R.layout.dialog_custom_layout, null)
+            val photoView = mView.findViewById<View>(R.id.imageView) as ImageView
+            Glide.with(this@DetailResaleActivity).load(bundle!!.getString("UpdateResaleUrl"))
+                .placeholder(R.drawable.photoplaceholder)
+                .apply(RequestOptions.circleCropTransform())
+                .into(
+                    photoView
+                )
+//            photoView.setImageResource(R.drawable.photoplaceholder)
+            mBuilder.setView(mView)
+            val mDialog = mBuilder.create()
+            mDialog.show()
+        })
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

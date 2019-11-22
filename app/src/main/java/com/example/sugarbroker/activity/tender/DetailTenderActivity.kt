@@ -7,7 +7,9 @@ import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -82,6 +84,21 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
             finish()
 
         }
+
+        detail_sugar_image.setOnClickListener(View.OnClickListener {
+            val mBuilder = AlertDialog.Builder(this@DetailTenderActivity)
+            val mView = layoutInflater.inflate(R.layout.dialog_custom_layout, null)
+            val photoView = mView.findViewById<View>(R.id.imageView) as ImageView
+            Glide.with(this@DetailTenderActivity).load(bundle!!.getString("UpdateResaleUrl"))
+                .placeholder(R.drawable.photoplaceholder)
+                .apply(RequestOptions.circleCropTransform())
+                .into(
+                    photoView
+                )
+            mBuilder.setView(mView)
+            val mDialog = mBuilder.create()
+            mDialog.show()
+        })
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
