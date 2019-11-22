@@ -1,5 +1,7 @@
 package com.example.sugarbroker.activity.users
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -33,6 +35,16 @@ class DetailUserActivity : AppCompatActivity() {
             phone_textview.setText(bundle.getString("UpdateUserPhone"))
             type_textview.setText(bundle.getString("UpdateUserType"))
             tvIcon.setText(bundle.getString("UpdateUserName")!!.get(0).toUpperCase().toString())
+        }
+
+        callUser.setOnClickListener {
+            val mobNum = bundle!!.getString("UpdateUserPhone")
+            val phoneIntent = Intent(
+                Intent.ACTION_DIAL, Uri.fromParts(
+                    "tel", mobNum, null
+                )
+            )
+            startActivity(phoneIntent)
         }
     }
 

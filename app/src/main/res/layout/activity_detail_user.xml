@@ -22,7 +22,16 @@
             app:title="@string/user_detail"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>
+            app:titleTextColor="@android:color/white">
+
+            <ImageView
+                android:id="@+id/callUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="180dp"
+                android:src="@drawable/ic_phone_white_24dp" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <View
             android:layout_marginTop="50dp"
