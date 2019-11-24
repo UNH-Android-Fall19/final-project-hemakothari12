@@ -46,12 +46,6 @@ class UserHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home)
-//        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-//        val viewPager: ViewPager = findViewById(R.id.view_pager)
-//        viewPager.adapter = sectionsPagerAdapter
-//        val tabs: TabLayout = findViewById(R.id.tabs)
-//        tabs.setupWithViewPager(viewPager)
-
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -75,19 +69,23 @@ class UserHomeActivity : AppCompatActivity() {
             when (menuItem.itemId) {
 
                 R.id.nav_tender -> {
-                    replaceFragment(UserTenderFragment(), "Resale")
+                    replaceFragment(UserTenderFragment(), "Tender")
                 }
                 R.id.nav_resale -> {
                     replaceFragment(UserResaleFragment(), "Resale")
                 }
                 R.id.nav_order -> {
-                    replaceFragment(UserOrdersFragment(), "Resale")
+                    replaceFragment(UserOrdersFragment(), "Orders")
                 }
             }
             // Add code here to update the UI based on the item selected
             // For example, swap UI fragments here
 
             true
+        }
+
+        if (savedInstanceState == null) {
+            replaceFragment(UserTenderFragment(), "Tender")
         }
 
 
@@ -99,43 +97,6 @@ class UserHomeActivity : AppCompatActivity() {
         fragmentTransaction.addToBackStack(screen)
         fragmentTransaction.commit()
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//
-//        firestoreDB = FirebaseFirestore.getInstance()
-//
-//        val inflater = menuInflater
-//        inflater.inflate(R.menu.user_toolbar_menu, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.user_drawer_menu, menu)
-//        return true
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//
-//        when (item.itemId) {
-//            R.id.search -> {
-//                Toast.makeText(this, "Implement search", Toast.LENGTH_SHORT).show()
-//                return true
-//            }
-//            R.id.logout -> {
-//                //Implement Logout
-//                Toast.makeText(this, "Implement Logout", Toast.LENGTH_SHORT).show()
-//                performLogout()
-//                return true
-//            }
-//            R.id.profile -> {
-//                val uid = FirebaseAuth.getInstance().uid
-//                updateProfile(uid!!)
-//                return true
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
