@@ -3,12 +3,10 @@ package com.example.sugarbroker.activity.resale
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.home.SellerHomeActivity
 import com.example.sugarbroker.activity.home.UserHomeActivity
 import com.example.sugarbroker.activity.userType
-import com.example.sugarbroker.fragment.ResaleFragment
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_buy_resale.*
 
@@ -29,7 +27,6 @@ class BuyResaleActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateResaleId")
-            Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
 
             mill_name_edittext.setText(bundle.getString("UpdateResaleMillName"))
             price_edittext.setText(bundle.getString("UpdateResalePrice"))

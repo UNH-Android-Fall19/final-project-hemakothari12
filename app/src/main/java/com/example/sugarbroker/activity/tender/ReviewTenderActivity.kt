@@ -36,7 +36,6 @@ class ReviewTenderActivity : AppCompatActivity() {
         if (bundle != null) {
             id = bundle.getString("UpdateTenderId")
             Log.d(TAG, "id is ${id}")
-            Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
 
             mill_name_textview.setText(bundle.getString("UpdateTenderMillName"))
             price_textview.setText(bundle.getString("UpdateTenderPrice"))

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -49,7 +48,6 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateResaleId")
-            Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
             address = bundle.getString("UpdateResaleAddress")
             mapTitle = bundle.getString("UpdateResaleMillName")
 
@@ -96,7 +94,6 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
                 .into(
                     photoView
                 )
-//            photoView.setImageResource(R.drawable.photoplaceholder)
             mBuilder.setView(mView)
             val mDialog = mBuilder.create()
             mDialog.show()

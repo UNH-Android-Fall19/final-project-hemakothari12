@@ -24,7 +24,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
-import com.example.sugarbroker.activity.interfaces.ListClick
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_users.view.*
@@ -162,7 +161,6 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
                     val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-//                            deleteRow(viewHolder.adapterPosition)
                             val position = viewHolder.adapterPosition
                             val deletedModel = userList!![position]
                             val uid = deletedModel.uid
@@ -215,13 +213,4 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
         startActivity(intent)
     }
 
-//    override fun deleteRow(position: Int) {
-//        Log.d("Position is delete row: ", "position is ${position}")
-//        val users = userList[position]
-//        val uid = users.uid
-//        firestoreDB!!.collection("users").document(uid!!).delete()
-//            .addOnCompleteListener {
-//                 Toast.makeText(context, "User has been deleted!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 }

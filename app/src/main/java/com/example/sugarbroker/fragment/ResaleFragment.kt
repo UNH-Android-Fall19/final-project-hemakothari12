@@ -21,10 +21,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
-import com.example.sugarbroker.activity.interfaces.ListClick
 import com.example.sugarbroker.activity.resale.AddResaleActivity
 import com.example.sugarbroker.adapter.ResaleRecyclerViewAdapter
-import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Resale
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -32,9 +30,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import kotlinx.android.synthetic.main.fragment_resale.*
 import kotlinx.android.synthetic.main.fragment_resale.view.*
-import kotlinx.android.synthetic.main.fragment_resale.view.resaleAdd
 
 /**
  * [Resale Fragment] subclass.
@@ -177,7 +173,6 @@ class ResaleFragment : Fragment(), SearchView.OnQueryTextListener {
                     val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-//                            deleteRow(viewHolder.adapterPosition)
                             val position = viewHolder.adapterPosition
                             val deletedModel = resaleList!![position]
                             val uid = deletedModel.id

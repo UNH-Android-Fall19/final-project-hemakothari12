@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -50,7 +49,6 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateTenderId")
-            Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
             address = bundle.getString("UpdateTenderAddress")
             mapTitle = bundle.getString("UpdateTenderMillName")
 

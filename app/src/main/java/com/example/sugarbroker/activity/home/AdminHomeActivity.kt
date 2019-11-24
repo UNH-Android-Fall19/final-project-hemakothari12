@@ -1,24 +1,15 @@
 package com.example.sugarbroker.activity.home
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sugarbroker.R
-import com.example.sugarbroker.activity.account.LoginActivity
-import com.example.sugarbroker.activity.order.AddOrderActivity
-import com.example.sugarbroker.activity.resale.AddResaleActivity
-import com.example.sugarbroker.activity.tender.AddTenderActivity
-import com.example.sugarbroker.activity.users.AddUserActivity
 import com.example.sugarbroker.fragment.OrdersFragment
 import com.example.sugarbroker.fragment.ResaleFragment
 import com.example.sugarbroker.fragment.TenderFragment
 import com.example.sugarbroker.fragment.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_admin_home.*
 

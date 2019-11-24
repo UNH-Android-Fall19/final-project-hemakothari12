@@ -72,7 +72,6 @@ class AddOrderActivity : AppCompatActivity() {
                 }
             }
 
-
             finish()
 
         }

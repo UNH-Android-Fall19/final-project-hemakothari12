@@ -169,8 +169,6 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener {
                     val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-//                            deleteRow(viewHolder.adapterPosition)
-
                             val position = viewHolder.adapterPosition
                             val deletedModel = tenderList!![position]
                             val uid = deletedModel.id

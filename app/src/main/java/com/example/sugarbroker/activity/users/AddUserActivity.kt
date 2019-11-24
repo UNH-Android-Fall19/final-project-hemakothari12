@@ -29,7 +29,6 @@ class AddUserActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             uid = bundle.getString("UpdateUserId")
-            Toast.makeText(applicationContext, "ID ${uid}", Toast.LENGTH_SHORT).show()
 
             val userType = bundle.getString("UpdateUserProfileType")
 
