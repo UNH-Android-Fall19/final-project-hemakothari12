@@ -22,17 +22,6 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:elevation="4dp">
-
-            <SearchView
-                android:id="@+id/searchtender_sv"
-                android:layoutDirection="rtl"
-                android:iconifiedByDefault="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:searchIcon="@null"
-                android:theme="@style/ToolbarStyle"
-                android:clickable="true" />
-
         </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
