@@ -53,6 +53,7 @@ class AddResaleActivity : AppCompatActivity() {
             price_edittext.setText(bundle.getString("UpdateResalePrice"))
             milladdress_edittext.setText(bundle.getString("UpdateResaleAddress"))
             millcontact_edittext.setText(bundle.getString("UpdateResaleContact"))
+            millemail_edittext.setText(bundle.getString("UpdateResaleEmail"))
             Glide.with(this@AddResaleActivity).load(bundle.getString("UpdateResaleUrl"))
                 .placeholder(R.drawable.photoplaceholder)
                 .apply(RequestOptions.circleCropTransform())
@@ -84,6 +85,7 @@ class AddResaleActivity : AppCompatActivity() {
             val price = price_edittext.text.toString()
             val millAddress = milladdress_edittext.text.toString()
             val millContact = millcontact_edittext.text.toString()
+            val millEmail = millemail_edittext.text.toString()
 
             val storageRef = storage.reference
             var x = UUID.randomUUID()
@@ -113,9 +115,9 @@ class AddResaleActivity : AppCompatActivity() {
                     if (title.isNotEmpty()) {
                         if (id!!.isNotEmpty()) {
                             Log.d("downloadUri", "downloadUri is ${downloadUri}")
-                            updateResale(id!!, millName, price, millAddress, millContact, downloadUri.toString())
+                            updateResale(id!!, millName, price, millAddress, millContact, millEmail, downloadUri.toString())
                         } else {
-                            addResale(millName, price, millAddress, millContact, downloadUri.toString())
+                            addResale(millName, price, millAddress, millContact, millEmail, downloadUri.toString())
                         }
                     }
                 } else {
@@ -128,8 +130,8 @@ class AddResaleActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateResale(id: String, millName: String, price: String, millAddress: String, millContact: String, url: String? = null) {
-        val resale = Resale(id, millName, price, millAddress, millContact, url)
+    private fun updateResale(id: String, millName: String, price: String, millAddress: String, millContact: String, millEmail: String, url: String? = null) {
+        val resale = Resale(id, millName, price, millAddress, millContact, millEmail, url)
 
         Log.d("downloadUri", "downloadUri is url ${url}")
 
@@ -147,8 +149,8 @@ class AddResaleActivity : AppCompatActivity() {
             }
     }
 
-    private fun addResale(millName: String, price: String, millAddress: String, millContact: String, url: String? = null) {
-        val resale = Resale(millName, price, millAddress, millContact, url)
+    private fun addResale(millName: String, price: String, millAddress: String, millContact: String, millEmail: String, url: String? = null) {
+        val resale = Resale(millName, price, millAddress, millContact, millEmail, url)
 
         firestoreDB!!.collection("resale")
             .add(resale)

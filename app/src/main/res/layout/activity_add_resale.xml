@@ -121,15 +121,40 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:theme="@style/TextInputLayoutStyle"
-            android:hint="@string/email">
+            android:hint="@string/contact">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/millcontact_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
+                android:drawableStart="@drawable/ic_contact_blue_24dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:theme="@style/TextInputLayoutStyle"
+            android:hint="@string/email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/millemail_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:drawableStart="@drawable/ic_email_black_24dp"/>
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/add_button"

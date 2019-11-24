@@ -101,6 +101,7 @@ class ResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>, pri
         intent.putExtra("UpdateResalePrice", resale.price)
         intent.putExtra("UpdateResaleAddress", resale.address)
         intent.putExtra("UpdateResaleContact", resale.contact)
+        intent.putExtra("UpdateResaleEmail", resale.email)
         intent.putExtra("UpdateResaleUrl", resale.resaleUrl)
         context.startActivity(intent)
     }
@@ -113,6 +114,7 @@ class ResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>, pri
         intent.putExtra("UpdateResalePrice", resale.price)
         intent.putExtra("UpdateResaleAddress", resale.address)
         intent.putExtra("UpdateResaleContact", resale.contact)
+        intent.putExtra("UpdateResaleEmail", resale.email)
         intent.putExtra("UpdateResaleUrl", resale.resaleUrl)
         context.startActivity(intent)
     }
