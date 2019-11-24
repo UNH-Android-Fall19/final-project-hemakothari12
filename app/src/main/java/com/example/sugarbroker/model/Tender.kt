@@ -6,24 +6,27 @@ class Tender {
     var price: String? = null
     var address: String? = null
     var contact: String? = null
+    var email: String? = null
     var tenderUrl: String? = null
 
     constructor() {}
 
-    constructor(id: String, millName: String, price: String, address: String, contact: String, url: String? = null) {
+    constructor(id: String, millName: String, price: String, address: String, contact: String, email:String, url: String? = null) {
         this.id = id
         this.millName = millName
         this.price = price
         this.address = address
         this.contact = contact
+        this.email = email
         this.tenderUrl = url
     }
 
-    constructor(millName: String, price: String, address: String, contact: String, url: String? = null) {
+    constructor(millName: String, price: String, address: String, contact: String, email:String, url: String? = null) {
         this.millName = millName
         this.price = price
         this.address = address
         this.contact = contact
+        this.email = email
         this.tenderUrl = url
     }
 }

@@ -222,14 +222,4 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
-
-//    override fun deleteRow(position: Int) {
-//        Log.d("Position is delete row: ", "position is ${position}")
-//        val tender = tenderList[position]
-//        val uid = tender.id
-//        firestoreDB!!.collection("tender").document(uid!!).delete()
-//            .addOnCompleteListener {
-//                Toast.makeText(context, "Tender has been deleted!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 }

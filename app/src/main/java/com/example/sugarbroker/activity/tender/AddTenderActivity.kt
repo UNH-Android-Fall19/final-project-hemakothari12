@@ -54,6 +54,7 @@ class AddTenderActivity : AppCompatActivity() {
             price_edittext.setText(bundle.getString("UpdateTenderPrice"))
             milladdress_edittext.setText(bundle.getString("UpdateTenderAddress"))
             millcontact_edittext.setText(bundle.getString("UpdateTenderContact"))
+            millemail_edittext.setText(bundle.getString("UpdateTenderEmail"))
             Glide.with(this@AddTenderActivity).load(bundle.getString("UpdateTenderUrl"))
                 .placeholder(R.drawable.photoplaceholder)
                 .apply(RequestOptions.circleCropTransform())
@@ -85,6 +86,7 @@ class AddTenderActivity : AppCompatActivity() {
             val price = price_edittext.text.toString()
             val millAddress = milladdress_edittext.text.toString()
             val millContact = millcontact_edittext.text.toString()
+            val millEmail = millemail_edittext.text.toString()
 
             val storageRef = storage.reference
             var x = UUID.randomUUID()
@@ -114,9 +116,9 @@ class AddTenderActivity : AppCompatActivity() {
                     if (title.isNotEmpty()) {
                         if (id!!.isNotEmpty()) {
                             Log.d("downloadUri", "downloadUri is ${downloadUri}")
-                            updateTender(id!!, millName, price, millAddress, millContact, downloadUri.toString())
+                            updateTender(id!!, millName, price, millAddress, millContact, millEmail, downloadUri.toString())
                         } else {
-                            addTender(millName, price, millAddress, millContact, downloadUri.toString())
+                            addTender(millName, price, millAddress, millContact, millEmail, downloadUri.toString())
                         }
                     }
                 } else {
@@ -129,8 +131,8 @@ class AddTenderActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateTender(id: String, millName: String, price: String, millAddress: String, millContact: String, url: String? = null) {
-        val tender = Tender(id, millName, price, millAddress, millContact, url)
+    private fun updateTender(id: String, millName: String, price: String, millAddress: String, millContact: String, millEmail: String, url: String? = null) {
+        val tender = Tender(id, millName, price, millAddress, millContact, millEmail, url)
 
         Log.d("downloadUri", "downloadUri is url ${url}")
 
@@ -148,8 +150,8 @@ class AddTenderActivity : AppCompatActivity() {
             }
     }
 
-    private fun addTender(millName: String, price: String, millAddress: String, millContact: String, url: String? = null) {
-        val tender = Tender(millName, price, millAddress, millContact, url)
+    private fun addTender(millName: String, price: String, millAddress: String, millContact: String, millEmail: String, url: String? = null) {
+        val tender = Tender(millName, price, millAddress, millContact, millEmail, url)
 
         firestoreDB!!.collection("tender")
             .add(tender)

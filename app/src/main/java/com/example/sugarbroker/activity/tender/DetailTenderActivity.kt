@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -57,6 +58,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
             price_textview.setText(bundle.getString("UpdateTenderPrice"))
             milladdress_textview.setText(bundle.getString("UpdateTenderAddress"))
             millcontact_textview.setText(bundle.getString("UpdateTenderContact"))
+            millemail_textview.setText(bundle.getString("UpdateTenderEmail"))
             Glide.with(this@DetailTenderActivity).load(bundle.getString("UpdateTenderUrl"))
                 .placeholder(R.drawable.photoplaceholder)
                 .apply(RequestOptions.circleCropTransform())
@@ -99,6 +101,16 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
             val mDialog = mBuilder.create()
             mDialog.show()
         })
+
+        callSeller.setOnClickListener {
+            val mobNum = bundle!!.getString("UpdateTenderContact")
+            val phoneIntent = Intent(
+                Intent.ACTION_DIAL, Uri.fromParts(
+                    "tel", mobNum, null
+                )
+            )
+            startActivity(phoneIntent)
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

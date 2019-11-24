@@ -100,6 +100,7 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         intent.putExtra("UpdateTenderPrice", tender.price)
         intent.putExtra("UpdateTenderAddress", tender.address)
         intent.putExtra("UpdateTenderContact", tender.contact)
+        intent.putExtra("UpdateTenderEmail", tender.email)
         intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
     }
@@ -112,6 +113,7 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         intent.putExtra("UpdateTenderPrice", tender.price)
         intent.putExtra("UpdateTenderAddress", tender.address)
         intent.putExtra("UpdateTenderContact", tender.contact)
+        intent.putExtra("UpdateTenderEmail", tender.email)
         intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
     }
