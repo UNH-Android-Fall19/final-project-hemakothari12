@@ -112,7 +112,8 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                         .name
                 when (tag) {
                     "UserResale" -> {
-                        Log.d(TAG, "text is ${newText}")
+                        val searchResaleUser = findViewById<View>(R.id.searchResaleUser_sv) as SearchView
+                        searchResaleUser.setQuery(newText, false)
                     }
                     "UserTender" -> {
                         val searchTenderUser = findViewById<View>(R.id.searchTenderUser_sv) as SearchView

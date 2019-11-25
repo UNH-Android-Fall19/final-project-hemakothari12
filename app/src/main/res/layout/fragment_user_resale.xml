@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.PlaceholderFragment">
+    android:orientation="vertical">
+
+    <SearchView
+        android:id="@+id/searchResaleUser_sv"
+        android:layoutDirection="rtl"
+        android:iconifiedByDefault="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:searchIcon="@null"
+        android:visibility="gone"
+        android:theme="@style/ToolbarStyle"
+        android:clickable="true" />
 
     <TextView
+        android:id="@+id/pageHeading_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resale Details"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:inputType="textPersonName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_resale_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Resale Fragment" />
+        android:paddingBottom="50dp"
+        android:scrollbars="vertical" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
