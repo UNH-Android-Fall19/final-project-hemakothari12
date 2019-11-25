@@ -5,29 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.main.PlaceholderFragment">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:minHeight="50dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@color/white" >
-
-        <ImageView
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:src="@drawable/ic_logout_to_app_white_24dp" />
-
-    </androidx.appcompat.widget.Toolbar>
+    android:orientation="vertical">
 
     <SearchView
         android:id="@+id/searchTenderUser_sv"
@@ -36,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:searchIcon="@null"
+        android:visibility="gone"
         android:theme="@style/ToolbarStyle"
         android:clickable="true" />
 

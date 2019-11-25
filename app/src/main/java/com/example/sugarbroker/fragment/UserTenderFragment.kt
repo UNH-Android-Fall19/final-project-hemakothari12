@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,8 +21,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import kotlinx.android.synthetic.main.activity_user_home.*
 
-class UserTenderFragment : Fragment() {
+class UserTenderFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "UserTenderFragment"
 
@@ -29,7 +31,7 @@ class UserTenderFragment : Fragment() {
 
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
-    private var logout: ImageView? = null
+    lateinit var editSearchUser: SearchView
 
     private var root: View? = null
 
@@ -43,8 +45,7 @@ class UserTenderFragment : Fragment() {
 
         root = inflater.inflate(R.layout.fragment_user_tender, container, false)
 
-        logout = root!!.findViewById(R.id.logout) as ImageView
-        logout!!.visibility = View.VISIBLE
+        editSearchUser = root!!.findViewById(R.id.searchTenderUser_sv) as SearchView
 
         loadTenderList()
 
@@ -69,11 +70,19 @@ class UserTenderFragment : Fragment() {
                 tenderListRV.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
             })
 
-        logout!!.setOnClickListener {
-            performLogout()
-        }
+
+        editSearchUser!!.setOnQueryTextListener(this)
 
         return root
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        tenderAdapter!!.filter(newText)
+        return false
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
     }
 
     override fun onDestroy() {

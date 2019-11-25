@@ -12,6 +12,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
@@ -32,11 +34,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_user_home.*
 import kotlinx.android.synthetic.main.fragment_user_tender.*
 
-class UserHomeActivity : AppCompatActivity() {
+class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val TAG = "UserHomeActivity"
 
     private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var textWatcher: TextWatcher
+    lateinit var searchIcon1: SearchView
 
 
     private var firestoreDB: FirebaseFirestore? = null
@@ -82,7 +86,7 @@ class UserHomeActivity : AppCompatActivity() {
                     replaceFragment(UserResaleFragment(), "UserResale")
                 }
                 R.id.nav_order -> {
-                    replaceFragment(UserOrdersFragment(), "USerOrders")
+                    replaceFragment(UserOrdersFragment(), "UserOrders")
                 }
             }
             // Add code here to update the UI based on the item selected
@@ -95,46 +99,110 @@ class UserHomeActivity : AppCompatActivity() {
             replaceFragment(UserTenderFragment(), "UserTender")
         }
 
-        searchIcon.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
 
-            }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//        val textWatcher = object : TextWatcher {
+//            override fun afterTextChanged(editable: Editable?) {
+//
+//            }
+//
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//
+//            }
 
-            }
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+////                Toast.makeText(applicationContext, "${s}", Toast.LENGTH_SHORT).show()
+//                if (searchIcon.hasFocus()) {
+//                    searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_clear_black_24dp,0)
+//
+//                    if (supportFragmentManager.backStackEntryCount > 0) {
+//                        val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+//                            .name
+//                        when(tag) {
+//                            "UserResale" -> {
+//
+//                            }
+//                            "UserTender" -> {
+//                                searchTenderUser_sv.setQuery(s,false)
+//                            }
+//                            "UserOrders" -> {
+//
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                Toast.makeText(applicationContext, "${s}", Toast.LENGTH_SHORT).show()
-                searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_clear_black_24dp,0)
-
-                if (supportFragmentManager.backStackEntryCount > 0) {
-                    val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
-                        .name
-                    when(tag) {
-                        "UserResale" -> {
-
-                        }
-                        "UserTender" -> {
-                            searchTenderUser_sv.setQuery(s,false)
-                        }
-                        "UserOrders" -> {
-
-                        }
-                    }
-                }
-
-            }
-        })
-
-        searchIcon.setOnTouchListener { _, event ->
-            searchIcon.setText("")
-            searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            return@setOnTouchListener true
-        }
+        searchIcon1 = findViewById<EditText>(R.id.searchIcon) as SearchView
+        searchIcon1.setOnQueryTextListener(this)
+//        searchIcon1.addTextChangedListener(this)
+//
+//        searchIcon.setOnTouchListener { _, event ->
+//            searchIcon.setText("")
+//            searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+//            return@setOnTouchListener true
+//            false
+//        }
 
 
     }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                val tag =
+                    supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+                        .name
+                when (tag) {
+                    "UserResale" -> {
+
+                    }
+                    "UserTender" -> {
+                        searchTenderUser_sv.setQuery(newText, false)
+                    }
+                    "UserOrders" -> {
+
+                    }
+                }
+            }
+
+        return false
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+//    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//        if (searchIcon.hasFocus()) {
+//            searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_clear_black_24dp,0)
+//
+//            if (supportFragmentManager.backStackEntryCount > 0) {
+//                val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+//                    .name
+//                when(tag) {
+//                    "UserResale" -> {
+//
+//                    }
+//                    "UserTender" -> {
+//                        searchTenderUser_sv.setQuery(s,false)
+//                    }
+//                    "UserOrders" -> {
+//
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    override fun afterTextChanged(s: Editable?) {
+//
+//    }
+//
+//    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//
+//    }
 
     private fun replaceFragment(fragment: Fragment, screen: String) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()

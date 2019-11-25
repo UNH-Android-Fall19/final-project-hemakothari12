@@ -14,9 +14,18 @@ import com.example.sugarbroker.activity.tender.BuyTenderActivity
 import com.example.sugarbroker.activity.tender.DetailTenderActivity
 import com.example.sugarbroker.model.Tender
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, private val context: Context,
                                     private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<UserTenderRecyclerViewAdapter.ViewHolder>() {
+
+    private val listTender: ArrayList<Tender>
+
+    init {
+
+        this.listTender = ArrayList<Tender>()
+        this.listTender.addAll(tenderList)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent!!.context).inflate(R.layout.user_item_tender, parent, false)
@@ -76,6 +85,22 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         intent.putExtra("UpdateTenderContact", tender.contact)
         intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
+    }
+
+    fun filter(charText: String) {
+        var charText = charText
+        charText = charText.toLowerCase(Locale.getDefault())
+        tenderList.clear()
+        if (charText.length == 0) {
+            tenderList.addAll(listTender)
+        } else {
+            for (wp in listTender) {
+                if (wp.millName!!.toLowerCase(Locale.getDefault()).contains(charText)) {
+                    tenderList.add(wp)
+                }
+            }
+        }
+        notifyDataSetChanged()
     }
 
 }

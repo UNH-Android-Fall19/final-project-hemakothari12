@@ -23,18 +23,28 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:elevation="4dp">
 
-            <androidx.appcompat.widget.AppCompatEditText
+<!--            <SearchView-->
+<!--                android:id="@+id/searchTenderUser_sv"-->
+<!--                android:layout_width="340dp"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                android:background="@color/transparent"-->
+<!--                android:backgroundTint="@color/transparent"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"-->
+<!--                android:textSize="19dp"-->
+<!--                android:hint="Search"-->
+<!--                android:textColorHint="@color/colorPrimary"-->
+<!--                android:singleLine="true"-->
+<!--                android:textColor="@color/colorPrimary"></SearchView>-->
+
+            <SearchView
                 android:id="@+id/searchIcon"
-                android:layout_width="340dp"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/transparent"
-                android:backgroundTint="@color/transparent"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:textSize="19dp"
-                android:hint="Search"
-                android:textColorHint="@color/colorPrimary"
-                android:singleLine="true"
-                android:textColor="@color/colorPrimary"></androidx.appcompat.widget.AppCompatEditText>
+                android:layoutDirection="rtl"
+                android:iconifiedByDefault="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:searchIcon="@null"
+                android:theme="@style/ToolbarStyle"
+                android:clickable="true" />
 
         </androidx.appcompat.widget.Toolbar>
 
