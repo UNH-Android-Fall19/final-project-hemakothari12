@@ -99,52 +99,8 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             replaceFragment(UserTenderFragment(), "UserTender")
         }
 
-
-
-//        val textWatcher = object : TextWatcher {
-//            override fun afterTextChanged(editable: Editable?) {
-//
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//
-//            }
-
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-////                Toast.makeText(applicationContext, "${s}", Toast.LENGTH_SHORT).show()
-//                if (searchIcon.hasFocus()) {
-//                    searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_clear_black_24dp,0)
-//
-//                    if (supportFragmentManager.backStackEntryCount > 0) {
-//                        val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
-//                            .name
-//                        when(tag) {
-//                            "UserResale" -> {
-//
-//                            }
-//                            "UserTender" -> {
-//                                searchTenderUser_sv.setQuery(s,false)
-//                            }
-//                            "UserOrders" -> {
-//
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
         searchIcon1 = findViewById<EditText>(R.id.searchIcon) as SearchView
         searchIcon1.setOnQueryTextListener(this)
-//        searchIcon1.addTextChangedListener(this)
-//
-//        searchIcon.setOnTouchListener { _, event ->
-//            searchIcon.setText("")
-//            searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-//            return@setOnTouchListener true
-//            false
-//        }
-
 
     }
 
@@ -156,55 +112,28 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                         .name
                 when (tag) {
                     "UserResale" -> {
-
+                        Log.d(TAG, "text is ${newText}")
                     }
                     "UserTender" -> {
-                        searchTenderUser_sv.setQuery(newText, false)
+                        val searchTenderUser = findViewById<View>(R.id.searchTenderUser_sv) as SearchView
+                        searchTenderUser.setQuery(newText, false)
                     }
                     "UserOrders" -> {
-
+                        Log.d(TAG, "text is ${newText}")
                     }
                 }
             }
 
-        return false
+        return true
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        return false
+        return true
     }
 
-//    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//        if (searchIcon.hasFocus()) {
-//            searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_clear_black_24dp,0)
-//
-//            if (supportFragmentManager.backStackEntryCount > 0) {
-//                val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
-//                    .name
-//                when(tag) {
-//                    "UserResale" -> {
-//
-//                    }
-//                    "UserTender" -> {
-//                        searchTenderUser_sv.setQuery(s,false)
-//                    }
-//                    "UserOrders" -> {
-//
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    override fun afterTextChanged(s: Editable?) {
-//
-//    }
-//
-//    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//
-//    }
-
     private fun replaceFragment(fragment: Fragment, screen: String) {
+        val searchIconClear = findViewById<View>(R.id.searchIcon) as SearchView
+        searchIconClear.setQuery("", false)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment, screen)
         fragmentTransaction.addToBackStack(screen)
