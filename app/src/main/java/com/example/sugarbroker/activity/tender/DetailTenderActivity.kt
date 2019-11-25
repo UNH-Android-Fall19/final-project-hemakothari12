@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.userType
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -45,6 +46,12 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
         firestoreDB = FirebaseFirestore.getInstance()
 
         setUpToolbar()
+
+        if (userType == "User" || userType == "Seller") {
+            millemail_textview.visibility = View.GONE
+        } else {
+            millemail_textview.visibility = View.VISIBLE
+        }
 
         val bundle = intent.extras
         if (bundle != null) {

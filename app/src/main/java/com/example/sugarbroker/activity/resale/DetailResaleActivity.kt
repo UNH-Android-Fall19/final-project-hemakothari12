@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detail_resale.*
 import androidx.appcompat.app.AlertDialog
+import com.example.sugarbroker.activity.userType
 
 
 class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -44,6 +45,12 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
         firestoreDB = FirebaseFirestore.getInstance()
 
         setUpToolbar()
+
+        if (userType == "User" || userType == "Seller") {
+            mill_name_textview.visibility = View.GONE
+        } else {
+            mill_name_textview.visibility = View.VISIBLE
+        }
 
         val bundle = intent.extras
         if (bundle != null) {
