@@ -1,10 +1,15 @@
 package com.example.sugarbroker.activity.tender
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.home.SellerHomeActivity
+import com.example.sugarbroker.activity.home.UserHomeActivity
+import com.example.sugarbroker.activity.userType
 import com.example.sugarbroker.model.Orders
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,6 +37,8 @@ class ReviewTenderActivity : AppCompatActivity() {
 
         firestoreDB = FirebaseFirestore.getInstance()
 
+        setUpToolbar()
+
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateTenderId")
@@ -48,8 +55,8 @@ class ReviewTenderActivity : AppCompatActivity() {
             GST = (0.18 * quantityPrice!!).toFloat()
             totalPrice = quantityPrice!! + GST!!
 
-            quantityprice_textview.text = quantityPrice.toString()
-            GST_textview.text = GST.toString()
+            quantityprice_textview.setText(quantityPrice!!.toString())
+            GST_textview.setText(GST.toString())
             totalprice_textview.setText(totalPrice.toString())
         }
 
@@ -85,7 +92,18 @@ class ReviewTenderActivity : AppCompatActivity() {
 
 
             finish()
+        }
 
+        cancel_button.setOnClickListener {
+            if(userType == "Seller") {
+                val intent = Intent(applicationContext, SellerHomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                applicationContext.startActivity(intent)
+            } else {
+                val intent = Intent(applicationContext, UserHomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                applicationContext.startActivity(intent)
+            }
         }
     }
 
@@ -106,5 +124,21 @@ class ReviewTenderActivity : AppCompatActivity() {
                 Log.e(TAG, "Error adding Note document", e)
                 Toast.makeText(applicationContext, "Order could not be added!", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        val count = supportFragmentManager.backStackEntryCount
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            if (count == 0)
+                super.onBackPressed()
+            else
+                supportFragmentManager.popBackStack()
+        })
     }
 }
