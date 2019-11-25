@@ -12,9 +12,19 @@ import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.order.DetailOrderActivity
 import com.example.sugarbroker.model.Orders
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserOrdersRecyclerViewAdapter(private val orderList: MutableList<Orders>, private val context: Context,
                                     private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<UserOrdersRecyclerViewAdapter.ViewHolder>() {
+
+    private val listOrders: ArrayList<Orders>
+
+    init {
+
+        this.listOrders = ArrayList<Orders>()
+        this.listOrders.addAll(orderList)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent!!.context).inflate(R.layout.user_item_order, parent, false)
@@ -27,6 +37,7 @@ class UserOrdersRecyclerViewAdapter(private val orderList: MutableList<Orders>, 
 
         holder.millName.text = order.millName
         holder.quantity.text = order.quantity
+        holder.tvIcon.text = order.millName!!.get(0).toUpperCase().toString()
 
         holder.itemView.setOnClickListener { detailOrder(order) }
     }
@@ -40,10 +51,12 @@ class UserOrdersRecyclerViewAdapter(private val orderList: MutableList<Orders>, 
     inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         internal var millName: TextView
         internal var quantity: TextView
+        internal var tvIcon: TextView
 
         init {
             millName = view.findViewById(R.id.mill_name_textview)
             quantity = view.findViewById(R.id.quantity_textview)
+            tvIcon = view.findViewById(R.id.tvIcon)
         }
     }
 
@@ -62,6 +75,22 @@ class UserOrdersRecyclerViewAdapter(private val orderList: MutableList<Orders>, 
         intent.putExtra("UpdateOrderUserAddress", order.address)
         intent.putExtra("UpdateOrderStatus", order.status)
         context.startActivity(intent)
+    }
+
+    fun filter(charText: String) {
+        var charText = charText
+        charText = charText.toLowerCase(Locale.getDefault())
+        orderList.clear()
+        if (charText.length == 0) {
+            orderList.addAll(listOrders)
+        } else {
+            for (wp in listOrders) {
+                if (wp.millName!!.toLowerCase(Locale.getDefault()).contains(charText)) {
+                    orderList.add(wp)
+                }
+            }
+        }
+        notifyDataSetChanged()
     }
 
 }

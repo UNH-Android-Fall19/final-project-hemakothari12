@@ -9,12 +9,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.tender.BuyTenderActivity
 import com.example.sugarbroker.activity.tender.DetailTenderActivity
 import com.example.sugarbroker.model.Tender
 import com.google.firebase.firestore.FirebaseFirestore
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, private val context: Context,
@@ -40,8 +44,29 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         holder.millName.text = tender.millName
         holder.price.text = tender.price
 
-        holder.book.setOnClickListener { buyTender(tender) }
+        Glide.with(context).load(tender.tenderUrl.toString())
+            .placeholder(R.drawable.photoplaceholder)
+            .apply(RequestOptions.circleCropTransform())
+            .into(
+                holder.tvIcon
+            )
 
+        holder.tvIcon.setOnClickListener {
+            val mBuilder = AlertDialog.Builder(context)
+            val mView = View.inflate(context,R.layout.dialog_custom_layout, null)
+            val photoView = mView.findViewById<View>(R.id.imageView) as ImageView
+            Glide.with(context).load(tender.tenderUrl)
+                .placeholder(R.drawable.photoplaceholder)
+                .apply(RequestOptions.circleCropTransform())
+                .into(
+                    photoView
+                )
+            mBuilder.setView(mView)
+            val mDialog = mBuilder.create()
+            mDialog.show()
+        }
+
+        holder.book.setOnClickListener { buyTender(tender) }
         holder.itemView.setOnClickListener { detailTender(tender) }
     }
 
@@ -55,12 +80,14 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         internal var millName: TextView
         internal var price: TextView
         internal var book: Button
+        internal var tvIcon: CircleImageView
 
         init {
             millName = view.findViewById(R.id.mill_name_textview)
             price = view.findViewById(R.id.price_textview)
 
             book = view.findViewById(R.id.ivbook)
+            tvIcon = view.findViewById(R.id.tvIcon)
         }
     }
 
@@ -72,6 +99,7 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         intent.putExtra("UpdateTenderPrice", tender.price)
         intent.putExtra("UpdateTenderAddress", tender.address)
         intent.putExtra("UpdateTenderContact", tender.contact)
+        intent.putExtra("UpdateTenderEmail", tender.email)
         intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
     }
@@ -84,6 +112,7 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
         intent.putExtra("UpdateTenderPrice", tender.price)
         intent.putExtra("UpdateTenderAddress", tender.address)
         intent.putExtra("UpdateTenderContact", tender.contact)
+        intent.putExtra("UpdateTenderEmail", tender.email)
         intent.putExtra("UpdateTenderUrl", tender.tenderUrl)
         context.startActivity(intent)
     }

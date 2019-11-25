@@ -1,18 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.PlaceholderFragment">
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pageHeading_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order Details"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:inputType="textPersonName" />
+
+    <RadioGroup
+        android:checkedButton="@+id/open"
+        android:id="@+id/toggle"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/primary_color_out_line"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/open"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/toggle_widget_background"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Open"
+            android:textColor="@color/transparent" />
+
+        <RadioButton
+            android:id="@+id/transit"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_widget_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Transit"
+            android:textColor="@color/colorPrimary" />
+
+        <RadioButton
+            android:id="@+id/closed"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_widget_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Closed"
+            android:textColor="@color/colorPrimary" />
+    </RadioGroup>
+
+    <SearchView
+        android:id="@+id/searchOrderUser_sv"
+        android:layoutDirection="rtl"
+        android:iconifiedByDefault="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:searchIcon="@null"
+        android:visibility="gone"
+        android:theme="@style/ToolbarStyle"
+        android:clickable="true" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_order_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
         android:scrollbars="vertical"
         android:paddingBottom="50dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

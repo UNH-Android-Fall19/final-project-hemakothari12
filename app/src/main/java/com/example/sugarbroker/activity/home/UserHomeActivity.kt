@@ -120,7 +120,8 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                         searchTenderUser.setQuery(newText, false)
                     }
                     "UserOrders" -> {
-                        Log.d(TAG, "text is ${newText}")
+                        val searchOrderUser = findViewById<View>(R.id.searchOrderUser_sv) as SearchView
+                        searchOrderUser.setQuery(newText, false)
                     }
                 }
             }

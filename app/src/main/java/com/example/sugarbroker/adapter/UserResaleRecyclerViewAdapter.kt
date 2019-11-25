@@ -7,13 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.resale.BuyResaleActivity
 import com.example.sugarbroker.activity.resale.DetailResaleActivity
 import com.example.sugarbroker.model.Resale
 import com.google.firebase.firestore.FirebaseFirestore
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 class UserResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>, private val context: Context,
@@ -39,8 +44,29 @@ class UserResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>,
         holder.millName.text = resale.millName
         holder.price.text = resale.price
 
-        holder.book.setOnClickListener { buyResale(resale) }
+        Glide.with(context).load(resale.resaleUrl.toString())
+            .placeholder(R.drawable.photoplaceholder)
+            .apply(RequestOptions.circleCropTransform())
+            .into(
+                holder.tvIcon
+            )
 
+        holder.tvIcon.setOnClickListener {
+            val mBuilder = AlertDialog.Builder(context)
+            val mView = View.inflate(context,R.layout.dialog_custom_layout, null)
+            val photoView = mView.findViewById<View>(R.id.imageView) as ImageView
+            Glide.with(context).load(resale.resaleUrl)
+                .placeholder(R.drawable.photoplaceholder)
+                .apply(RequestOptions.circleCropTransform())
+                .into(
+                    photoView
+                )
+            mBuilder.setView(mView)
+            val mDialog = mBuilder.create()
+            mDialog.show()
+        }
+
+        holder.book.setOnClickListener { buyResale(resale) }
         holder.itemView.setOnClickListener { detailResale(resale) }
     }
 
@@ -54,12 +80,14 @@ class UserResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>,
         internal var millName: TextView
         internal var price: TextView
         internal var book: Button
+        internal var tvIcon: CircleImageView
 
         init {
             millName = view.findViewById(R.id.mill_name_textview)
             price = view.findViewById(R.id.price_textview)
 
             book = view.findViewById(R.id.ivbook)
+            tvIcon = view.findViewById(R.id.tvIcon)
         }
     }
 
@@ -71,6 +99,7 @@ class UserResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>,
         intent.putExtra("UpdateResalePrice", resale.price)
         intent.putExtra("UpdateResaleAddress", resale.address)
         intent.putExtra("UpdateResaleContact", resale.contact)
+        intent.putExtra("UpdateResaleEmail", resale.email)
         intent.putExtra("UpdateResaleUrl", resale.resaleUrl)
         context.startActivity(intent)
     }
@@ -83,6 +112,7 @@ class UserResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>,
         intent.putExtra("UpdateResalePrice", resale.price)
         intent.putExtra("UpdateResaleAddress", resale.address)
         intent.putExtra("UpdateResaleContact", resale.contact)
+        intent.putExtra("UpdateResaleEmail", resale.email)
         intent.putExtra("UpdateResaleUrl", resale.resaleUrl)
         context.startActivity(intent)
     }
