@@ -57,6 +57,8 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home)
 
+        firestoreDB = FirebaseFirestore.getInstance()
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -87,6 +89,12 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
                 R.id.nav_order -> {
                     replaceFragment(UserOrdersFragment(), "UserOrders")
+                }
+                R.id.updateProfile -> {
+                    updateProfile()
+                }
+                R.id.logout -> {
+                    performLogout()
                 }
             }
             // Add code here to update the UI based on the item selected
@@ -161,9 +169,10 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         startActivity(intent)
     }
 
-    private fun updateProfile(uid: Any ) {
+    private fun updateProfile() {
         val intent = Intent(applicationContext, AddUserActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val uid = FirebaseAuth.getInstance().uid
 
         Log.d("UID in function", "uid in function ${uid}")
 

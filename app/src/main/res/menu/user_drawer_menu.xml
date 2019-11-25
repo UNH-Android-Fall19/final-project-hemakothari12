@@ -15,6 +15,14 @@
         <item android:id="@+id/nav_order"
             android:icon="@drawable/ic_order_pc_24dp"
             android:title="@string/title_orders" />
+
+        <item android:id="@+id/updateProfile"
+            android:icon="@drawable/ic_edit_black_24dp"
+            android:title="@string/edit_profile" />
+
+        <item android:id="@+id/logout"
+            android:icon="@drawable/ic_logout_to_app_white_24dp"
+            android:title="@string/logout" />
     </group>
 
 </menu>
