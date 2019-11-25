@@ -17,11 +17,25 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@color/transparent"
             android:id="@+id/toolbar"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:elevation="4dp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/searchIcon"
+                android:layout_width="340dp"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/transparent"
+                android:backgroundTint="@color/transparent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:textSize="19dp"
+                android:hint="Search"
+                android:textColorHint="@color/colorPrimary"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimary"></androidx.appcompat.widget.AppCompatEditText>
+
         </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout

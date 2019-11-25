@@ -2,16 +2,21 @@ package com.example.sugarbroker.activity.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.sugarbroker.R
@@ -25,6 +30,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_user_home.*
+import kotlinx.android.synthetic.main.fragment_user_tender.*
 
 class UserHomeActivity : AppCompatActivity() {
 
@@ -49,6 +55,7 @@ class UserHomeActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         val actionbar: ActionBar? = supportActionBar
         actionbar?.apply {
@@ -69,13 +76,13 @@ class UserHomeActivity : AppCompatActivity() {
             when (menuItem.itemId) {
 
                 R.id.nav_tender -> {
-                    replaceFragment(UserTenderFragment(), "Tender")
+                    replaceFragment(UserTenderFragment(), "UserTender")
                 }
                 R.id.nav_resale -> {
-                    replaceFragment(UserResaleFragment(), "Resale")
+                    replaceFragment(UserResaleFragment(), "UserResale")
                 }
                 R.id.nav_order -> {
-                    replaceFragment(UserOrdersFragment(), "Orders")
+                    replaceFragment(UserOrdersFragment(), "USerOrders")
                 }
             }
             // Add code here to update the UI based on the item selected
@@ -85,7 +92,45 @@ class UserHomeActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
-            replaceFragment(UserTenderFragment(), "Tender")
+            replaceFragment(UserTenderFragment(), "UserTender")
+        }
+
+        searchIcon.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                Toast.makeText(applicationContext, "${s}", Toast.LENGTH_SHORT).show()
+                searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_clear_black_24dp,0)
+
+                if (supportFragmentManager.backStackEntryCount > 0) {
+                    val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+                        .name
+                    when(tag) {
+                        "UserResale" -> {
+
+                        }
+                        "UserTender" -> {
+                            searchTenderUser_sv.setQuery(s,false)
+                        }
+                        "UserOrders" -> {
+
+                        }
+                    }
+                }
+
+            }
+        })
+
+        searchIcon.setOnTouchListener { _, event ->
+            searchIcon.setText("")
+            searchIcon.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+            return@setOnTouchListener true
         }
 
 

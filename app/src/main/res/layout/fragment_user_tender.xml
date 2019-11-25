@@ -29,6 +29,16 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <SearchView
+        android:id="@+id/searchTenderUser_sv"
+        android:layoutDirection="rtl"
+        android:iconifiedByDefault="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:searchIcon="@null"
+        android:theme="@style/ToolbarStyle"
+        android:clickable="true" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_tender_list"
         android:layout_width="match_parent"
