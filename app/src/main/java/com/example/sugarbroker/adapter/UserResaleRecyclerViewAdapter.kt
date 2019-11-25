@@ -1,0 +1,107 @@
+package com.example.sugarbroker.adapter
+
+import android.content.Context
+import android.content.Intent
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.resale.BuyResaleActivity
+import com.example.sugarbroker.activity.resale.DetailResaleActivity
+import com.example.sugarbroker.model.Resale
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
+
+class UserResaleRecyclerViewAdapter(private val resaleList: MutableList<Resale>, private val context: Context,
+                                    private val firestoreDB: FirebaseFirestore): RecyclerView.Adapter<UserResaleRecyclerViewAdapter.ViewHolder>() {
+
+    private val listResale: ArrayList<Resale>
+
+    init {
+
+        this.listResale = ArrayList<Resale>()
+        this.listResale.addAll(resaleList)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent!!.context).inflate(R.layout.user_item_resale, parent, false)
+
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val resale= resaleList[position]
+
+        holder.millName.text = resale.millName
+        holder.price.text = resale.price
+
+        holder.book.setOnClickListener { buyResale(resale) }
+
+        holder.itemView.setOnClickListener { detailResale(resale) }
+    }
+
+    override fun getItemCount(): Int {
+        Log.d("Size", "Size is ${resaleList.size}")
+        return resaleList.size
+    }
+
+
+    inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
+        internal var millName: TextView
+        internal var price: TextView
+        internal var book: Button
+
+        init {
+            millName = view.findViewById(R.id.mill_name_textview)
+            price = view.findViewById(R.id.price_textview)
+
+            book = view.findViewById(R.id.ivbook)
+        }
+    }
+
+    private fun detailResale(resale: Resale) {
+        val intent = Intent(context, DetailResaleActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateResaleId", resale.id)
+        intent.putExtra("UpdateResaleMillName", resale.millName)
+        intent.putExtra("UpdateResalePrice", resale.price)
+        intent.putExtra("UpdateResaleAddress", resale.address)
+        intent.putExtra("UpdateResaleContact", resale.contact)
+        intent.putExtra("UpdateResaleUrl", resale.resaleUrl)
+        context.startActivity(intent)
+    }
+
+    private fun buyResale(resale: Resale) {
+        val intent = Intent(context, BuyResaleActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateResaleId", resale.id)
+        intent.putExtra("UpdateResaleMillName", resale.millName)
+        intent.putExtra("UpdateResalePrice", resale.price)
+        intent.putExtra("UpdateResaleAddress", resale.address)
+        intent.putExtra("UpdateResaleContact", resale.contact)
+        intent.putExtra("UpdateResaleUrl", resale.resaleUrl)
+        context.startActivity(intent)
+    }
+
+    fun filter(charText: String) {
+        var charText = charText
+        charText = charText.toLowerCase(Locale.getDefault())
+        resaleList.clear()
+        if (charText.length == 0) {
+            resaleList.addAll(listResale)
+        } else {
+            for (wp in listResale) {
+                if (wp.millName!!.toLowerCase(Locale.getDefault()).contains(charText)) {
+                    resaleList.add(wp)
+                }
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+}
+
