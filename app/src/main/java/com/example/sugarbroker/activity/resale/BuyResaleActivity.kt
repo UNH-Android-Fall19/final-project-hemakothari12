@@ -3,6 +3,7 @@ package com.example.sugarbroker.activity.resale
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.home.SellerHomeActivity
 import com.example.sugarbroker.activity.home.UserHomeActivity
@@ -23,6 +24,8 @@ class BuyResaleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_buy_resale)
 
         firestoreDB = FirebaseFirestore.getInstance()
+
+        setUpToolbar()
 
         val bundle = intent.extras
         if (bundle != null) {
@@ -60,6 +63,22 @@ class BuyResaleActivity : AppCompatActivity() {
                 applicationContext.startActivity(intent)
             }
         }
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.elevation = 4.0F
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        val count = supportFragmentManager.backStackEntryCount
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            if (count == 0)
+                super.onBackPressed()
+            else
+                supportFragmentManager.popBackStack()
+        })
     }
 
 }
