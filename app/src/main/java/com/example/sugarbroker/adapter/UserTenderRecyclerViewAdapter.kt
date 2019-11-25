@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -53,7 +54,7 @@ class UserTenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>,
     inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         internal var millName: TextView
         internal var price: TextView
-        internal var book: ImageView
+        internal var book: Button
 
         init {
             millName = view.findViewById(R.id.mill_name_textview)

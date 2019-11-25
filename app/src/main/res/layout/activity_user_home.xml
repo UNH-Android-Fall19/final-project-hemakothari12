@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/ThemeOverlay.AppCompat.Light"
                 android:searchIcon="@null"
+                android:focusable="false"
                 android:clickable="true" />
 
         </androidx.appcompat.widget.Toolbar>
