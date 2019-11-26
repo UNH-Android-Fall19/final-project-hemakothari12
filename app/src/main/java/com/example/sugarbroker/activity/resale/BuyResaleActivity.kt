@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.home.AdminHomeActivity
 import com.example.sugarbroker.activity.home.SellerHomeActivity
 import com.example.sugarbroker.activity.home.UserHomeActivity
 import com.example.sugarbroker.activity.userType
@@ -57,8 +58,14 @@ class BuyResaleActivity : AppCompatActivity() {
                 val intent = Intent(applicationContext, SellerHomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 applicationContext.startActivity(intent)
-            } else {
+            }
+            if (userType == "User") {
                 val intent = Intent(applicationContext, UserHomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                applicationContext.startActivity(intent)
+            }
+            if (userType == "Admin") {
+                val intent = Intent(applicationContext, AdminHomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 applicationContext.startActivity(intent)
             }
