@@ -12,9 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
-import android.widget.EditText
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -23,6 +21,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.account.LoginActivity
+import com.example.sugarbroker.activity.userEmail
+import com.example.sugarbroker.activity.userName
 import com.example.sugarbroker.activity.users.AddUserActivity
 import com.example.sugarbroker.fragment.UserOrdersFragment
 import com.example.sugarbroker.fragment.UserResaleFragment
@@ -33,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_user_home.*
 import kotlinx.android.synthetic.main.fragment_user_tender.*
+import kotlinx.android.synthetic.main.nav_header.*
 
 class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
@@ -58,6 +59,8 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         setContentView(R.layout.activity_user_home)
 
         firestoreDB = FirebaseFirestore.getInstance()
+
+        setHeader()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -200,6 +203,38 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     }
                 } else {
                     Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
+    }
+
+    private fun setHeader() {
+        val uid = FirebaseAuth.getInstance().uid
+//        val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
+//        val huserIcon = navigationView.getHeaderView(0)
+//        val userIcon = huserIcon.findViewById<View>(R.id.userIcon) as TextView
+
+        val hView = nav_view.getHeaderView(0)
+        val textViewName = hView.findViewById(R.id.nameUser) as TextView
+        val textViewEmail = hView.findViewById(R.id.emailUser) as TextView
+        val textviewIcon = hView.findViewById(R.id.userIcon) as TextView
+
+        firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+                    for (document in documents) {
+                        userName = document.get("name").toString()
+                        userEmail = document.get("email").toString()
+
+                        textViewName.setText(userName)
+                        textViewEmail.setText(userEmail)
+                        textviewIcon.setText(userName!!.get(0).toUpperCase().toString())
+
+                    }
+                } else {
+                    Log.d(TAG, "Error Fetching Details")
                 }
             }
             .addOnFailureListener { exception ->
