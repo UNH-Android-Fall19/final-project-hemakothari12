@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -17,43 +19,46 @@
         android:roundIcon="@drawable/logomini"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.account.ContactUsActivity"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA-d9Gv_H5AOlQofgeRWPbmegUR-OwNt9k"/>
+            android:value="AIzaSyA-d9Gv_H5AOlQofgeRWPbmegUR-OwNt9k" />
 
-        <activity android:name=".activity.resale.AddResaleActivity"
-            android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
-        <activity android:name=".activity.resale.DetailResaleActivity"
-            android:parentActivityName=".activity.home.UserHomeActivity"/>
+        <activity
+            android:name=".activity.resale.AddResaleActivity"
+            android:parentActivityName=".activity.home.AdminHomeActivity" />
+        <activity
+            android:name=".activity.resale.DetailResaleActivity"
+            android:parentActivityName=".activity.home.UserHomeActivity" />
         <activity android:name=".activity.resale.BuyResaleActivity" />
         <activity android:name=".activity.resale.ReviewResaleActivity" />
-
-        <activity android:name=".activity.tender.AddTenderActivity"
-            android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
-        <activity android:name=".activity.tender.DetailTenderActivity"
-            android:parentActivityName=".activity.home.UserHomeActivity"></activity>
-        <activity android:name=".activity.tender.BuyTenderActivity"></activity>
-        <activity android:name=".activity.tender.ReviewTenderActivity"></activity>
-
-        <activity android:name=".activity.users.AddUserActivity"
-            android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
-        <activity android:name=".activity.users.DetailUserActivity"></activity>
-
-        <activity android:name=".activity.order.AddOrderActivity"
-            android:parentActivityName=".activity.home.AdminHomeActivity"></activity>
-        <activity android:name=".activity.order.DetailOrderActivity"></activity>
-
-
-        <activity android:name=".activity.home.SellerHomeActivity"></activity>
+        <activity
+            android:name=".activity.tender.AddTenderActivity"
+            android:parentActivityName=".activity.home.AdminHomeActivity" />
+        <activity
+            android:name=".activity.tender.DetailTenderActivity"
+            android:parentActivityName=".activity.home.UserHomeActivity" />
+        <activity android:name=".activity.tender.BuyTenderActivity" />
+        <activity android:name=".activity.tender.ReviewTenderActivity" />
+        <activity
+            android:name=".activity.users.AddUserActivity"
+            android:parentActivityName=".activity.home.AdminHomeActivity" />
+        <activity android:name=".activity.users.DetailUserActivity" />
+        <activity
+            android:name=".activity.order.AddOrderActivity"
+            android:parentActivityName=".activity.home.AdminHomeActivity" />
+        <activity android:name=".activity.order.DetailOrderActivity" />
+        <activity android:name=".activity.home.SellerHomeActivity" />
         <activity android:name=".activity.home.UserHomeActivity" />
         <activity android:name=".activity.home.AdminHomeActivity" />
-
         <activity android:name=".activity.account.LoginActivity" />
-        <activity android:name=".activity.account.RegisterActivity"
+        <activity
+            android:name=".activity.account.RegisterActivity"
             android:parentActivityName=".activity.account.LoginActivity" />
-        <activity android:name=".activity.account.ForgotPasswordActivity"
-            android:parentActivityName=".activity.account.LoginActivity"/>
-
+        <activity
+            android:name=".activity.account.ForgotPasswordActivity"
+            android:parentActivityName=".activity.account.LoginActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -20,6 +20,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.account.ContactUsActivity
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.userEmail
 import com.example.sugarbroker.activity.userName
@@ -96,6 +97,9 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 R.id.updateProfile -> {
                     updateProfile()
                 }
+                R.id.contactUs -> {
+                    contactUs()
+                }
                 R.id.logout -> {
                     performLogout()
                 }
@@ -170,6 +174,12 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         intent = Intent(applicationContext, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+    }
+
+    private fun contactUs() {
+        val intent = Intent(applicationContext, ContactUsActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        applicationContext.startActivity(intent)
     }
 
     private fun updateProfile() {
