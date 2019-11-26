@@ -212,9 +212,6 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private fun setHeader() {
         val uid = FirebaseAuth.getInstance().uid
-//        val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
-//        val huserIcon = navigationView.getHeaderView(0)
-//        val userIcon = huserIcon.findViewById<View>(R.id.userIcon) as TextView
 
         val hView = nav_view.getHeaderView(0)
         val textViewName = hView.findViewById(R.id.nameUser) as TextView
