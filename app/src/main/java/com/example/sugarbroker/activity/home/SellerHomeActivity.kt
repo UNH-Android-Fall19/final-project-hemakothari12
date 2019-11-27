@@ -20,6 +20,7 @@ import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.userEmail
 import com.example.sugarbroker.activity.userName
 import com.example.sugarbroker.activity.users.AddUserActivity
+import com.example.sugarbroker.fragment.SellerUpdatePriceFragment
 import com.example.sugarbroker.fragment.UserOrdersFragment
 import com.example.sugarbroker.fragment.UserResaleFragment
 import com.example.sugarbroker.fragment.UserTenderFragment
@@ -81,6 +82,10 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
                 R.id.nav_order -> {
                     replaceFragment(UserOrdersFragment(), "UserOrders")
+                }
+                R.id.updatePrice -> {
+                    Log.d("In Price", "In update Price")
+                    replaceFragment(SellerUpdatePriceFragment(), "SellerUpdatePrice")
                 }
                 R.id.updateProfile -> {
                     updateProfile()
@@ -149,6 +154,11 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private fun replaceFragment(fragment: Fragment, screen: String) {
         val searchIconClear = findViewById<View>(R.id.searchIcon) as SearchView
         searchIconClear.setQuery("", false)
+        if (screen == "SellerUpdatePrice") {
+            searchIconClear.visibility = View.GONE
+        } else {
+            searchIconClear.visibility = View.VISIBLE
+        }
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment, screen)
         fragmentTransaction.addToBackStack(screen)
