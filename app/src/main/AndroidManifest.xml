@@ -19,7 +19,8 @@
         android:roundIcon="@drawable/logomini"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.account.ContactUsActivity"></activity>
+        <activity android:name=".activity.account.ContactUsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -27,37 +28,54 @@
 
         <activity
             android:name=".activity.resale.AddResaleActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.home.AdminHomeActivity" />
         <activity
             android:name=".activity.resale.DetailResaleActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.home.UserHomeActivity" />
-        <activity android:name=".activity.resale.BuyResaleActivity" />
-        <activity android:name=".activity.resale.ReviewResaleActivity" />
+        <activity android:name=".activity.resale.BuyResaleActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".activity.resale.ReviewResaleActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".activity.tender.AddTenderActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.home.AdminHomeActivity" />
         <activity
             android:name=".activity.tender.DetailTenderActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.home.UserHomeActivity" />
-        <activity android:name=".activity.tender.BuyTenderActivity" />
-        <activity android:name=".activity.tender.ReviewTenderActivity" />
+        <activity android:name=".activity.tender.BuyTenderActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.tender.ReviewTenderActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.users.AddUserActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.home.AdminHomeActivity" />
         <activity android:name=".activity.users.DetailUserActivity" />
         <activity
             android:name=".activity.order.AddOrderActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.home.AdminHomeActivity" />
-        <activity android:name=".activity.order.DetailOrderActivity" />
-        <activity android:name=".activity.home.SellerHomeActivity" />
-        <activity android:name=".activity.home.UserHomeActivity" />
-        <activity android:name=".activity.home.AdminHomeActivity" />
-        <activity android:name=".activity.account.LoginActivity" />
+        <activity android:name=".activity.order.DetailOrderActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.home.SellerHomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.home.UserHomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".activity.home.AdminHomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".activity.account.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".activity.account.RegisterActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.account.LoginActivity" />
         <activity
             android:name=".activity.account.ForgotPasswordActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.account.LoginActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
