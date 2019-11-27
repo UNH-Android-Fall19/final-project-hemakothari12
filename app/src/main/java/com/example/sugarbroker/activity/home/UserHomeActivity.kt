@@ -2,21 +2,14 @@ package com.example.sugarbroker.activity.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.sugarbroker.R
@@ -28,25 +21,15 @@ import com.example.sugarbroker.activity.users.AddUserActivity
 import com.example.sugarbroker.fragment.UserOrdersFragment
 import com.example.sugarbroker.fragment.UserResaleFragment
 import com.example.sugarbroker.fragment.UserTenderFragment
-import com.example.sugarbroker.ui.main.SectionsPagerAdapter
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_user_home.*
-import kotlinx.android.synthetic.main.fragment_user_tender.*
-import kotlinx.android.synthetic.main.nav_header.*
 
 class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val TAG = "UserHomeActivity"
-
-    private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var textWatcher: TextWatcher
-    lateinit var searchIcon1: SearchView
-
-
     private var firestoreDB: FirebaseFirestore? = null
-
     internal var id: String? = null
     internal var name: Any? = null
     internal var email: Any? = null
@@ -54,6 +37,8 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     internal var address: Any? = null
     internal var phone: Any? = null
     internal var type: Any? = null
+    private lateinit var mDrawerLayout: DrawerLayout
+    lateinit var searchIcon1: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,8 +89,6 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     performLogout()
                 }
             }
-            // Add code here to update the UI based on the item selected
-            // For example, swap UI fragments here
 
             true
         }

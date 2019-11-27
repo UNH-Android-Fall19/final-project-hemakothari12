@@ -8,21 +8,36 @@ import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
+import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.account.ContactUsActivity
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.tender.AddTenderActivity
+import com.example.sugarbroker.activity.userEmail
+import com.example.sugarbroker.activity.userName
 import com.example.sugarbroker.activity.users.AddUserActivity
+import com.example.sugarbroker.fragment.UserOrdersFragment
+import com.example.sugarbroker.fragment.UserResaleFragment
+import com.example.sugarbroker.fragment.UserTenderFragment
 import com.example.sugarbroker.ui.main.SectionsPagerAdapter
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_user_home.*
 
-class SellerHomeActivity : AppCompatActivity() {
+class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val TAG = "SellerHomeActivity"
-
     private var firestoreDB: FirebaseFirestore? = null
-
     internal var id: Any? = null
     internal var name: Any? = null
     internal var email: Any? = null
@@ -31,60 +46,130 @@ class SellerHomeActivity : AppCompatActivity() {
     internal var phone: Any? = null
     internal var type: Any? = null
     internal var LoggedInUserEmail: Any? = null
-    internal var millName: Any? = null
-    internal var price: Any? = null
-    internal var millAddress: Any? = null
-    internal var contact: Any? = null
+    private lateinit var mDrawerLayout: DrawerLayout
+    lateinit var searchIcon1: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_home)
-
-        val bundle = intent.extras
-        if (bundle != null) {
-            LoggedInUserEmail = bundle.getString("LoggedInUserEmail")
-        }
-
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-//        val viewPager: ViewPager = findViewById(R.id.view_pager)
-//        viewPager.adapter = sectionsPagerAdapter
-//        val tabs: TabLayout = findViewById(R.id.tabs)
-//        tabs.setupWithViewPager(viewPager)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        setContentView(R.layout.activity_seller_home)
 
         firestoreDB = FirebaseFirestore.getInstance()
 
-        val inflater = menuInflater
-        inflater.inflate(R.menu.seller_toolbar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+        setHeader()
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+
+        val actionbar: ActionBar? = supportActionBar
+        actionbar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_drawer_icon)
+        }
+
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            // set item as selected to persist highlight
+            menuItem.isChecked = true
+            // close drawer when item is tapped
+            mDrawerLayout.closeDrawers()
+
+            // Handle navigation view item clicks here.
+            when (menuItem.itemId) {
+
+                R.id.nav_tender -> {
+                    replaceFragment(UserTenderFragment(), "UserTender")
+                }
+                R.id.nav_resale -> {
+                    replaceFragment(UserResaleFragment(), "UserResale")
+                }
+                R.id.nav_order -> {
+                    replaceFragment(UserOrdersFragment(), "UserOrders")
+                }
+                R.id.updateProfile -> {
+                    updateProfile()
+                }
+                R.id.contactUs -> {
+                    contactUs()
+                }
+                R.id.logout -> {
+                    performLogout()
+                }
+            }
+            // Add code here to update the UI based on the item selected
+            // For example, swap UI fragments here
+
+            true
+        }
+
+        if (savedInstanceState == null) {
+            replaceFragment(UserTenderFragment(), "UserTender")
+        }
+
+        searchIcon1 = findViewById<EditText>(R.id.searchIcon) as SearchView
+        searchIcon1.setOnQueryTextListener(this)
+
+//        val bundle = intent.extras
+//        if (bundle != null) {
+//            LoggedInUserEmail = bundle.getString("LoggedInUserEmail")
+//        }
+//
+//        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+////        val viewPager: ViewPager = findViewById(R.id.view_pager)
+////        viewPager.adapter = sectionsPagerAdapter
+////        val tabs: TabLayout = findViewById(R.id.tabs)
+////        tabs.setupWithViewPager(viewPager)
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            val tag =
+                supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+                    .name
+            when (tag) {
+                "UserResale" -> {
+                    val searchResaleUser = findViewById<View>(R.id.searchResaleUser_sv) as SearchView
+                    searchResaleUser.setQuery(newText, false)
+                }
+                "UserTender" -> {
+                    val searchTenderUser = findViewById<View>(R.id.searchTenderUser_sv) as SearchView
+                    searchTenderUser.setQuery(newText, false)
+                }
+                "UserOrders" -> {
+                    val searchOrderUser = findViewById<View>(R.id.searchOrderUser_sv) as SearchView
+                    searchOrderUser.setQuery(newText, false)
+                }
+            }
+        }
+
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    private fun replaceFragment(fragment: Fragment, screen: String) {
+        val searchIconClear = findViewById<View>(R.id.searchIcon) as SearchView
+        searchIconClear.setQuery("", false)
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment, screen)
+        fragmentTransaction.addToBackStack(screen)
+        fragmentTransaction.commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                mDrawerLayout.openDrawer(GravityCompat.START)
+                true
+            }
 
-        when (item.itemId) {
-            R.id.search -> {
-                Toast.makeText(this, "Implement search", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            R.id.profile -> {
-                val uid = FirebaseAuth.getInstance().uid
-                updateProfile(uid!!)
-                return true
-            }
-            R.id.updateprice -> {
-                Toast.makeText(this, "Implement Update Price", Toast.LENGTH_SHORT).show()
-                updatePrice(LoggedInUserEmail!!)
-                return true
-            }
-            R.id.logout -> {
-                Toast.makeText(this, "Implement Logout", Toast.LENGTH_SHORT).show()
-                performLogout()
-                return true
-            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun performLogout() {
@@ -95,9 +180,16 @@ class SellerHomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun updateProfile(uid: Any ) {
+    private fun contactUs() {
+        val intent = Intent(applicationContext, ContactUsActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        applicationContext.startActivity(intent)
+    }
+
+    private fun updateProfile() {
         val intent = Intent(applicationContext, AddUserActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val uid = FirebaseAuth.getInstance().uid
 
         Log.d("UID in function", "uid in function ${uid}")
 
@@ -132,32 +224,61 @@ class SellerHomeActivity : AppCompatActivity() {
             }
     }
 
-    private fun updatePrice(LoggedInUserEmail: Any) {
-        Log.d("LoggedInUserEmail", "LoggedInUserEmail ${LoggedInUserEmail}")
+//    private fun updatePrice(LoggedInUserEmail: Any) {
+//        Log.d("LoggedInUserEmail", "LoggedInUserEmail ${LoggedInUserEmail}")
+//
+//        val intent = Intent(applicationContext, AddTenderActivity::class.java)
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//
+//        firestoreDB!!.collection("tender").whereEqualTo("contact", LoggedInUserEmail).get()
+//            .addOnSuccessListener { documents ->
+//                if (documents != null) {
+//                    for (document in documents) {
+//                        id = document.get("id")
+//                        millName = document.get("millName")
+//                        price = document.get("price")
+//                        millAddress = document.get("address")
+//                        contact = document.get("contact")
+//
+//                        intent.putExtra("UpdateTenderId", id.toString())
+//                        intent.putExtra("UpdateTenderMillName", millName.toString())
+//                        intent.putExtra("UpdateTenderPrice", price.toString())
+//                        intent.putExtra("UpdateTenderAddress", millAddress.toString())
+//                        intent.putExtra("UpdateTenderContact", contact.toString())
+//
+//                        applicationContext.startActivity(intent)
+//                    }
+//                } else {
+//                    Log.d(TAG, "No such document")
+//                }
+//            }
+//            .addOnFailureListener { exception ->
+//                Log.d(TAG, "get failed with ", exception)
+//            }
+//    }
 
-        val intent = Intent(applicationContext, AddTenderActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    private fun setHeader() {
+        val uid = FirebaseAuth.getInstance().uid
 
-        firestoreDB!!.collection("tender").whereEqualTo("contact", LoggedInUserEmail).get()
+        val hView = nav_view.getHeaderView(0)
+        val textViewName = hView.findViewById(R.id.nameUser) as TextView
+        val textViewEmail = hView.findViewById(R.id.emailUser) as TextView
+        val textviewIcon = hView.findViewById(R.id.userIcon) as TextView
+
+        firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()
             .addOnSuccessListener { documents ->
                 if (documents != null) {
                     for (document in documents) {
-                        id = document.get("id")
-                        millName = document.get("millName")
-                        price = document.get("price")
-                        millAddress = document.get("address")
-                        contact = document.get("contact")
+                        userName = document.get("name").toString()
+                        userEmail = document.get("email").toString()
 
-                        intent.putExtra("UpdateTenderId", id.toString())
-                        intent.putExtra("UpdateTenderMillName", millName.toString())
-                        intent.putExtra("UpdateTenderPrice", price.toString())
-                        intent.putExtra("UpdateTenderAddress", millAddress.toString())
-                        intent.putExtra("UpdateTenderContact", contact.toString())
+                        textViewName.setText(userName)
+                        textViewEmail.setText(userEmail)
+                        textviewIcon.setText(userName!!.get(0).toUpperCase().toString())
 
-                        applicationContext.startActivity(intent)
                     }
                 } else {
-                    Log.d(TAG, "No such document")
+                    Log.d(TAG, "Error Fetching Details")
                 }
             }
             .addOnFailureListener { exception ->

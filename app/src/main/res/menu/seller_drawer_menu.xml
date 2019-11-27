@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_tender"
+            android:icon="@drawable/ic_tender_black_24dp"
+            android:title="@string/title_tender" />
+
+        <item android:id="@+id/nav_resale"
+            android:icon="@drawable/ic_resale_black_24dp"
+            android:title="@string/title_resale" />
+
+        <item android:id="@+id/nav_order"
+            android:icon="@drawable/ic_order_pc_24dp"
+            android:title="@string/title_orders" />
+
+        <item android:id="@+id/updatePrice"
+            android:icon="@drawable/ic_rupee_symbol"
+            android:title="@string/update_price" />
+
+        <item android:id="@+id/updateProfile"
+            android:icon="@drawable/ic_edit_black_24dp"
+            android:title="@string/edit_profile" />
+
+        <item android:id="@+id/contactUs"
+            android:icon="@drawable/ic_contact_us"
+            android:title="@string/contact_us" />
+
+        <item android:id="@+id/logout"
+            android:icon="@drawable/ic_logout_to_app_white_24dp"
+            android:title="@string/logout" />
+    </group>
+
+</menu>

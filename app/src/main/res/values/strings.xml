@@ -11,6 +11,7 @@
     <string name="tab_text_2">Resale</string>
     <string name="tab_text_3">Orders</string>
     <string name="price">Price</string>
+    <string name="update_price">Update Price</string>
     <string name="quantity">Quantity</string>
     <string name="mill_name">Mill Name</string>
     <string name="edit">Edit</string>
