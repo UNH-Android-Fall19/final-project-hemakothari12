@@ -6,14 +6,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sugarbroker.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_contact_us.*
 
-
 class ContactUsActivity : AppCompatActivity() {
+
+    private var sendButton: FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_us)
+
+
 
         setUpToolbar()
 
@@ -28,14 +32,6 @@ class ContactUsActivity : AppCompatActivity() {
         }
 
         emailAdmin.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_SENDTO)
-//            intent.data = Uri.parse("mailto:" + “hema.kothari12@gmail.com”)
-//            i.putExtra(Intent.EXTRA_EMAIL, new String[]{ "prasana91@gmail.com" });
-//            intent.putExtra(Intent.EXTRA_SUBJECT, "")
-//            if (intent.resolveActivity(packageManager) != null) {
-//                startActivity(intent)
-//            }
-
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.type = "text/html"
             intent.data = Uri.parse("mailto:")
@@ -47,6 +43,7 @@ class ContactUsActivity : AppCompatActivity() {
             }
 //            startActivity(Intent.createChooser(intent, "Send Email"))
         }
+
     }
 
     private fun setUpToolbar() {

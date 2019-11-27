@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:minHeight="50dp"
-            app:title="@string/order_detail"
+            app:title="@string/contact_us"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>
@@ -42,7 +42,7 @@
                 android:layout_marginTop="60dp">
 
                 <TextView
-                    android:id="@+id/companyname_textview"
+                    android:id="@+id/heading_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/contact_us"
@@ -64,69 +64,122 @@
                     android:src="@drawable/companylogo"
                     android:contentDescription="@string/company_logo" />
 
-                <ImageView
-                    android:id="@+id/callAdmin"
+                <TextView
+                    android:id="@+id/companyname_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="150dp"
-                    android:paddingLeft="40dp"
-                    android:src="@drawable/ic_phone_white_24dp" />
-
-                <TextView
-                    android:id="@+id/call_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="150dp"
-                    android:paddingLeft="70dp"
+                    android:paddingLeft="80dp"
                     android:textColor="@color/white"
-                    android:text="@string/phone" />
-
-                <TextView
-                    android:id="@+id/adminCall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="150dp"
-                    android:paddingLeft="140dp"
-                    android:textColor="@color/white"
-                    android:text="+91 9422003575" />
-
-                <ImageView
-                    android:id="@+id/emailAdmin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="190dp"
-                    android:paddingLeft="40dp"
-                    android:src="@drawable/ic_email_white_24dp" />
-
-                <TextView
-                    android:id="@+id/email_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="190dp"
-                    android:paddingLeft="70dp"
-                    android:textColor="@color/white"
-                    android:text="@string/email" />
-
-                <TextView
-                    android:id="@+id/adminEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="190dp"
-                    android:paddingLeft="140dp"
-                    android:textColor="@color/white"
-                    android:text="jitendrarkothari@gmail.com" />
-
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:text="Jitendra R Kothari" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="200dp"
+                    android:paddingTop="180dp"
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/call_cv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
+                        app:contentPaddingTop="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/callAdmin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:paddingLeft="20dp"
+                                    android:src="@drawable/ic_phone_blue_24dp" />
+
+                                <TextView
+                                    android:id="@+id/number_textview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="40dp"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="20dp"
+                                    android:text="(942)200-3575" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/numbertext_textview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="90dp"
+                                android:textColor="@android:color/black"
+                                android:text="Mobile" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/call2_cv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="10dp"
+                        app:contentPaddingTop="5dp"
+                        app:contentPaddingBottom="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingRight="15dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/number2_textview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="80dp"
+                                    android:text="+912024270525"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="20dp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/numbertext2_textview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="90dp"
+                                android:text="Office"
+                                android:textColor="@android:color/black" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/email_cv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         app:contentPaddingTop="15dp"
                         app:contentPaddingRight="15dp"
                         app:contentPaddingLeft="15dp"
@@ -138,81 +191,98 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                app:boxCornerRadiusTopStart="10dp"
-                                app:boxCornerRadiusBottomEnd="10dp"
-                                app:boxCornerRadiusBottomStart="10dp"
-                                app:boxCornerRadiusTopEnd="10dp"
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColorHint="@color/colorPrimary"
-                                app:boxStrokeColor="@color/colorPrimary"
-                                android:layout_marginTop="10dp"
-                                android:theme="@style/TextInputLayoutStyle"
-                                android:hint="@string/name">
+                                android:orientation="horizontal">
 
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/name_textview"
-                                    android:layout_width="match_parent"
+                                <ImageView
+                                    android:id="@+id/emailAdmin"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:inputType="textPersonName"
-                                    android:drawablePadding="5dp"
-                                    android:drawableTint="@color/colorAccent"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="18sp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
+                                    android:layout_marginTop="10dp"
+                                    android:paddingLeft="20dp"
+                                    android:src="@drawable/ic_email_black_24dp" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                app:boxCornerRadiusTopStart="10dp"
-                                app:boxCornerRadiusBottomEnd="10dp"
-                                app:boxCornerRadiusBottomStart="10dp"
-                                app:boxCornerRadiusTopEnd="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textColorHint="@color/colorPrimary"
-                                app:boxStrokeColor="@color/colorPrimary"
-                                android:layout_marginTop="10dp"
-                                android:theme="@style/TextInputLayoutStyle"
-                                android:hint="@string/phone">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/phoneUser_textview"
-                                    android:layout_width="match_parent"
+                                <TextView
+                                    android:id="@+id/email_textview"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:inputType="number"
-                                    android:drawablePadding="5dp"
-                                    android:drawableTint="@color/colorAccent"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="18sp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
+                                    android:paddingLeft="40dp"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="20dp"
+                                    android:text="jitendrarkothari@gmail.com" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                app:boxCornerRadiusTopStart="10dp"
-                                app:boxCornerRadiusBottomEnd="10dp"
-                                app:boxCornerRadiusBottomStart="10dp"
-                                app:boxCornerRadiusTopEnd="10dp"
-                                android:layout_width="match_parent"
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/emailtext_textview"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColorHint="@color/colorPrimary"
-                                app:boxStrokeColor="@color/colorPrimary"
-                                android:layout_marginTop="10dp"
-                                android:theme="@style/TextInputLayoutStyle"
-                                android:hint="@string/message">
+                                android:paddingLeft="90dp"
+                                android:textColor="@android:color/black"
+                                android:text="Personal" />
 
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/message_textview"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="150dp"
-                                    android:inputType="textMultiLine"
-                                    android:drawablePadding="5dp"
-                                    android:drawableTint="@color/colorAccent"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textAlignment="textStart"
-                                    android:textSize="18sp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/location_cv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:contentPaddingTop="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingBottom="15dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/locationAdmin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:paddingLeft="20dp"
+                                    android:src="@drawable/ic_location_on_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/location_textview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="40dp"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="20dp"
+                                    android:text="Market Yard Gultekdi" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/location2_textview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="85dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="20dp"
+                                android:text="Pune, Maharashtra" />
+
+                            <TextView
+                                android:id="@+id/locationtext_textview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="90dp"
+                                android:textColor="@android:color/black"
+                                android:text="Office" />
 
                         </LinearLayout>
 
