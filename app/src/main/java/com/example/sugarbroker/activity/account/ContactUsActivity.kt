@@ -1,25 +1,33 @@
 package com.example.sugarbroker.activity.account
 
 import android.content.Intent
+import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sugarbroker.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_contact_us.*
 
-class ContactUsActivity : AppCompatActivity() {
+class ContactUsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private var sendButton: FloatingActionButton? = null
+    private lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_us)
 
-
-
         setUpToolbar()
+
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as? SupportMapFragment
+        mapFragment?.getMapAsync(this)
 
         callAdmin.setOnClickListener {
             val mobNum = "+919422003575"
@@ -44,6 +52,23 @@ class ContactUsActivity : AppCompatActivity() {
 //            startActivity(Intent.createChooser(intent, "Send Email"))
         }
 
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+
+        //These coordinates represent the latitude and longitude of the Googleplex.
+        val zoomLevel = 4f
+
+            val address = "126 Nana Peth, Kamal Mohan Society, Pune - 411002"
+
+        val add = Geocoder(this).getFromLocationName(address!!, 5)
+
+        val location = add[0]
+        val homeLatLng = LatLng(location.getLatitude(), location.getLongitude())
+
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
+        map.addMarker(MarkerOptions().position(homeLatLng).title("JituPune"))
     }
 
     private fun setUpToolbar() {
