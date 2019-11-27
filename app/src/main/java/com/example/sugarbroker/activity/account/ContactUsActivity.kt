@@ -30,28 +30,48 @@ class ContactUsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment?.getMapAsync(this)
 
         callAdmin.setOnClickListener {
-            val mobNum = "+919422003575"
-            val phoneIntent = Intent(
-                Intent.ACTION_DIAL, Uri.fromParts(
-                    "tel", mobNum, null
-                )
-            )
-            startActivity(phoneIntent)
+            callAdmin()
         }
 
         emailAdmin.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SENDTO)
-            intent.type = "text/html"
-            intent.data = Uri.parse("mailto:")
-            intent.putExtra(Intent.EXTRA_EMAIL, Array(1) { "jitendrarkothari@gmail.com" })
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Inquire about sugar price")
-            intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.")
-            if (intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
-            }
-//            startActivity(Intent.createChooser(intent, "Send Email"))
+            sendEmail()
         }
 
+        call_cv.setOnClickListener { callAdmin() }
+        call2_cv.setOnClickListener { callAdminAlternate() }
+        email_cv.setOnClickListener { sendEmail() }
+    }
+
+    private fun callAdmin() {
+        val mobNum = "+919422003575"
+        val phoneIntent = Intent(
+            Intent.ACTION_DIAL, Uri.fromParts(
+                "tel", mobNum, null
+            )
+        )
+        startActivity(phoneIntent)
+    }
+
+    private fun callAdminAlternate() {
+        val mobNum = "+912024270525"
+        val phoneIntent = Intent(
+            Intent.ACTION_DIAL, Uri.fromParts(
+                "tel", mobNum, null
+            )
+        )
+        startActivity(phoneIntent)
+    }
+
+    private fun sendEmail() {
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.type = "text/html"
+        intent.data = Uri.parse("mailto:")
+        intent.putExtra(Intent.EXTRA_EMAIL, Array(1) { "jitendrarkothari@gmail.com" })
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Inquire about sugar price")
+        intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.")
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
