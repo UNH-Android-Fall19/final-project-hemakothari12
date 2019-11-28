@@ -19,12 +19,17 @@
         android:roundIcon="@drawable/logomini"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.account.ContactUsActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA-d9Gv_H5AOlQofgeRWPbmegUR-OwNt9k" />
+
+        <activity android:name=".activity.account.ContactUsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
 
         <activity
             android:name=".activity.resale.AddResaleActivity"

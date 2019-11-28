@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
 import com.example.sugarbroker.adapter.UserResaleRecyclerViewAdapter
 import com.example.sugarbroker.model.Resale
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -39,6 +42,11 @@ class UserResaleFragment : Fragment(), SearchView.OnQueryTextListener {
         firestoreDB = FirebaseFirestore.getInstance()
 
         root = inflater.inflate(R.layout.fragment_user_resale, container, false)
+
+        MobileAds.initialize(context,getString(R.string.app_unit_id))
+        val mAdView = root!!.findViewById<View>(R.id.adView) as AdView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         editSearchUser = root!!.findViewById(R.id.searchResaleUser_sv) as SearchView
 

@@ -19,6 +19,9 @@ import com.example.sugarbroker.adapter.UserResaleRecyclerViewAdapter
 import com.example.sugarbroker.adapter.UserTenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Resale
 import com.example.sugarbroker.model.Tender
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -45,6 +48,11 @@ class SellerUpdatePriceFragment : Fragment(), SearchView.OnQueryTextListener {
         firestoreDB = FirebaseFirestore.getInstance()
 
         root = inflater.inflate(R.layout.fragment_seller_update_price, container, false)
+
+        MobileAds.initialize(context,getString(R.string.app_unit_id))
+        val mAdView = root!!.findViewById<View>(R.id.adView) as AdView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         loadTenderList()
         loadResaleList()

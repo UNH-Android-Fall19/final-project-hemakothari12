@@ -1,6 +1,5 @@
 package com.example.sugarbroker.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,10 +12,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sugarbroker.R
-import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.adapter.UserTenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Tender
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -42,6 +42,11 @@ class UserTenderFragment : Fragment(), SearchView.OnQueryTextListener {
         firestoreDB = FirebaseFirestore.getInstance()
 
         root = inflater.inflate(R.layout.fragment_user_tender, container, false)
+
+        MobileAds.initialize(context,getString(R.string.app_unit_id))
+        val mAdView = root!!.findViewById<View>(R.id.adView) as AdView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         editSearchUser = root!!.findViewById(R.id.searchTenderUser_sv) as SearchView
 
