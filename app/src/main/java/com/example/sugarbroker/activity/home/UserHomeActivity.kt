@@ -18,6 +18,7 @@ import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.userEmail
 import com.example.sugarbroker.activity.userName
 import com.example.sugarbroker.activity.users.AddUserActivity
+import com.example.sugarbroker.fragment.SettingsFragment
 import com.example.sugarbroker.fragment.UserOrdersFragment
 import com.example.sugarbroker.fragment.UserResaleFragment
 import com.example.sugarbroker.fragment.UserTenderFragment
@@ -44,8 +45,6 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home)
-
-        subscribeToPushNotifications()
 
         firestoreDB = FirebaseFirestore.getInstance()
 
@@ -88,8 +87,8 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 R.id.contactUs -> {
                     contactUs()
                 }
-                R.id.notification -> {
-//                    sendNotification()
+                R.id.settings -> {
+                    replaceFragment(SettingsFragment(), "Settings")
                 }
                 R.id.logout -> {
                     performLogout()
@@ -140,6 +139,11 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private fun replaceFragment(fragment: Fragment, screen: String) {
         val searchIconClear = findViewById<View>(R.id.searchIcon) as SearchView
         searchIconClear.setQuery("", false)
+        if (screen == "Settings") {
+            searchIconClear.visibility = View.GONE
+        } else {
+            searchIconClear.visibility = View.VISIBLE
+        }
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment, screen)
         fragmentTransaction.addToBackStack(screen)
@@ -238,18 +242,6 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             }
     }
 
-    //this enables push notification to sugarbroker topic
-    private fun subscribeToPushNotifications(){
-        FirebaseMessaging.getInstance().subscribeToTopic("sugarbroker")
-            .addOnCompleteListener { task ->
-            }
-    }
 
-    //this disables push notification to sugarbroker topic.
-    private fun unsubscribeToPushNotifications(){
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("sugarbroker")
-            .addOnCompleteListener { task ->
-            }
-    }
 
 }

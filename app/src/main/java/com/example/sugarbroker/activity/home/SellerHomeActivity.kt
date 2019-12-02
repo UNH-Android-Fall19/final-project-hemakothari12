@@ -154,7 +154,7 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private fun replaceFragment(fragment: Fragment, screen: String) {
         val searchIconClear = findViewById<View>(R.id.searchIcon) as SearchView
         searchIconClear.setQuery("", false)
-        if (screen == "SellerUpdatePrice") {
+        if (screen == "SellerUpdatePrice" || screen == "Settings") {
             searchIconClear.visibility = View.GONE
         } else {
             searchIconClear.visibility = View.VISIBLE
