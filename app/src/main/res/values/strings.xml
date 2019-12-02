@@ -55,7 +55,9 @@
     <string name="message">Message</string>
     <string name="app_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="new_tender_added">New Tender Added</string>
+    <string name="new_resale_added">New Resale Added</string>
     <string name="tender_name">Tender Name</string>
+    <string name="resale_name">Resale Name</string>
     <string name="push_notification">Push Notification</string>
     <string name="settings">Settings</string>
 

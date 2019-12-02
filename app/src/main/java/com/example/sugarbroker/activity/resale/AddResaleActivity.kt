@@ -14,7 +14,10 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.RequestNotificaton
+import com.example.sugarbroker.interfaces.ApiInterface
 import com.example.sugarbroker.model.Resale
+import com.example.sugarbroker.model.SendNotificationModel
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,6 +27,12 @@ import com.mikelau.croperino.Croperino
 import com.mikelau.croperino.CroperinoConfig
 import com.mikelau.croperino.CroperinoFileUtil
 import kotlinx.android.synthetic.main.activity_add_resale.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -34,6 +43,8 @@ class AddResaleActivity : AppCompatActivity() {
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""
     var toolbarTitle: String? = "Add Resale Details"
+    val BASE_URL = "https://fcm.googleapis.com/"
+    private var retrofit: Retrofit? = null
 
     lateinit var storage: FirebaseStorage
 
@@ -157,6 +168,7 @@ class AddResaleActivity : AppCompatActivity() {
             .addOnSuccessListener { documentReference ->
                 Log.e(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
                 Toast.makeText(applicationContext, "Resale has been added!", Toast.LENGTH_SHORT).show()
+                sendNotification(millName, price)
                 firestoreDB!!.collection("resale").document(documentReference.id).update("id", documentReference.id)
                     .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
                     .addOnFailureListener { e -> Log.w(TAG, "Error updating ID", e) }
@@ -245,6 +257,56 @@ class AddResaleActivity : AppCompatActivity() {
                 super.onBackPressed()
             else
                 supportFragmentManager.popBackStack()
+        })
+    }
+
+    fun getClient(): Retrofit {
+        if (retrofit == null) {
+            retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
+        return retrofit!!
+    }
+
+    fun sendNotification(millName: String, price: String) {
+        val sendNotificationModel = SendNotificationModel(
+            "" + millName.toUpperCase(),
+            "" + resources.getString(R.string.new_resale_added)
+        )
+        val requestNotificaton = RequestNotificaton()
+        requestNotificaton.sendNotificationModel = sendNotificationModel
+        var title = resources.getString(R.string.new_resale_added)
+        var subTitle =
+            resources.getString(R.string.resale_name) + " = " + millName + "\n" + resources.getString(
+                R.string.price
+            ) + " = " + price + "\n"
+
+        var postJsonData = "{\n" +
+                " \"to\" : \"/topics/sugarbroker\",\n" +
+                " \"collapse_key\" : \"type_a\",\n" +
+                " \"notification\" : {\n" +
+                "     \"body\" : \"" + subTitle + "\",\n" +
+                "     \"title\": \"" + title + "\"\n" +
+                " }\n" +
+                "}"
+
+        var apiService = getClient().create(ApiInterface::class.java)
+        var body =
+            RequestBody.create(MediaType.parse("application/json"), postJsonData)
+        val responseBodyCall = apiService.sendChatNotification(body)
+        responseBodyCall.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(
+                call: retrofit2.Call<ResponseBody>,
+                response: retrofit2.Response<ResponseBody>
+            ) {
+            }
+            override fun onFailure(
+                call: retrofit2.Call<ResponseBody>,
+                t: Throwable
+            ) {
+            }
         })
     }
 
