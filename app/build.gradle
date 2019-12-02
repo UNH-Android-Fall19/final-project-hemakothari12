@@ -74,6 +74,9 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0-alpha3'
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
 
+    //Fingerprint
+    implementation 'androidx.biometric:biometric:1.0.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
