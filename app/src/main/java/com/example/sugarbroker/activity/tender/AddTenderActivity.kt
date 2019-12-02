@@ -272,7 +272,7 @@ class AddTenderActivity : AppCompatActivity() {
     }
 
     //this will send notification, when new tender is added
-    // user will receive notification if subscribed to news topic, or wont receive if he is unsubscribed or not subscribed at all.
+    // user will receive notification if subscribed to sugarbroker topic, or wont receive if he is unsubscribed or not subscribed at all.
     fun sendNotification(millName: String, price: String) {
         val sendNotificationModel = SendNotificationModel(
             "" + millName.toUpperCase(),
@@ -287,7 +287,7 @@ class AddTenderActivity : AppCompatActivity() {
         ) + " = " + price + "\n"
 
         var postJsonData = "{\n" +
-                " \"to\" : \"/topics/news\",\n" +
+                " \"to\" : \"/topics/sugarbroker\",\n" +
                 " \"collapse_key\" : \"type_a\",\n" +
                 " \"notification\" : {\n" +
                 "     \"body\" : \"" + subTitle + "\",\n" +
@@ -312,51 +312,5 @@ class AddTenderActivity : AppCompatActivity() {
             }
         })
     }
-
-//    fun sendNotification1(millName: String, price: String) {
-//
-//        val sendNotificationModel = SendNotificationModel(
-//            "" + millName.toUpperCase(),
-//            "" + resources.getString(R.string.new_tender_added)
-//        )
-//        val requestNotificaton = RequestNotificaton()
-//        requestNotificaton.sendNotificationModel = sendNotificationModel
-//        var title = resources.getString(R.string.new_tender_added)
-//        var subTitle =
-//            resources.getString(R.string.tender_name) + " = " + millName + "\n" + resources.getString(
-//                R.string.price
-//            ) + " = " + price + "\n"
-//
-//        var postJsonData = "{\n" +
-//                " \"to\" : \"/topics/vproperty\",\n" +
-//                " \"collapse_key\" : \"type_a\",\n" +
-//                " \"notification\" : {\n" +
-//                "     \"body\" : \"" + subTitle + "\",\n" +
-//                "     \"title\": \"" + title + "\"\n" +
-//                " },\n" +
-//                " \"data\" : {\n" +
-//                "     \"body\" : \"Body of Your Notification in Data\",\n" +
-//                "     \"title\": \"Title of Your Notification in Title\",\n" +
-//                "     \"key_1\" : \"Value for key_1\",\n" +
-//                "     \"key_2\" : \"Value for key_2\"\n" +
-//                " }\n" +
-//                "}"
-//
-//        var apiService = getClient().create(ApiInterface::class.java)
-//        var body = RequestBody.create(MediaType.parse("application/json"), postJsonData)
-//        val responseBodyCall = apiService.sendChatNotification(body)
-//        responseBodyCall.enqueue(object : Callback<ResponseBody> {
-//            override fun onResponse(
-//                call: retrofit2.Call<ResponseBody>,
-//                response: retrofit2.Response<ResponseBody>
-//            ) {
-//            }
-//            override fun onFailure(
-//                call: retrofit2.Call<ResponseBody>,
-//                t: Throwable
-//            ) {
-//            }
-//        })
-//    }
 
 }
