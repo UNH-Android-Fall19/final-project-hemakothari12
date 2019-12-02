@@ -73,6 +73,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0-alpha3'
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+
+
+
 
     //Fingerprint
     implementation 'androidx.biometric:biometric:1.0.0'

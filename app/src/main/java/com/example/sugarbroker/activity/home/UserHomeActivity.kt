@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.RequestNotificaton
 import com.example.sugarbroker.activity.account.ContactUsActivity
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.userEmail
@@ -21,10 +22,19 @@ import com.example.sugarbroker.activity.users.AddUserActivity
 import com.example.sugarbroker.fragment.UserOrdersFragment
 import com.example.sugarbroker.fragment.UserResaleFragment
 import com.example.sugarbroker.fragment.UserTenderFragment
+import com.example.sugarbroker.interfaces.ApiInterface
+import com.example.sugarbroker.model.SendNotificationModel
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_user_home.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
@@ -39,10 +49,14 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     internal var type: Any? = null
     private lateinit var mDrawerLayout: DrawerLayout
     lateinit var searchIcon1: SearchView
+//    val BASE_URL = "https://fcm.googleapis.com/"
+//    private var retrofit: Retrofit? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home)
+
+        subscribeToPushNotifications()
 
         firestoreDB = FirebaseFirestore.getInstance()
 
@@ -85,6 +99,9 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 R.id.contactUs -> {
                     contactUs()
                 }
+                R.id.notification -> {
+//                    sendNotification()
+                }
                 R.id.logout -> {
                     performLogout()
                 }
@@ -101,6 +118,16 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         searchIcon1.setOnQueryTextListener(this)
 
     }
+
+//    fun getClient(): Retrofit {
+//        if (retrofit == null) {
+//            retrofit = Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build()
+//        }
+//        return retrofit!!
+//    }
 
     override fun onQueryTextChange(newText: String): Boolean {
 
@@ -231,4 +258,46 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 Log.d(TAG, "get failed with ", exception)
             }
     }
+
+    private fun subscribeToPushNotifications(){
+        FirebaseMessaging.getInstance().subscribeToTopic("news")
+            .addOnCompleteListener { task ->
+            }
+    }
+
+//    fun sendNotification() {
+//        val sendNotificationModel = SendNotificationModel(
+//            "Body",
+//            "Title")
+//        val requestNotificaton = RequestNotificaton()
+//        requestNotificaton.sendNotificationModel = sendNotificationModel
+//        var title = "Title"
+//        var subTitle = "SubTitle"
+//
+//        var postJsonData = "{\n" +
+//                " \"to\" : \"/topics/news\",\n" +
+//                " \"collapse_key\" : \"type_a\",\n" +
+//                " \"notification\" : {\n" +
+//                "     \"body\" : \"" + subTitle + "\",\n" +
+//                "     \"title\": \"" + title + "\"\n" +
+//                " }\n" +
+//                "}"
+//
+//        var apiService = getClient().create(ApiInterface::class.java)
+//        var body =
+//            RequestBody.create(MediaType.parse("application/json"), postJsonData)
+//        val responseBodyCall = apiService.sendChatNotification(body)
+//        responseBodyCall.enqueue(object : Callback<ResponseBody> {
+//            override fun onResponse(
+//                call: retrofit2.Call<ResponseBody>,
+//                response: retrofit2.Response<ResponseBody>
+//            ) {
+//            }
+//            override fun onFailure(
+//                call: retrofit2.Call<ResponseBody>,
+//                t: Throwable
+//            ) {
+//            }
+//        })
+//    }
 }

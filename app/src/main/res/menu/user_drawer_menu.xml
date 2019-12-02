@@ -24,6 +24,10 @@
             android:icon="@drawable/ic_contact_us"
             android:title="@string/contact_us" />
 
+        <item android:id="@+id/notification"
+            android:icon="@drawable/ic_fingerprint_pc_24dp"
+            android:title="Send Notification" />
+
         <item android:id="@+id/logout"
             android:icon="@drawable/ic_logout_to_app_white_24dp"
             android:title="@string/logout" />
