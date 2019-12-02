@@ -20,10 +20,7 @@ import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.userEmail
 import com.example.sugarbroker.activity.userName
 import com.example.sugarbroker.activity.users.AddUserActivity
-import com.example.sugarbroker.fragment.SellerUpdatePriceFragment
-import com.example.sugarbroker.fragment.UserOrdersFragment
-import com.example.sugarbroker.fragment.UserResaleFragment
-import com.example.sugarbroker.fragment.UserTenderFragment
+import com.example.sugarbroker.fragment.*
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -40,7 +37,6 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     internal var address: Any? = null
     internal var phone: Any? = null
     internal var type: Any? = null
-    internal var LoggedInUserEmail: Any? = null
     private lateinit var mDrawerLayout: DrawerLayout
     lateinit var searchIcon1: SearchView
 
@@ -90,6 +86,9 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 R.id.updateProfile -> {
                     updateProfile()
                 }
+                R.id.settings -> {
+                    replaceFragment(SettingsFragment(), "Settings")
+                }
                 R.id.contactUs -> {
                     contactUs()
                 }
@@ -109,17 +108,6 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         searchIcon1 = findViewById<EditText>(R.id.searchIcon) as SearchView
         searchIcon1.setOnQueryTextListener(this)
-
-//        val bundle = intent.extras
-//        if (bundle != null) {
-//            LoggedInUserEmail = bundle.getString("LoggedInUserEmail")
-//        }
-//
-//        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-////        val viewPager: ViewPager = findViewById(R.id.view_pager)
-////        viewPager.adapter = sectionsPagerAdapter
-////        val tabs: TabLayout = findViewById(R.id.tabs)
-////        tabs.setupWithViewPager(viewPager)
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
@@ -227,39 +215,6 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 Log.d(TAG, "get failed with ", exception)
             }
     }
-
-//    private fun updatePrice(LoggedInUserEmail: Any) {
-//        Log.d("LoggedInUserEmail", "LoggedInUserEmail ${LoggedInUserEmail}")
-//
-//        val intent = Intent(applicationContext, AddTenderActivity::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//
-//        firestoreDB!!.collection("tender").whereEqualTo("contact", LoggedInUserEmail).get()
-//            .addOnSuccessListener { documents ->
-//                if (documents != null) {
-//                    for (document in documents) {
-//                        id = document.get("id")
-//                        millName = document.get("millName")
-//                        price = document.get("price")
-//                        millAddress = document.get("address")
-//                        contact = document.get("contact")
-//
-//                        intent.putExtra("UpdateTenderId", id.toString())
-//                        intent.putExtra("UpdateTenderMillName", millName.toString())
-//                        intent.putExtra("UpdateTenderPrice", price.toString())
-//                        intent.putExtra("UpdateTenderAddress", millAddress.toString())
-//                        intent.putExtra("UpdateTenderContact", contact.toString())
-//
-//                        applicationContext.startActivity(intent)
-//                    }
-//                } else {
-//                    Log.d(TAG, "No such document")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d(TAG, "get failed with ", exception)
-//            }
-//    }
 
     private fun setHeader() {
         val uid = FirebaseAuth.getInstance().uid
