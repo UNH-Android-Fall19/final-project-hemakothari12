@@ -13,27 +13,48 @@ import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.home.AdminHomeActivity
 import com.example.sugarbroker.activity.home.SellerHomeActivity
 import com.example.sugarbroker.activity.home.UserHomeActivity
+import com.example.sugarbroker.activity.userEmail
 import com.example.sugarbroker.activity.userType
+import com.example.sugarbroker.model.User
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
 
     private var progressBar: ProgressBar? = null
-    private var i = 0
-    private val handler = Handler()
+    lateinit var googleSignInClient: GoogleSignInClient
+    private val RC_SIGN_IN = 9001
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        auth = FirebaseAuth.getInstance()
         progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
         progressBar!!.visibility = View.GONE
 
         val createAccount = "Don't have an account? " + "<font><b>" + "Sign up" + "<b></font>"
         newuser_textview.setText(Html.fromHtml(createAccount))
+
+        val signIn = findViewById<View>(R.id.googleSignIn) as SignInButton
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        signIn.setOnClickListener { signInGoogle() }
 
         login_button.setOnClickListener {
             progressBar!!.visibility = View.VISIBLE
@@ -54,6 +75,108 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun signInGoogle() {
+        val signInIntent: Intent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+//            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account!!)
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Google sign in failed:( ${e}", Toast.LENGTH_LONG).show()
+                Log.d("Google sign in failed:(", "Google sign in failed:( ${e}")
+            }
+        }else {
+            Toast.makeText(this, "Problem in execution order :(", Toast.LENGTH_LONG).show()
+        }
+    }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == RC_SIGN_IN) {
+//            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+//            try {
+//                val account = task.getResult(ApiException::class.java)
+//                firebaseAuthWithGoogle(account!!)
+//            } catch (e: ApiException) {
+//                Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
+//            }
+////            handleResult (task)
+//        }else {
+//            Toast.makeText(this, "Problem in execution order :(", Toast.LENGTH_LONG).show()
+//        }
+//    }
+
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        Log.d("loginactivity", "firebaseAuthWithGoogle:" + acct.id!!)
+        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        auth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                Log.d("LoginActivity", "signInWithCredential:success")
+                saveUserDetailsToFirebase(acct!!)
+                userType = "User"
+                userEmail = acct.email
+                val intent = Intent(this, UserHomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+
+            } else {
+                Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+//    private fun handleResult (completedTask: Task<GoogleSignInAccount>) {
+//        try {
+//            val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
+//            saveUserDetailsToFirebase(account!!)
+//            Log.d("Main", "Successfully created user with uid: ")
+//
+//            val intent = Intent(this, UserHomeActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(intent)
+//
+//        } catch (e: ApiException) {
+//            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+//        }
+//    }
+
+    private fun saveUserDetailsToFirebase(account: GoogleSignInAccount) {
+
+        //Firestore database
+
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+
+        val db = FirebaseFirestore.getInstance()
+
+        val user = User(
+            uid,
+            account.displayName!!,
+            account.email!!,
+            "",
+            "",
+            "",
+            "User"
+        )
+
+        //Add document with specific ID
+        db.collection("users")
+            .document(uid)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d("Regi", "DocumentSnapshot added with ID")
+            }
+            .addOnFailureListener { e ->
+                Log.w("Regi", "Error adding document", e)
+            }
     }
 
     private fun performLogin() {

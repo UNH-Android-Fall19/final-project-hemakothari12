@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.Toast
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.home.UserHomeActivity
+import com.example.sugarbroker.activity.userEmail
+import com.example.sugarbroker.activity.userType
 import com.example.sugarbroker.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -57,7 +59,8 @@ class RegisterActivity : AppCompatActivity() {
                 //else if successful
                 saveUserDetailsToFirebase()
                 Log.d("Main", "Successfully created user with uid: ${it?.result?.user?.uid} ")
-
+                userType = "User"
+                userEmail = email
                 val intent = Intent(this, UserHomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
