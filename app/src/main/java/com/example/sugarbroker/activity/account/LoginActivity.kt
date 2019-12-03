@@ -3,7 +3,6 @@ package com.example.sugarbroker.activity.account
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.text.Html
 import android.util.Log
 import android.view.View
@@ -21,11 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -85,69 +82,71 @@ class LoginActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
-//            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account!!)
-            } catch (e: ApiException) {
-                Toast.makeText(this, "Google sign in failed:( ${e}", Toast.LENGTH_LONG).show()
-                Log.d("Google sign in failed:(", "Google sign in failed:( ${e}")
-            }
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                try {
+                    val account = task.getResult(ApiException::class.java)
+                    firebaseAuthWithGoogle(account!!)
+                } catch (e: ApiException) {
+                    Toast.makeText(this, "Google sign in failed:( ${e}", Toast.LENGTH_LONG).show()
+                    Log.d("Google sign in failed:(", "Google sign in failed:( ${e}")
+                }
         }else {
             Toast.makeText(this, "Problem in execution order :(", Toast.LENGTH_LONG).show()
         }
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == RC_SIGN_IN) {
-//            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-//            try {
-//                val account = task.getResult(ApiException::class.java)
-//                firebaseAuthWithGoogle(account!!)
-//            } catch (e: ApiException) {
-//                Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
-//            }
-////            handleResult (task)
-//        }else {
-//            Toast.makeText(this, "Problem in execution order :(", Toast.LENGTH_LONG).show()
-//        }
-//    }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.d("loginactivity", "firebaseAuthWithGoogle:" + acct.id!!)
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                Log.d("LoginActivity", "signInWithCredential:success")
-                saveUserDetailsToFirebase(acct!!)
-                userType = "User"
-                userEmail = acct.email
-                val intent = Intent(this, UserHomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                val db = FirebaseFirestore.getInstance()
+                val uid = FirebaseAuth.getInstance().uid ?: ""
+                Log.d("uid is", "uid is ${uid}")
+                val documentRef = db.collection("users").document(uid)
+                documentRef.get()
+                    .addOnSuccessListener { document ->
+                        if (document != null) {
+                            val value = document.getString("type")
+                            Log.d("Document", "DocumentSnapshot data: ${document.data}")
 
+                            if (value == "Admin") {
+                                Log.d("User Logged", "User Logged in is Admin")
+                                userType = "Admin"
+                                progressBar!!.visibility = View.GONE
+                                intent = Intent(applicationContext, AdminHomeActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
+                            } else if (value == "Seller") {
+                                Log.d("User Logged", "User Logged in is Seller")
+                                userType = "Seller"
+                                progressBar!!.visibility = View.GONE
+                                intent = Intent(applicationContext, SellerHomeActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                intent.putExtra("LoggedInUserEmail",login_email_edittext.text.toString())
+                                startActivity(intent)
+                            } else {
+                                Log.d("User Logged", "User Logged in is User")
+                                saveUserDetailsToFirebase(acct!!)
+                                userType = "User"
+                                userEmail = acct.email
+                                progressBar!!.visibility = View.GONE
+                                intent = Intent(applicationContext, UserHomeActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
+                            }
+
+                        } else {
+                            Log.d("LoginActivity", "No document found")
+
+                            Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                        }
+                    }
             } else {
                 Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
             }
         }
     }
-
-//    private fun handleResult (completedTask: Task<GoogleSignInAccount>) {
-//        try {
-//            val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
-//            saveUserDetailsToFirebase(account!!)
-//            Log.d("Main", "Successfully created user with uid: ")
-//
-//            val intent = Intent(this, UserHomeActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            startActivity(intent)
-//
-//        } catch (e: ApiException) {
-//            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
-//        }
-//    }
 
     private fun saveUserDetailsToFirebase(account: GoogleSignInAccount) {
 
