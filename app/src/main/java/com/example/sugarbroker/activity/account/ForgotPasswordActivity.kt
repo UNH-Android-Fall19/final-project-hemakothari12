@@ -43,7 +43,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     }
                 }
                     .addOnFailureListener {
-                        Log.d("Main", "Failed to send email: ${it.message}")
                         Toast.makeText(this, "Failed to send Email: ${it.message}", Toast.LENGTH_SHORT).show()
                     }
             }

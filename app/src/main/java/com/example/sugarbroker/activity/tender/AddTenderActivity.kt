@@ -60,8 +60,6 @@ class AddTenderActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateTenderId")
-            Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
-
             mill_name_edittext.setText(bundle.getString("UpdateTenderMillName"))
             price_edittext.setText(bundle.getString("UpdateTenderPrice"))
             milladdress_edittext.setText(bundle.getString("UpdateTenderAddress"))

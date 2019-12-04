@@ -59,8 +59,6 @@ class AddResaleActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateResaleId")
-            Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
-
             mill_name_edittext.setText(bundle.getString("UpdateResaleMillName"))
             price_edittext.setText(bundle.getString("UpdateResalePrice"))
             milladdress_edittext.setText(bundle.getString("UpdateResaleAddress"))

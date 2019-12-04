@@ -27,8 +27,6 @@ class AddOrderActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateOrderId")
-            Toast.makeText(applicationContext, "ID ${id}", Toast.LENGTH_SHORT).show()
-
             mill_name_edittext.setText(bundle.getString("UpdateOrderMillName"))
             price_edittext.setText(bundle.getString("UpdateOrderPrice"))
             quantity_edittext.setText(bundle.getString("UpdateOrderQuantity"))
