@@ -44,8 +44,6 @@ class ReviewTenderActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateTenderId")
-            Log.d(TAG, "id is ${id}")
-
             mill_name_textview.setText(bundle.getString("UpdateTenderMillName"))
             price_textview.setText(bundle.getString("UpdateTenderPrice"))
             quantity_textview.setText(bundle.getString("UpdateTenderQuantity"))
@@ -65,10 +63,6 @@ class ReviewTenderActivity : AppCompatActivity() {
             val millName = mill_name_textview.text.toString()
             val currentUser = FirebaseAuth.getInstance().currentUser
             val uid = FirebaseAuth.getInstance().uid
-
-
-            Log.d(TAG, "currentUser ${currentUser}")
-            Log.d(TAG, "uid ${uid}")
 
             firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()
                 .addOnSuccessListener { documents ->

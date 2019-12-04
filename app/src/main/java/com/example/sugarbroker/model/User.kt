@@ -9,8 +9,7 @@ class User {
     var phone: String? = null
     var type: String? = null
 
-    constructor() {}
-
+    // constructor for Add New
     constructor(uid: String, name: String, email: String, password: String, address: String, phone: String, type: String) {
         this.uid = uid
         this.name = name
@@ -21,6 +20,7 @@ class User {
         this.type = type
     }
 
+    // constructor for Update
     constructor(name: String, email: String, password: String, address: String, phone: String, type: String) {
         this.name = name
         this.email = email

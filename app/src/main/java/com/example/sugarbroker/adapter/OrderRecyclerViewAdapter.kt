@@ -2,7 +2,6 @@ package com.example.sugarbroker.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,6 @@ class OrderRecyclerViewAdapter(private val orderList: MutableList<Orders>, priva
     }
 
     override fun getItemCount(): Int {
-        Log.d("Size", "Size is ${orderList.size}")
         return orderList.size
     }
 

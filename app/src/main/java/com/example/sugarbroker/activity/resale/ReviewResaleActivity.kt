@@ -44,8 +44,6 @@ class ReviewResaleActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateResaleId")
-            Log.d(TAG, "id is ${id}")
-
             mill_name_textview.setText(bundle.getString("UpdateResaleMillName"))
             price_textview.setText(bundle.getString("UpdateResalePrice"))
             quantity_textview.setText(bundle.getString("UpdateResaleQuantity"))
@@ -63,12 +61,7 @@ class ReviewResaleActivity : AppCompatActivity() {
 
         confirm_button.setOnClickListener {
             val millName = mill_name_textview.text.toString()
-            val currentUser = FirebaseAuth.getInstance().currentUser
             val uid = FirebaseAuth.getInstance().uid
-
-
-            Log.d(TAG, "currentUser ${currentUser}")
-            Log.d(TAG, "uid ${uid}")
 
             firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()
                 .addOnSuccessListener { documents ->
@@ -87,9 +80,6 @@ class ReviewResaleActivity : AppCompatActivity() {
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "get failed with ", exception)
                 }
-            Log.d(TAG, "Name: ${name}")
-            Log.d(TAG, "Address: ${address}")
-
 
             finish()
         }

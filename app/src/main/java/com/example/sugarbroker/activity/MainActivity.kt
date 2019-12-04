@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val TAG = "MainActivity"
     lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,16 +50,15 @@ class MainActivity : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         val value = document.getString("type")
-                        Log.d("Document", "DocumentSnapshot data: ${document.data}")
 
                         if (value == "Admin") {
-                            Log.d("User Logged", "User Logged in is Admin")
+                            Log.d(TAG, "User Logged in is Admin")
                             intent = Intent(applicationContext, AdminHomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else if (value == "Seller") {
-                            Log.d("User Logged", "User Logged in is Seller")
+                            Log.d(TAG, "User Logged in is Seller")
                             userType = "Seller"
                             intent = Intent(applicationContext, SellerHomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
-                            Log.d("User Logged", "User Logged in is User")
+                            Log.d(TAG, "User Logged in is User")
                             userType = "User"
                             intent = Intent(applicationContext, UserHomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -76,13 +76,12 @@ class MainActivity : AppCompatActivity() {
                         }
 
                     } else {
-                        Log.d("LoginActivity", "No document found")
-
+                        Log.d(TAG, "No document found")
                         Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.d("LoginActivity", "Failed to fetch document: ", exception)
+                    Log.d(TAG, "Failed to fetch document: ", exception)
 
                     Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                 }

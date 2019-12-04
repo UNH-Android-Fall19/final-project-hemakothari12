@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.account.LoginActivity
 import com.example.sugarbroker.activity.callback.SwipeToDeleteCallback
@@ -38,9 +37,7 @@ import kotlinx.android.synthetic.main.fragment_resale.view.*
 class ResaleFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "ResaleFragment"
-
     private var resaleAdapter: ResaleRecyclerViewAdapter? = null
-
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
     lateinit var editsearch: SearchView
@@ -50,10 +47,7 @@ class ResaleFragment : Fragment(), SearchView.OnQueryTextListener {
     private var heading: TextView? = null
     private var logout: ImageView? = null
     private var resaleAdd: FloatingActionButton? = null
-    private var coordinatorLayoutForSnackBar: CoordinatorLayout? = null
-
     private var root: View? = null
-
     var resaleList = mutableListOf<Resale>()
 
     override fun onCreateView(

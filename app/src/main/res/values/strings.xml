@@ -7,9 +7,6 @@
     <string name="address">Address</string>
     <string name="submit">Submit</string>
     <string name="title_activity_user_home">UserHomeActivity</string>
-    <string name="tab_text_1">Tender</string>
-    <string name="tab_text_2">Resale</string>
-    <string name="tab_text_3">Orders</string>
     <string name="price">Price</string>
     <string name="update_price">Update Price</string>
     <string name="quantity">Quantity</string>
@@ -59,9 +56,6 @@
     <string name="tender_name">Tender Name</string>
     <string name="resale_name">Resale Name</string>
     <string name="delete_account">Delete Account</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot password</string>
     <string name="forgot_password_text">Forgot password? Reset here</string>

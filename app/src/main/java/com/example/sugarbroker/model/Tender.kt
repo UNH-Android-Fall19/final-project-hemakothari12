@@ -9,8 +9,7 @@ class Tender {
     var email: String? = null
     var tenderUrl: String? = null
 
-    constructor() {}
-
+    // constructor for Add New
     constructor(id: String, millName: String, price: String, address: String, contact: String, email:String, url: String? = null) {
         this.id = id
         this.millName = millName
@@ -21,6 +20,7 @@ class Tender {
         this.tenderUrl = url
     }
 
+    // constructor for Update
     constructor(millName: String, price: String, address: String, contact: String, email:String, url: String? = null) {
         this.millName = millName
         this.price = price

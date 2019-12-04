@@ -129,7 +129,6 @@ class AddResaleActivity : AppCompatActivity() {
 
                         if (title.isNotEmpty()) {
                             if (id!!.isNotEmpty()) {
-                                Log.d("downloadUri", "downloadUri is ${downloadUri}")
                                 updateResale(id!!, millName, price, millAddress, millContact, millEmail, downloadUri.toString())
                             } else {
                                 addResale(millName, price, millAddress, millContact, millEmail, downloadUri.toString())
@@ -147,9 +146,6 @@ class AddResaleActivity : AppCompatActivity() {
 
     private fun updateResale(id: String, millName: String, price: String, millAddress: String, millContact: String, millEmail: String, url: String? = null) {
         val resale = Resale(id, millName, price, millAddress, millContact, millEmail, url)
-
-        Log.d("downloadUri", "downloadUri is url ${url}")
-
 
         firestoreDB!!.collection("resale")
             .document(id)
@@ -196,7 +192,6 @@ class AddResaleActivity : AppCompatActivity() {
     }
 
     private fun addSugarButtonClicked() {
-        Log.d("Camera in use", "Camera in use")
         Croperino.prepareChooser(
             this@AddResaleActivity,
             "" + resources.getString(R.string.capture_photo),

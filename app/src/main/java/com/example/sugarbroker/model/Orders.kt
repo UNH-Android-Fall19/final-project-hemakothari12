@@ -13,8 +13,8 @@ class Orders {
     var address: String? = null
     var status: String? = null
 
-    constructor() {}
 
+    // constructor for Add New
     constructor(id: String, millName: String, price: String, quantity: String, quantityPrice: String, GST: String,
                 totalPrice: String, email: String, name: String, address: String, status: String) {
         this.id = id
@@ -30,6 +30,7 @@ class Orders {
         this.status = status
     }
 
+    // constructor for Update
     constructor(millName: String, price: String, quantity: String, quantityPrice: String, GST: String,
                 totalPrice: String, email: String, name: String, address: String, status: String) {
         this.millName = millName

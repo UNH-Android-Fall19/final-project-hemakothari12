@@ -25,21 +25,16 @@ import com.google.firebase.firestore.Query
 class UserOrdersFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "UserOrdersFragment"
-
     private var orderAdapter: UserOrdersRecyclerViewAdapter? = null
-
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
-
     internal var LoggedInUserEmail: Any? = null
     lateinit var editsearch: SearchView
     private var toggle: RadioGroup? = null
     private var open: RadioButton? = null
     private var transit: RadioButton? = null
     private var closed: RadioButton? = null
-
     private var root: View? = null
-
     var orderList = mutableListOf<Orders>()
 
     override fun onCreateView(

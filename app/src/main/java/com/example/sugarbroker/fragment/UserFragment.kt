@@ -28,16 +28,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_users.view.*
 
-
 /**
  * [Orders Fragment] subclass.
  */
 class UserFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "UserFragment"
-
     private var userAdapter: UserRecyclerViewAdapter? = null
-
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
     lateinit var editsearch: SearchView
@@ -46,9 +43,7 @@ class UserFragment : Fragment(), SearchView.OnQueryTextListener {
     private var backIcon: ImageView? = null
     private var heading: TextView? = null
     private var logout: ImageView? = null
-
     private var root: View? = null
-
     var userList = mutableListOf<User>()
 
     override fun onCreateView(

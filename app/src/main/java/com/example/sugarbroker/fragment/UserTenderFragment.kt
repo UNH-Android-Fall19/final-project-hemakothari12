@@ -24,13 +24,10 @@ import com.google.firebase.firestore.ListenerRegistration
 class UserTenderFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "UserTenderFragment"
-
     private var tenderAdapter: UserTenderRecyclerViewAdapter? = null
-
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
     lateinit var editSearchUser: SearchView
-
     private var root: View? = null
 
     override fun onCreateView(

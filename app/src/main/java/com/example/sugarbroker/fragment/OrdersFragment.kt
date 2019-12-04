@@ -34,9 +34,7 @@ import kotlinx.android.synthetic.main.fragment_orders.view.*
 class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "OrdersFragment"
-
     private var orderAdapter: OrderRecyclerViewAdapter? = null
-
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
     lateinit var editsearch: SearchView
@@ -50,9 +48,7 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
     private var open: RadioButton? = null
     private var transit: RadioButton? = null
     private var closed: RadioButton? = null
-
     private var root: View? = null
-
     var orderList = mutableListOf<Orders>()
 
     override fun onCreateView(

@@ -36,9 +36,7 @@ import kotlinx.android.synthetic.main.fragment_tender.view.*
 class TenderFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "TenderFragment"
-
     private var tenderAdapter: TenderRecyclerViewAdapter? = null
-
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
     lateinit var editsearch: SearchView
@@ -48,9 +46,7 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener {
     private var heading: TextView? = null
     private var logout: ImageView? = null
     private var tenderAdd: FloatingActionButton? = null
-
     private var root: View? = null
-
     var tenderList = mutableListOf<Tender>()
 
     override fun onCreateView(
@@ -144,7 +140,6 @@ class TenderFragment : Fragment(), SearchView.OnQueryTextListener {
 
         firestoreListener!!.remove()
     }
-
 
     private fun loadTenderList() {
         firestoreDB!!.collection("tender")

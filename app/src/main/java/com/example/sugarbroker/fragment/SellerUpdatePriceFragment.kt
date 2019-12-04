@@ -15,8 +15,6 @@ import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.userEmail
 import com.example.sugarbroker.adapter.ResaleRecyclerViewAdapter
 import com.example.sugarbroker.adapter.TenderRecyclerViewAdapter
-import com.example.sugarbroker.adapter.UserResaleRecyclerViewAdapter
-import com.example.sugarbroker.adapter.UserTenderRecyclerViewAdapter
 import com.example.sugarbroker.model.Resale
 import com.example.sugarbroker.model.Tender
 import com.google.android.gms.ads.AdRequest
@@ -29,14 +27,12 @@ import com.google.firebase.firestore.ListenerRegistration
 class SellerUpdatePriceFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "SellerUpdatePriceFragment"
-
     private var tenderAdapter: TenderRecyclerViewAdapter? = null
     private var resaleAdapter: ResaleRecyclerViewAdapter? = null
     private var firestoreDB: FirebaseFirestore? = null
     private var firestoreListener: ListenerRegistration? = null
     private var firestoreListenerResale: ListenerRegistration? = null
     private var LoggedInUserEmail: String? = null
-
     private var root: View? = null
 
     override fun onCreateView(
@@ -57,8 +53,6 @@ class SellerUpdatePriceFragment : Fragment(), SearchView.OnQueryTextListener {
         loadTenderList()
         loadResaleList()
         LoggedInUserEmail = userEmail
-        Log.d("LoggedInUserEmail", "LoggedInUserEmail value ${LoggedInUserEmail}")
-
         firestoreListener = firestoreDB!!.collection("tender").whereEqualTo("email", LoggedInUserEmail)
             .addSnapshotListener(EventListener { documentSnapshots, e ->
                 if (e != null) {

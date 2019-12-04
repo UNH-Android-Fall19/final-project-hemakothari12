@@ -2,7 +2,6 @@ package com.example.sugarbroker.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +45,6 @@ class UserRecyclerViewAdapter(private val usersList: MutableList<User>, private 
     }
 
     override fun getItemCount(): Int {
-        Log.d("Size", "Size is ${usersList.size}")
         return usersList.size
     }
 

@@ -130,7 +130,6 @@ class AddTenderActivity : AppCompatActivity() {
 
                         if (title.isNotEmpty()) {
                             if (id!!.isNotEmpty()) {
-                                Log.d("downloadUri", "downloadUri is ${downloadUri}")
                                 updateTender(id!!, millName, price, millAddress, millContact, millEmail, downloadUri.toString())
                             } else {
                                 addTender(millName, price, millAddress, millContact, millEmail, downloadUri.toString())
@@ -148,9 +147,6 @@ class AddTenderActivity : AppCompatActivity() {
 
     private fun updateTender(id: String, millName: String, price: String, millAddress: String, millContact: String, millEmail: String, url: String? = null) {
         val tender = Tender(id, millName, price, millAddress, millContact, millEmail, url)
-
-        Log.d("downloadUri", "downloadUri is url ${url}")
-
 
         firestoreDB!!.collection("tender")
             .document(id)
@@ -197,7 +193,6 @@ class AddTenderActivity : AppCompatActivity() {
     }
 
     private fun addSugarButtonClicked() {
-        Log.d("Camera in use", "Camera in use")
         Croperino.prepareChooser(
             this@AddTenderActivity,
             "" + resources.getString(R.string.capture_photo),

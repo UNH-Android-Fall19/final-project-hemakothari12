@@ -19,9 +19,7 @@ class SettingsFragment : Fragment() {
 
     private val TAG = "SettingsFragment"
     private var firestoreDB: FirebaseFirestore? = null
-
     private var root: View? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +62,6 @@ class SettingsFragment : Fragment() {
     private fun deleteAccount() {
         val user = FirebaseAuth.getInstance().currentUser
         val uid = FirebaseAuth.getInstance().uid
-        Log.d(TAG, "uid is for delete ${uid}")
 
         performLogout()
 
