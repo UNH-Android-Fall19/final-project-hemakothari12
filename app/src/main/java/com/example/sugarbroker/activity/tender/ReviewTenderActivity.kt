@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.calculatePrice
 import com.example.sugarbroker.activity.home.AdminHomeActivity
 import com.example.sugarbroker.activity.home.SellerHomeActivity
 import com.example.sugarbroker.activity.home.UserHomeActivity
@@ -24,8 +25,8 @@ class ReviewTenderActivity : AppCompatActivity() {
 
     internal var id: String? = ""
     internal var quantity: Int? = 0
-    internal var price: Int? = 0
-    internal var quantityPrice: Int? = 0
+    internal var price: Float? = 0f
+    internal var quantityPrice: Float? = 0f
     internal var GST: Float? = 0f
     internal var totalPrice: Float? = 0f
     var name: Any? = null
@@ -50,11 +51,9 @@ class ReviewTenderActivity : AppCompatActivity() {
             quantity_textview.setText(bundle.getString("UpdateTenderQuantity"))
 
             quantity = bundle.getString("UpdateTenderQuantity")!!.toInt()
-            price = bundle.getString("UpdateTenderPrice")!!.toInt()
+            price = bundle.getString("UpdateTenderPrice")!!.toFloat()
 
-            quantityPrice = quantity!! * price!!
-            GST = (0.18 * quantityPrice!!).toFloat()
-            totalPrice = quantityPrice!! + GST!!
+            val (quantityPrice, GST, totalPrice) = calculatePrice(quantity!!, price!!)
 
             quantityprice_textview.setText(quantityPrice!!.toString())
             GST_textview.setText(GST.toString())
