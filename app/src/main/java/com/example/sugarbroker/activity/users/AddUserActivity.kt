@@ -88,7 +88,7 @@ class AddUserActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
         actionBar!!.title = "Update User Details"
-        actionBar!!.elevation = 4.0F
+        actionBar.elevation = 4.0F
         actionBar.setDisplayShowHomeEnabled(true)
         actionBar.setDisplayUseLogoEnabled(true)
         actionBar.setDisplayHomeAsUpEnabled(true)

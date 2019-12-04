@@ -38,7 +38,7 @@
             android:id="@+id/companyname_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Review Tender Details"
+            android:text="@string/review_tender_details"
             android:textStyle="bold"
             android:textAlignment="center"
             android:layout_marginTop="10dp"

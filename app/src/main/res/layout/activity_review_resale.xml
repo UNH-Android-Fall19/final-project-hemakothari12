@@ -38,7 +38,7 @@
             android:id="@+id/companyname_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Review Resale Detail"
+            android:text="@string/review_resale_detail"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:textAlignment="center"

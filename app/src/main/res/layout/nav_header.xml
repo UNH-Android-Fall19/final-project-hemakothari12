@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="To display Username"
+        android:text="@string/name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/transparent"/>
 
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="To display Email"
+        android:text="@string/email"
         android:textColor="@color/transparent"/>
 
 </LinearLayout>

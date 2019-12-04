@@ -141,12 +141,13 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                             } else {
                                 Log.d(TAG, "User Logged in is User")
-                                saveUserDetailsToFirebase(acct!!)
+                                saveUserDetailsToFirebase(acct)
                                 userType = "User"
                                 userEmail = acct.email
                                 progressBar!!.visibility = View.GONE
                                 intent = Intent(applicationContext, UserHomeActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                intent.putExtra("LoggedInUserEmail",acct.email)
                                 startActivity(intent)
                             }
 

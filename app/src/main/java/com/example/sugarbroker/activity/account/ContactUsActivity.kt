@@ -81,7 +81,7 @@ class ContactUsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             val address = "126 Nana Peth, Kamal Mohan Society, Pune - 411002"
 
-        val add = Geocoder(this).getFromLocationName(address!!, 5)
+        val add = Geocoder(this).getFromLocationName(address, 5)
 
         val location = add[0]
         val homeLatLng = LatLng(location.getLatitude(), location.getLongitude())

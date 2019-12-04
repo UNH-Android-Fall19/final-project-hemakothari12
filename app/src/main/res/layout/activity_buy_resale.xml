@@ -36,13 +36,13 @@
             android:id="@+id/companyname_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Buy Resale Sugar"
+            android:text="@string/buy_resale_sugar"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:textAlignment="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:inputType="textPersonName" />
 
         <com.google.android.material.textfield.TextInputLayout

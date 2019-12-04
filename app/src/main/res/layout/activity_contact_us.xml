@@ -60,7 +60,7 @@
                     android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
-                    android:text="Jitendra R Kothari" />
+                    android:text="@string/jitendra_r_kothari" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                                     android:paddingLeft="40dp"
                                     android:textColor="@android:color/black"
                                     android:textSize="20dp"
-                                    android:text="(942)200-3575" />
+                                    android:text="@string/admin_phone_number" />
 
                             </LinearLayout>
 
@@ -113,7 +113,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="90dp"
                                 android:textColor="@android:color/black"
-                                android:text="Mobile" />
+                                android:text="@string/mobile" />
 
                         </LinearLayout>
 
@@ -144,7 +144,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="80dp"
-                                    android:text="+912024270525"
+                                    android:text="@string/admin_landline_phone"
                                     android:textColor="@android:color/black"
                                     android:textSize="20dp" />
 
@@ -155,7 +155,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="90dp"
-                                android:text="Office"
+                                android:text="@string/office"
                                 android:textColor="@android:color/black" />
 
                         </LinearLayout>
@@ -198,7 +198,7 @@
                                     android:paddingLeft="40dp"
                                     android:textColor="@android:color/black"
                                     android:textSize="20dp"
-                                    android:text="jitendrarkothari@gmail.com" />
+                                    android:text="@string/admin_email" />
 
                             </LinearLayout>
 
@@ -208,7 +208,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="90dp"
                                 android:textColor="@android:color/black"
-                                android:text="Personal" />
+                                android:text="@string/personal" />
 
                         </LinearLayout>
 
@@ -250,7 +250,7 @@
                                     android:paddingLeft="40dp"
                                     android:textColor="@android:color/black"
                                     android:textSize="20dp"
-                                    android:text="Market Yard Gultekdi" />
+                                    android:text="@string/market_yard_gultekdi" />
 
                             </LinearLayout>
 
@@ -261,7 +261,7 @@
                                 android:paddingLeft="85dp"
                                 android:textColor="@android:color/black"
                                 android:textSize="20dp"
-                                android:text="Pune, Maharashtra" />
+                                android:text="@string/pune_maharashtra" />
 
                             <TextView
                                 android:id="@+id/locationtext_textview"
@@ -269,7 +269,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="90dp"
                                 android:textColor="@android:color/black"
-                                android:text="Office" />
+                                android:text="@string/office" />
 
                         </LinearLayout>
 

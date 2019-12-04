@@ -58,8 +58,6 @@
     <string name="new_resale_added">New Resale Added</string>
     <string name="tender_name">Tender Name</string>
     <string name="resale_name">Resale Name</string>
-    <string name="push_notification">Push Notification</string>
-    <string name="settings">Settings</string>
     <string name="delete_account">Delete Account</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -67,4 +65,25 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot password</string>
     <string name="forgot_password_text">Forgot password? Reset here</string>
+    <string name="buy_resale_sugar">Buy Resale Sugar</string>
+    <string name="buy_tender_sugar">Buy Tender Sugar</string>
+    <string name="jitendra_r_kothari">Jitendra R Kothari</string>
+    <string name="admin_phone_number">(942)200-3575</string>
+    <string name="mobile">Mobile</string>
+    <string name="personal">Personal</string>
+    <string name="admin_landline_phone">+912024270525</string>
+    <string name="admin_email">jitendrarkothari@gmail.com</string>
+    <string name="pune_maharashtra">Pune, Maharashtra</string>
+    <string name="market_yard_gultekdi">Market Yard Gultekdi</string>
+    <string name="office">Office</string>
+    <string name="review_resale_detail">Review Resale Detail</string>
+    <string name="review_tender_details">Review Tender Details</string>
+    <string name="tender_details">Tender Details</string>
+    <string name="settings">Settings</string>
+    <string name="push_notification">Push Notification</string>
+    <string name="order_details">Order Details</string>
+    <string name="open">Open</string>
+    <string name="transit">Transit</string>
+    <string name="closed">Closed</string>
+    <string name="resale_details">Resale Details</string>
 </resources>

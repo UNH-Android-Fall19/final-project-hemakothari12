@@ -22,7 +22,7 @@
         android:id="@+id/pageHeading_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Resale Details"
+        android:text="@string/resale_details"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         android:textAlignment="center"

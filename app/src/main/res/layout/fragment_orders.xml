@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="Open"
+            android:text="@string/open"
             android:textColor="@color/transparent" />
 
         <RadioButton
@@ -96,7 +96,7 @@
             android:background="@drawable/toggle_widget_background"
             android:button="@null"
             android:gravity="center"
-            android:text="Transit"
+            android:text="@string/transit"
             android:textColor="@color/colorPrimary" />
 
         <RadioButton
@@ -110,7 +110,7 @@
             android:background="@drawable/toggle_widget_background"
             android:button="@null"
             android:gravity="center"
-            android:text="Closed"
+            android:text="@string/closed"
             android:textColor="@color/colorPrimary" />
     </RadioGroup>
 

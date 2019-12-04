@@ -37,7 +37,7 @@
             android:id="@+id/companyname_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Buy Tender Sugar"
+            android:text="@string/buy_tender_sugar"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:textAlignment="center"

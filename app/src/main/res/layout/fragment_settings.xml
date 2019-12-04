@@ -11,7 +11,7 @@
         android:id="@+id/pageHeading_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="@string/settings"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -25,7 +25,7 @@
         android:checked="true"
         android:paddingTop="80dp"
         android:paddingLeft="30dp"
-        android:text="Push Notification"
+        android:text="@string/push_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
