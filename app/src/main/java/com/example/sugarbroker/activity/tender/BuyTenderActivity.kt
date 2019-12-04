@@ -3,7 +3,9 @@ package com.example.sugarbroker.activity.tender
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
 import com.example.sugarbroker.R
 import com.example.sugarbroker.activity.home.AdminHomeActivity
 import com.example.sugarbroker.activity.home.SellerHomeActivity
@@ -41,16 +43,19 @@ class BuyTenderActivity : AppCompatActivity() {
             val price = price_edittext.text.toString()
             val quantity = quantity_edittext.text.toString()
 
-            val intent = Intent(applicationContext, ReviewTenderActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.putExtra("UpdateTenderId", id)
-            intent.putExtra("UpdateTenderMillName", millName)
-            intent.putExtra("UpdateTenderPrice", price)
-            intent.putExtra("UpdateTenderQuantity", quantity)
-            applicationContext.startActivity(intent)
+            if(TextUtils.isEmpty(quantity)) {
+                Toast.makeText(applicationContext, "Please Enter Quantity", Toast.LENGTH_SHORT).show()
+            }else {
+                val intent = Intent(applicationContext, ReviewTenderActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.putExtra("UpdateTenderId", id)
+                intent.putExtra("UpdateTenderMillName", millName)
+                intent.putExtra("UpdateTenderPrice", price)
+                intent.putExtra("UpdateTenderQuantity", quantity)
+                applicationContext.startActivity(intent)
 
-            finish()
-
+                finish()
+            }
         }
 
         cancel_button.setOnClickListener {

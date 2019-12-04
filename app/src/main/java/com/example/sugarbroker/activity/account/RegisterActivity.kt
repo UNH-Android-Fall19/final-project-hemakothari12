@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -27,7 +28,11 @@ class RegisterActivity : AppCompatActivity() {
         already_account_textview.setText(Html.fromHtml(createAccount))
 
         register_button.setOnClickListener {
-            performRegister()
+            if(TextUtils.isEmpty(name_edittext.text) || TextUtils.isEmpty(email_edittext.text) || TextUtils.isEmpty(password_edittext.text) || TextUtils.isEmpty(phone_edittext.text)) {
+                Toast.makeText(applicationContext, "Please Enter Name, Email, Password and Phone", Toast.LENGTH_SHORT).show()
+            } else {
+                performRegister()
+            }
         }
 
         already_account_textview.setOnClickListener {

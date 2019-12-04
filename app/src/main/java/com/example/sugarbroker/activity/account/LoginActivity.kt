@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -51,16 +52,30 @@ class LoginActivity : AppCompatActivity() {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        signIn.setOnClickListener { signInGoogle() }
-
-        login_button.setOnClickListener {
-            progressBar!!.visibility = View.VISIBLE
+        signIn.setOnClickListener {
             login_email_edittext.visibility = View.GONE
             login_password_edittext.visibility = View.GONE
             login_button.visibility = View.GONE
             forgotpassword_textview.visibility = View.GONE
             newuser_textview.visibility = View.GONE
-            performLogin()
+            signIn.visibility = View.GONE
+            progressBar!!.visibility = View.VISIBLE
+            signInGoogle()
+        }
+
+        login_button.setOnClickListener {
+            if(TextUtils.isEmpty(login_email_edittext.text) || TextUtils.isEmpty(login_password_edittext.text)) {
+                Toast.makeText(applicationContext, "Please Enter Username and Password", Toast.LENGTH_SHORT).show()
+            }else {
+                login_email_edittext.visibility = View.GONE
+                login_password_edittext.visibility = View.GONE
+                login_button.visibility = View.GONE
+                forgotpassword_textview.visibility = View.GONE
+                newuser_textview.visibility = View.GONE
+                signIn.visibility = View.GONE
+                progressBar!!.visibility = View.VISIBLE
+                performLogin()
+            }
         }
 
         newuser_textview.setOnClickListener {

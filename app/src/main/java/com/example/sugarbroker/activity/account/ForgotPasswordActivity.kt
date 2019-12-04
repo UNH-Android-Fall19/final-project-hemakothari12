@@ -3,6 +3,7 @@ package com.example.sugarbroker.activity.account
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -26,7 +27,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
             var email = email_edittext.text.toString()
 
-            if (email_edittext.text.isNullOrBlank()) {
+            if (email_edittext.text.isNullOrBlank() || TextUtils.isEmpty(email)) {
                 Toast.makeText(this, "Please enter valid Email", Toast.LENGTH_SHORT).show()
             } else {
                 FirebaseAuth.getInstance().sendPasswordResetEmail(email)

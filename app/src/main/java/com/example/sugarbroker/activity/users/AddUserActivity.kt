@@ -2,6 +2,7 @@ package com.example.sugarbroker.activity.users
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -53,14 +54,17 @@ class AddUserActivity : AppCompatActivity() {
             val type = type_edittext.text.toString()
             val password = password_edittext.text.toString()
 
-            if (title.isNotEmpty()) {
-                if (uid!!.isNotEmpty()) {
-                    updateUser(uid!!, name, email, password, address, phone, type)
+            if(TextUtils.isEmpty(email) || TextUtils.isEmpty(name)){
+                Toast.makeText(applicationContext, "Please Enter Name and Email", Toast.LENGTH_SHORT).show()
+            } else {
+                if (title.isNotEmpty()) {
+                    if (uid!!.isNotEmpty()) {
+                        updateUser(uid!!, name, email, password, address, phone, type)
+                    }
                 }
+
+                finish()
             }
-
-            finish()
-
         }
     }
 

@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -99,46 +100,49 @@ class AddTenderActivity : AppCompatActivity() {
             val millContact = millcontact_edittext.text.toString()
             val millEmail = millemail_edittext.text.toString()
 
-            val storageRef = storage.reference
-            var x = UUID.randomUUID()
-            val mountainsRef = storageRef.child("" + (x) + ".jpg")
-            val mountainImagesRef = storageRef.child("images/" + x + ".jpg")
-            mountainsRef.name == mountainImagesRef.name // true
-            mountainsRef.path == mountainImagesRef.path // false
-            val bitmap = (sugar_image.drawable as BitmapDrawable).bitmap
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val data = baos.toByteArray()
+            if (TextUtils.isEmpty(millName) || TextUtils.isEmpty(price)) {
+                Toast.makeText(applicationContext, "Please Enter Millname and Price", Toast.LENGTH_SHORT).show()
+            } else {
+                val storageRef = storage.reference
+                var x = UUID.randomUUID()
+                val mountainsRef = storageRef.child("" + (x) + ".jpg")
+                val mountainImagesRef = storageRef.child("images/" + x + ".jpg")
+                mountainsRef.name == mountainImagesRef.name // true
+                mountainsRef.path == mountainImagesRef.path // false
+                val bitmap = (sugar_image.drawable as BitmapDrawable).bitmap
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
 
-            var uploadTask = mountainsRef.putBytes(data)
-            uploadTask = storageRef.child("images/" + x + ".jpg").putBytes(data)
+                var uploadTask = mountainsRef.putBytes(data)
+                uploadTask = storageRef.child("images/" + x + ".jpg").putBytes(data)
 
-            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
-                    }
-                }
-                return@Continuation mountainImagesRef.downloadUrl
-            }).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val downloadUri = task.result
-
-                    if (title.isNotEmpty()) {
-                        if (id!!.isNotEmpty()) {
-                            Log.d("downloadUri", "downloadUri is ${downloadUri}")
-                            updateTender(id!!, millName, price, millAddress, millContact, millEmail, downloadUri.toString())
-                        } else {
-                            addTender(millName, price, millAddress, millContact, millEmail, downloadUri.toString())
+                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
                         }
                     }
-                } else {
-                    Toast.makeText(applicationContext, "Upload unsuccesfull", Toast.LENGTH_SHORT).show()
+                    return@Continuation mountainImagesRef.downloadUrl
+                }).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUri = task.result
+
+                        if (title.isNotEmpty()) {
+                            if (id!!.isNotEmpty()) {
+                                Log.d("downloadUri", "downloadUri is ${downloadUri}")
+                                updateTender(id!!, millName, price, millAddress, millContact, millEmail, downloadUri.toString())
+                            } else {
+                                addTender(millName, price, millAddress, millContact, millEmail, downloadUri.toString())
+                            }
+                        }
+                    } else {
+                        Toast.makeText(applicationContext, "Upload unsuccesfull", Toast.LENGTH_SHORT).show()
+                    }
                 }
+
+                finish()
             }
-
-            finish()
-
         }
     }
 
