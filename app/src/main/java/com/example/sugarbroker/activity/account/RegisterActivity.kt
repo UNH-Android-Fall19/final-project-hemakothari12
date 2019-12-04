@@ -18,6 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
+
+    private val TAG = "RegisterActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -36,8 +39,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         already_account_textview.setOnClickListener {
-            Log.d("Mainactivity", "Try to show login activity")
-
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
@@ -53,9 +54,6 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        Log.d("Email", "Email is: " + email)
-        Log.d("Password", "Password is:  + $password")
-
         //Firebase Authentication to create user with email and password
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
@@ -63,7 +61,7 @@ class RegisterActivity : AppCompatActivity() {
 
                 //else if successful
                 saveUserDetailsToFirebase()
-                Log.d("Main", "Successfully created user with uid: ${it?.result?.user?.uid} ")
+                Log.d(TAG, "Successfully created user with uid: ${it?.result?.user?.uid} ")
                 userType = "User"
                 userEmail = email
                 val intent = Intent(this, UserHomeActivity::class.java)
@@ -71,19 +69,15 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             .addOnFailureListener {
-                Log.d("Main", "Failed to create user: ${it.message}")
+                Log.d(TAG, "Failed to create user: ${it.message}")
                 Toast.makeText(this, "Failed to create user: ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
     private fun saveUserDetailsToFirebase() {
 
-        //Firestore database
-
         val uid = FirebaseAuth.getInstance().uid ?: ""
-
         val db = FirebaseFirestore.getInstance()
-
         val user = User(
             uid,
             name_edittext.text.toString(),
@@ -94,15 +88,14 @@ class RegisterActivity : AppCompatActivity() {
             "User"
         )
 
-        //Add document with specific ID
         db.collection("users")
             .document(uid)
             .set(user)
             .addOnSuccessListener {
-                Log.d("Regi", "DocumentSnapshot added with ID")
+                Log.d(TAG, "DocumentSnapshot added with ID")
             }
             .addOnFailureListener { e ->
-                Log.w("Regi", "Error adding document", e)
+                Log.d(TAG, "Error adding document", e)
             }
     }
 

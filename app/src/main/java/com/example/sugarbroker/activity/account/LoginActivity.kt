@@ -29,6 +29,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
 
+    private val TAG = "LoginActivity"
     private var progressBar: ProgressBar? = null
     lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 9001
@@ -102,8 +103,8 @@ class LoginActivity : AppCompatActivity() {
                     val account = task.getResult(ApiException::class.java)
                     firebaseAuthWithGoogle(account!!)
                 } catch (e: ApiException) {
-                    Toast.makeText(this, "Google sign in failed:( ${e}", Toast.LENGTH_LONG).show()
-                    Log.d("Google sign in failed:(", "Google sign in failed:( ${e}")
+                    Toast.makeText(this, "Google sign in failed ${e}", Toast.LENGTH_LONG).show()
+                    Log.d(TAG, "Google sign in failed ${e}")
                 }
         }else {
             Toast.makeText(this, "Problem in execution order :(", Toast.LENGTH_LONG).show()
@@ -111,29 +112,27 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Log.d("loginactivity", "firebaseAuthWithGoogle:" + acct.id!!)
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 val db = FirebaseFirestore.getInstance()
                 val uid = FirebaseAuth.getInstance().uid ?: ""
-                Log.d("uid is", "uid is ${uid}")
                 val documentRef = db.collection("users").document(uid)
                 documentRef.get()
                     .addOnSuccessListener { document ->
                         if (document != null) {
                             val value = document.getString("type")
-                            Log.d("Document", "DocumentSnapshot data: ${document.data}")
+                            Log.d(TAG, "DocumentSnapshot data: ${document.data}")
 
                             if (value == "Admin") {
-                                Log.d("User Logged", "User Logged in is Admin")
+                                Log.d(TAG, "User Logged in is Admin")
                                 userType = "Admin"
                                 progressBar!!.visibility = View.GONE
                                 intent = Intent(applicationContext, AdminHomeActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             } else if (value == "Seller") {
-                                Log.d("User Logged", "User Logged in is Seller")
+                                Log.d(TAG, "User Logged in is Seller")
                                 userType = "Seller"
                                 progressBar!!.visibility = View.GONE
                                 intent = Intent(applicationContext, SellerHomeActivity::class.java)
@@ -141,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
                                 intent.putExtra("LoggedInUserEmail",login_email_edittext.text.toString())
                                 startActivity(intent)
                             } else {
-                                Log.d("User Logged", "User Logged in is User")
+                                Log.d(TAG, "User Logged in is User")
                                 saveUserDetailsToFirebase(acct!!)
                                 userType = "User"
                                 userEmail = acct.email
@@ -152,7 +151,7 @@ class LoginActivity : AppCompatActivity() {
                             }
 
                         } else {
-                            Log.d("LoginActivity", "No document found")
+                            Log.d(TAG, "No document found")
 
                             Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                         }
@@ -186,10 +185,10 @@ class LoginActivity : AppCompatActivity() {
             .document(uid)
             .set(user)
             .addOnSuccessListener {
-                Log.d("Regi", "DocumentSnapshot added with ID")
+                Log.d(TAG, "DocumentSnapshot added with ID")
             }
             .addOnFailureListener { e ->
-                Log.w("Regi", "Error adding document", e)
+                Log.w(TAG, "Error adding document", e)
             }
     }
 
@@ -214,17 +213,17 @@ class LoginActivity : AppCompatActivity() {
                     .addOnSuccessListener { document ->
                         if (document != null) {
                             val value = document.getString("type")
-                            Log.d("Document", "DocumentSnapshot data: ${document.data}")
+                            Log.d(TAG, "DocumentSnapshot data: ${document.data}")
 
                             if (value == "Admin") {
-                                Log.d("User Logged", "User Logged in is Admin")
+                                Log.d(TAG, "User Logged in is Admin")
                                 userType = "Admin"
                                 progressBar!!.visibility = View.GONE
                                 intent = Intent(applicationContext, AdminHomeActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             } else if (value == "Seller") {
-                                Log.d("User Logged", "User Logged in is Seller")
+                                Log.d(TAG, "User Logged in is Seller")
                                 userType = "Seller"
                                 progressBar!!.visibility = View.GONE
                                 intent = Intent(applicationContext, SellerHomeActivity::class.java)
@@ -232,7 +231,7 @@ class LoginActivity : AppCompatActivity() {
                                 intent.putExtra("LoggedInUserEmail",login_email_edittext.text.toString())
                                 startActivity(intent)
                             } else {
-                                Log.d("User Logged", "User Logged in is User")
+                                Log.d(TAG, "User Logged in is User")
                                 userType = "User"
                                 progressBar!!.visibility = View.GONE
                                 intent = Intent(applicationContext, UserHomeActivity::class.java)
@@ -242,19 +241,19 @@ class LoginActivity : AppCompatActivity() {
                             }
 
                         } else {
-                            Log.d("LoginActivity", "No document found")
+                            Log.d(TAG, "No document found")
 
                             Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                         }
                     }
                     .addOnFailureListener { exception ->
-                        Log.d("LoginActivity", "Failed to fetch document: ", exception)
+                        Log.d(TAG, "Failed to fetch document: ", exception)
 
                         Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                     }
             }
             .addOnFailureListener {
-                Log.d("LoginActivity", "Failed to Login: ${it.message}")
+                Log.d(TAG, "Failed to Login: ${it.message}")
 
                 Toast.makeText(this, "Invalid username and password", Toast.LENGTH_SHORT).show()
             }

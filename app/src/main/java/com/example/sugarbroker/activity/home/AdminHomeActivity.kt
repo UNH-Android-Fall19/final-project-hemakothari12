@@ -13,7 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_admin_home.*
 
-
 class AdminHomeActivity : AppCompatActivity() {
 
     private val TAG = "AdminHomeActivity"
@@ -29,22 +28,22 @@ class AdminHomeActivity : AppCompatActivity() {
     private val onNavigationItemReselectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item->
         when(item.itemId) {
             R.id.navigation_resale -> {
-                Log.d("AdminHomeActivity", "Resale Clicked")
+                Log.d(TAG, "Resale Clicked")
                 replaceFragment(ResaleFragment(), "Resale")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_tender -> {
-                Log.d("AdminHomeActivity", "Tender Clicked")
+                Log.d(TAG, "Tender Clicked")
                 replaceFragment(TenderFragment(), "Tender")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_orders -> {
-                Log.d("AdminHomeActivity", "Orders Clicked")
+                Log.d(TAG, "Orders Clicked")
                 replaceFragment(OrdersFragment(), "Orders")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_users -> {
-                Log.d("AdminHomeActivity", "Users Clicked")
+                Log.d(TAG, "Users Clicked")
                 replaceFragment(UserFragment(), "Users")
                 return@OnNavigationItemSelectedListener true
             }

@@ -25,7 +25,6 @@ import com.example.sugarbroker.fragment.UserTenderFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_user_home.*
 
 class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
@@ -179,8 +178,6 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val intent = Intent(applicationContext, AddUserActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         val uid = FirebaseAuth.getInstance().uid
-
-        Log.d("UID in function", "uid in function ${uid}")
 
         firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()
             .addOnSuccessListener { documents ->

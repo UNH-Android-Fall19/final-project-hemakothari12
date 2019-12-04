@@ -77,7 +77,6 @@ class ContactUsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
-        //These coordinates represent the latitude and longitude of the Googleplex.
         val zoomLevel = 4f
 
             val address = "126 Nana Peth, Kamal Mohan Society, Pune - 411002"

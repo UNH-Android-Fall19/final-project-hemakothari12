@@ -80,7 +80,6 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     replaceFragment(UserOrdersFragment(), "UserOrders")
                 }
                 R.id.updatePrice -> {
-                    Log.d("In Price", "In update Price")
                     replaceFragment(SellerUpdatePriceFragment(), "SellerUpdatePrice")
                 }
                 R.id.updateProfile -> {
@@ -96,8 +95,6 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     performLogout()
                 }
             }
-            // Add code here to update the UI based on the item selected
-            // For example, swap UI fragments here
 
             true
         }
@@ -182,8 +179,6 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val intent = Intent(applicationContext, AddUserActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         val uid = FirebaseAuth.getInstance().uid
-
-        Log.d("UID in function", "uid in function ${uid}")
 
         firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()
             .addOnSuccessListener { documents ->
