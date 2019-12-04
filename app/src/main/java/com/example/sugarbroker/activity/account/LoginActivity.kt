@@ -137,7 +137,7 @@ class LoginActivity : AppCompatActivity() {
                                 progressBar!!.visibility = View.GONE
                                 intent = Intent(applicationContext, SellerHomeActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                intent.putExtra("LoggedInUserEmail",login_email_edittext.text.toString())
+                                intent.putExtra("LoggedInUserEmail",acct.email)
                                 startActivity(intent)
                             } else {
                                 Log.d(TAG, "User Logged in is User")
