@@ -10,6 +10,8 @@ class Resale {
     var email: String? = null
     var resaleUrl: String? = null
 
+    constructor() {}
+
     // constructor for Add New
     constructor(id: String, millName: String, price: String, address: String, contact: String, email: String, url: String? = null) {
         this.id = id

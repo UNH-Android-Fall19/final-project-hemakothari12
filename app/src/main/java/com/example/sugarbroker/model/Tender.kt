@@ -9,6 +9,8 @@ class Tender {
     var email: String? = null
     var tenderUrl: String? = null
 
+    constructor() {}
+
     // constructor for Add New
     constructor(id: String, millName: String, price: String, address: String, contact: String, email:String, url: String? = null) {
         this.id = id

@@ -9,6 +9,8 @@ class User {
     var phone: String? = null
     var type: String? = null
 
+    constructor() {}
+
     // constructor for Add New
     constructor(uid: String, name: String, email: String, password: String, address: String, phone: String, type: String) {
         this.uid = uid

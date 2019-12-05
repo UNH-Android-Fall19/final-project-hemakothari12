@@ -13,6 +13,8 @@ class Orders {
     var address: String? = null
     var status: String? = null
 
+    constructor() {}
+
 
     // constructor for Add New
     constructor(id: String, millName: String, price: String, quantity: String, quantityPrice: String, GST: String,
