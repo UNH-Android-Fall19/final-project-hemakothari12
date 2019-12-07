@@ -31,6 +31,13 @@
                 android:paddingLeft="160dp"
                 android:src="@drawable/ic_phone_white_24dp" />
 
+            <ImageView
+                android:id="@+id/editTender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:src="@drawable/ic_edit_white_24dp" />
+
         </androidx.appcompat.widget.Toolbar>
 
         <View

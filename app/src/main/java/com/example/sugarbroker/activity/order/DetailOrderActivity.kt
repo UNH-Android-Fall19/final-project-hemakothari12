@@ -1,5 +1,6 @@
 package com.example.sugarbroker.activity.order
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -38,6 +39,8 @@ class DetailOrderActivity : AppCompatActivity() {
             tvIcon.setText(bundle.getString("UpdateOrderUsername")!!.get(0).toUpperCase().toString())
 
         }
+
+        editOrder.setOnClickListener { updateOrder() }
     }
 
     private fun setUpToolbar() {
@@ -54,6 +57,23 @@ class DetailOrderActivity : AppCompatActivity() {
             else
                 supportFragmentManager.popBackStack()
         })
+    }
+
+    private fun updateOrder() {
+        val intent = Intent(applicationContext, AddOrderActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateOrderId", id)
+        intent.putExtra("UpdateOrderMillName", mill_name_textview.text.toString())
+        intent.putExtra("UpdateOrderPrice", price_textview.text.toString())
+        intent.putExtra("UpdateOrderQuantity", quantity_textview.text.toString())
+        intent.putExtra("UpdateOrderQuantityPrice", quantityPrice_textview.text.toString())
+        intent.putExtra("UpdateOrderGST", GST_textview.text.toString())
+        intent.putExtra("UpdateOrderTotalPrice", totalPrice_textview.text.toString())
+        intent.putExtra("UpdateOrderEmail", email_textview.text.toString())
+        intent.putExtra("UpdateOrderUsername", userName_textview.text.toString())
+        intent.putExtra("UpdateOrderUserAddress", userAddress_textview.text.toString())
+        intent.putExtra("UpdateOrderStatus", status_textview.text.toString())
+        applicationContext.startActivity(intent)
     }
 
 }

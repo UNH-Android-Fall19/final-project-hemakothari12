@@ -37,6 +37,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
     private val REQUEST_LOCATION_PERMISSION = 1
     var address: String? = null
     var mapTitle: String? = null
+    var tenderImageUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
             id = bundle.getString("UpdateTenderId")
             address = bundle.getString("UpdateTenderAddress")
             mapTitle = bundle.getString("UpdateTenderMillName")
+            tenderImageUrl = bundle.getString("UpdateTenderUrl")
 
             mill_name_textview.setText(bundle.getString("UpdateTenderMillName"))
             price_textview.setText(bundle.getString("UpdateTenderPrice"))
@@ -115,6 +117,21 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
             )
             startActivity(phoneIntent)
         }
+
+        editTender.setOnClickListener { updateTender() }
+    }
+
+    private fun updateTender() {
+        val intent = Intent(applicationContext, AddTenderActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateTenderId", id)
+        intent.putExtra("UpdateTenderMillName", mill_name_textview.text.toString())
+        intent.putExtra("UpdateTenderPrice", price_textview.text.toString())
+        intent.putExtra("UpdateTenderAddress", milladdress_textview.text.toString())
+        intent.putExtra("UpdateTenderContact", millcontact_textview.text.toString())
+        intent.putExtra("UpdateTenderEmail", millemail_textview.text.toString())
+        intent.putExtra("UpdateTenderUrl", tenderImageUrl)
+        applicationContext.startActivity(intent)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

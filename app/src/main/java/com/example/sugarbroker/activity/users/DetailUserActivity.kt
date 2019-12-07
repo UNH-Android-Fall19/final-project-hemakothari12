@@ -27,7 +27,6 @@ class DetailUserActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             id = bundle.getString("UpdateUserId")
-
             name_textview.setText(bundle.getString("UpdateUserName"))
             email_textview.setText(bundle.getString("UpdateUserEmail"))
             password_textview.setText(bundle.getString("UpdateUserPassword"))
@@ -46,6 +45,8 @@ class DetailUserActivity : AppCompatActivity() {
             )
             startActivity(phoneIntent)
         }
+
+        editUser.setOnClickListener { updateUser() }
     }
 
     private fun setUpToolbar() {
@@ -62,6 +63,20 @@ class DetailUserActivity : AppCompatActivity() {
             else
                 supportFragmentManager.popBackStack()
         })
+    }
+
+    private fun updateUser() {
+        val intent = Intent(applicationContext, AddUserActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateUserId", id)
+        intent.putExtra("UpdateUserName", name_textview.text.toString())
+        intent.putExtra("UpdateUserEmail", email_textview.text.toString())
+        intent.putExtra("UpdateUserPassword", password_textview.text.toString())
+        intent.putExtra("UpdateUserAddress", address_textview.text.toString())
+        intent.putExtra("UpdateUserPhone", phone_textview.text.toString())
+        intent.putExtra("UpdateUserType", type_textview.text.toString())
+        intent.putExtra("UpdateUserProfileType", "Admin")
+        applicationContext.startActivity(intent)
     }
 
 }

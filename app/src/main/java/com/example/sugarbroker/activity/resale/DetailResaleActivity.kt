@@ -37,6 +37,7 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
     private val REQUEST_LOCATION_PERMISSION = 1
     var address: String? = null
     var mapTitle: String? = null
+    var resaleImageUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,7 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
             id = bundle.getString("UpdateResaleId")
             address = bundle.getString("UpdateResaleAddress")
             mapTitle = bundle.getString("UpdateResaleMillName")
+            resaleImageUrl = bundle.getString("UpdateResaleUrl")
 
             mill_name_textview.setText(bundle.getString("UpdateResaleMillName"))
             price_textview.setText(bundle.getString("UpdateResalePrice"))
@@ -115,6 +117,8 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
             )
             startActivity(phoneIntent)
         }
+
+        editResale.setOnClickListener { updateResale() }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -182,6 +186,19 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
             else
                 supportFragmentManager.popBackStack()
         })
+    }
+
+    private fun updateResale() {
+        val intent = Intent(applicationContext, AddResaleActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("UpdateResaleId", id)
+        intent.putExtra("UpdateResaleMillName", mill_name_textview.text.toString())
+        intent.putExtra("UpdateResalePrice", price_textview.text.toString())
+        intent.putExtra("UpdateResaleAddress", milladdress_textview.text.toString())
+        intent.putExtra("UpdateResaleContact", millcontact_textview.text.toString())
+        intent.putExtra("UpdateResaleEmail", millemail_textview.text.toString())
+        intent.putExtra("UpdateResaleUrl", resaleImageUrl)
+        applicationContext.startActivity(intent)
     }
 
 }
