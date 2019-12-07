@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.sugarbroker.R
+import com.example.sugarbroker.activity.userType
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detail_user.*
 
@@ -23,6 +24,12 @@ class DetailUserActivity : AppCompatActivity() {
         firestoreDB = FirebaseFirestore.getInstance()
 
         setUpToolbar()
+
+        if(userType == "User" || userType == "Seller") {
+            editUser.visibility = View.GONE
+        }else {
+            editUser.visibility = View.VISIBLE
+        }
 
         val bundle = intent.extras
         if (bundle != null) {

@@ -48,9 +48,11 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
         setUpToolbar()
 
         if (userType == "User" || userType == "Seller") {
-            mill_name_textview.visibility = View.GONE
+            millemail_textview.visibility = View.GONE
+            editResale.visibility = View.GONE
         } else {
-            mill_name_textview.visibility = View.VISIBLE
+            millemail_textview.visibility = View.VISIBLE
+            editResale.visibility = View.VISIBLE
         }
 
         val bundle = intent.extras

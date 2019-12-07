@@ -49,8 +49,10 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (userType == "User" || userType == "Seller") {
             millemail_textview.visibility = View.GONE
+            editTender.visibility = View.GONE
         } else {
             millemail_textview.visibility = View.VISIBLE
+            editTender.visibility = View.VISIBLE
         }
 
         val bundle = intent.extras
