@@ -58,10 +58,11 @@
     <string name="delete_account">Delete Account</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot password</string>
-    <string name="forgot_password_text">Forgot password? Reset here</string>
+    <string name="forgot_password_text">Forgot your password?</string>
     <string name="buy_resale_sugar">Buy Resale Sugar</string>
     <string name="buy_tender_sugar">Buy Tender Sugar</string>
     <string name="jitendra_r_kothari">Jitendra R Kothari</string>
+    <string name="or">Or</string>
     <string name="admin_phone_number">(942)200-3575</string>
     <string name="mobile">Mobile</string>
     <string name="personal">Personal</string>
