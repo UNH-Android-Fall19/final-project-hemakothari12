@@ -55,7 +55,10 @@ class LoginActivity : AppCompatActivity() {
 
         signIn.setOnClickListener {
             login_email_edittext.visibility = View.GONE
+            login_email_textInputLayout.visibility = View.GONE
             login_password_edittext.visibility = View.GONE
+            login_password_textInputLayout.visibility = View.GONE
+            or.visibility = View.GONE
             login_button.visibility = View.GONE
             forgotpassword_textview.visibility = View.GONE
             newuser_textview.visibility = View.GONE
@@ -69,7 +72,10 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Please Enter Username and Password", Toast.LENGTH_SHORT).show()
             }else {
                 login_email_edittext.visibility = View.GONE
+                login_email_textInputLayout.visibility = View.GONE
                 login_password_edittext.visibility = View.GONE
+                login_password_textInputLayout.visibility = View.GONE
+                or.visibility = View.GONE
                 login_button.visibility = View.GONE
                 forgotpassword_textview.visibility = View.GONE
                 newuser_textview.visibility = View.GONE

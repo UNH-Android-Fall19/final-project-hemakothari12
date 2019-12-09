@@ -40,6 +40,7 @@
             tools:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_email_textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:boxCornerRadiusTopStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
@@ -63,6 +64,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_password_textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:boxCornerRadiusTopStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"

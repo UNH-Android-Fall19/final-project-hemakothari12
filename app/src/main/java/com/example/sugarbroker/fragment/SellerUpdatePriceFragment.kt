@@ -45,10 +45,10 @@ class SellerUpdatePriceFragment : Fragment(), SearchView.OnQueryTextListener {
 
         root = inflater.inflate(R.layout.fragment_seller_update_price, container, false)
 
-        MobileAds.initialize(context,getString(R.string.app_unit_id))
-        val mAdView = root!!.findViewById<View>(R.id.adView) as AdView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+//        MobileAds.initialize(context,getString(R.string.app_unit_id))
+//        val mAdView = root!!.findViewById<View>(R.id.adView) as AdView
+//        val adRequest = AdRequest.Builder().build()
+//        mAdView.loadAd(adRequest)
 
         loadTenderList()
         loadResaleList()
