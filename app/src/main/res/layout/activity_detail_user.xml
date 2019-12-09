@@ -19,24 +19,43 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:minHeight="50dp"
-            app:title="@string/user_detail"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="@android:color/white">
 
-            <ImageView
-                android:id="@+id/callUser"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="180dp"
-                android:src="@drawable/ic_phone_white_24dp" />
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:gravity="right"
+                android:weightSum="6">
 
-            <ImageView
-                android:id="@+id/editUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:src="@drawable/ic_edit_white_24dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:titleTextColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:layout_gravity="left"
+                    android:textStyle="bold"
+                    android:layout_weight="5"
+                    android:text="@string/user_detail"/>
+
+                <ImageView
+                    android:id="@+id/callUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/ic_phone_white_24dp" />
+
+                <ImageView
+                    android:id="@+id/editUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/ic_edit_white_24dp" />
+
+            </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 

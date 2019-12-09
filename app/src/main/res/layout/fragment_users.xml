@@ -47,7 +47,7 @@
             android:id="@+id/search_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="260dp"
+            android:paddingLeft="270dp"
             android:src="@drawable/ic_search_white_24dp"></androidx.appcompat.widget.AppCompatImageView>
 
         <ImageView

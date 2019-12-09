@@ -66,7 +66,8 @@
             android:name=".activity.users.AddUserActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activity.home.AdminHomeActivity" />
-        <activity android:name=".activity.users.DetailUserActivity" />
+        <activity android:name=".activity.users.DetailUserActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.order.AddOrderActivity"
             android:windowSoftInputMode="stateAlwaysHidden"

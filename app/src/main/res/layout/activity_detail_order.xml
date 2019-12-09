@@ -19,17 +19,36 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:minHeight="50dp"
-            app:title="@string/order_detail"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="@android:color/white">
 
-            <ImageView
-                android:id="@+id/editOrder"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="180dp"
-                android:src="@drawable/ic_edit_white_24dp" />
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:gravity="right"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:titleTextColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:layout_gravity="left"
+                    android:textStyle="bold"
+                    android:layout_weight="5"
+                    android:text="@string/order_details"/>
+
+                <ImageView
+                    android:id="@+id/editOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_edit_white_24dp" />
+
+            </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
