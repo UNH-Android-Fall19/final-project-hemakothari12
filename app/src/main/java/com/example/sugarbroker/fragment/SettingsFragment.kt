@@ -77,8 +77,6 @@ class SettingsFragment : Fragment() {
                     Log.d(TAG, "User account deleted.")
                 }
             }
-
-
     }
 
     private fun performLogout() {

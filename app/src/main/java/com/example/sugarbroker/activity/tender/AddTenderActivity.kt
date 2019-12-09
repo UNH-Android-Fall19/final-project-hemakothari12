@@ -258,6 +258,7 @@ class AddTenderActivity : AppCompatActivity() {
         })
     }
 
+    //Will send notification when New Tender for Sugar is added
     fun getClient(): Retrofit {
         if (retrofit == null) {
             retrofit = Retrofit.Builder()

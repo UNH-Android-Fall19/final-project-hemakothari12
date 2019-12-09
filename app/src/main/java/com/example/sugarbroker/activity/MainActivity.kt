@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         },5000)
     }
 
+    // Depending on type of User Logged In display Homepage
     private fun callHomePage() {
         if (auth.currentUser != null) {
             val db = FirebaseFirestore.getInstance()

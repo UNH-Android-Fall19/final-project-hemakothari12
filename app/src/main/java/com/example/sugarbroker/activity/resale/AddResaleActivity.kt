@@ -257,6 +257,7 @@ class AddResaleActivity : AppCompatActivity() {
         })
     }
 
+    // Send notification when a New Resale Sugar is added
     fun getClient(): Retrofit {
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
@@ -306,5 +307,4 @@ class AddResaleActivity : AppCompatActivity() {
             }
         })
     }
-
 }

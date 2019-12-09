@@ -109,8 +109,6 @@ class AddOrderActivity : AppCompatActivity() {
                 Log.e(TAG, "Error adding Note document", e)
                 Toast.makeText(applicationContext, "Order could not be added!", Toast.LENGTH_SHORT).show()
             }
-
-
     }
 
     private fun setUpToolbar(toolbarTitle: String) {

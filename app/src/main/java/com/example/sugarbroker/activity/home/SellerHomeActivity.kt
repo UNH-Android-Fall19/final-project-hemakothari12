@@ -46,7 +46,7 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         firestoreDB = FirebaseFirestore.getInstance()
 
-        setHeader()
+        setDrawerHeader()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -211,7 +211,7 @@ class SellerHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             }
     }
 
-    private fun setHeader() {
+    private fun setDrawerHeader() {
         val uid = FirebaseAuth.getInstance().uid
 
         val hView = nav_view.getHeaderView(0)

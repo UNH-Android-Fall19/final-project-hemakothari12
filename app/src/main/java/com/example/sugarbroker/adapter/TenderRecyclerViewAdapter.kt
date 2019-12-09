@@ -116,6 +116,7 @@ class TenderRecyclerViewAdapter(private val tenderList: MutableList<Tender>, pri
         context.startActivity(intent)
     }
 
+    //Filter the recyclerview data based on search characters entered
     fun filter(charText: String) {
         var charText = charText
         charText = charText.toLowerCase(Locale.getDefault())

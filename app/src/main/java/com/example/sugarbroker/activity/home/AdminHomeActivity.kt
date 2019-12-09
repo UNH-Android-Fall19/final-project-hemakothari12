@@ -60,7 +60,6 @@ class AdminHomeActivity : AppCompatActivity() {
 
         bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemReselectedListener)
 
-
         if (supportFragmentManager.backStackEntryCount > 0) {
             val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
                 .name

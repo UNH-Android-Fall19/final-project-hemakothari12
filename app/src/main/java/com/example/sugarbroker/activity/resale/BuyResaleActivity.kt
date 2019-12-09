@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_buy_resale.*
 class BuyResaleActivity : AppCompatActivity() {
 
     private val TAG = "BuyResaleActivity"
-
     private var firestoreDB: FirebaseFirestore? = null
     internal var id: String? = ""
 

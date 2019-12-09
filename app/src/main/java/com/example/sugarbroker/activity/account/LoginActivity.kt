@@ -171,12 +171,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun saveUserDetailsToFirebase(account: GoogleSignInAccount) {
 
-        //Firestore database
-
         val uid = FirebaseAuth.getInstance().uid ?: ""
-
         val db = FirebaseFirestore.getInstance()
-
         val user = User(
             uid,
             account.displayName!!,
@@ -187,7 +183,6 @@ class LoginActivity : AppCompatActivity() {
             "User"
         )
 
-        //Add document with specific ID
         db.collection("users")
             .document(uid)
             .set(user)

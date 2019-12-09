@@ -30,9 +30,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.fragment_resale.view.*
 
-/**
- * [Resale Fragment] subclass.
- */
 class ResaleFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "ResaleFragment"

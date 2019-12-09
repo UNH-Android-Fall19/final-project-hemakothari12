@@ -75,6 +75,7 @@ class UserOrdersRecyclerViewAdapter(private val orderList: MutableList<Orders>, 
         context.startActivity(intent)
     }
 
+    //Filter the recyclerview data based on search characters entered
     fun filter(charText: String) {
         var charText = charText
         charText = charText.toLowerCase(Locale.getDefault())

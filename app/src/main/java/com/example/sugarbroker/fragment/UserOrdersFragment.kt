@@ -156,7 +156,6 @@ class UserOrdersFragment : Fragment(), SearchView.OnQueryTextListener {
         userRef = firestoreDB!!.collection("orders").whereEqualTo("status",typeOrder)
             .whereEqualTo("email",LoggedInUserEmail)
 
-//        firestoreDB!!.collection("orders").whereEqualTo("email",LoggedInUserEmail)
             userRef.get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

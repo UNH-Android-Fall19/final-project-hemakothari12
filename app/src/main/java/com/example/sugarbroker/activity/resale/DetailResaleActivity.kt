@@ -92,7 +92,6 @@ class DetailResaleActivity : AppCompatActivity(), OnMapReadyCallback {
 
             enableMyLocation()
             finish()
-
         }
 
         detail_sugar_image.setOnClickListener(View.OnClickListener {

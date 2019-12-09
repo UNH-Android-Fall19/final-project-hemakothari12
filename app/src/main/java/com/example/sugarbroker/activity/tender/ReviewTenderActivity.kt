@@ -61,7 +61,6 @@ class ReviewTenderActivity : AppCompatActivity() {
 
         confirm_button.setOnClickListener {
             val millName = mill_name_textview.text.toString()
-            val currentUser = FirebaseAuth.getInstance().currentUser
             val uid = FirebaseAuth.getInstance().uid
 
             firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()

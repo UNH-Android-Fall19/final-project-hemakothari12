@@ -28,9 +28,6 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_orders.view.*
 
-/**
- * [Orders Fragment] subclass.
- */
 class OrdersFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val TAG = "OrdersFragment"

@@ -47,7 +47,7 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         firestoreDB = FirebaseFirestore.getInstance()
 
-        setHeader()
+        setDrawerHeader()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -210,7 +210,7 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             }
     }
 
-    private fun setHeader() {
+    private fun setDrawerHeader() {
         val uid = FirebaseAuth.getInstance().uid
 
         val hView = nav_view.getHeaderView(0)
@@ -238,7 +238,4 @@ class UserHomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 Log.d(TAG, "get failed with ", exception)
             }
     }
-
-
-
 }
