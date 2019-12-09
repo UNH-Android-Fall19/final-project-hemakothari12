@@ -99,7 +99,7 @@ class DetailTenderActivity : AppCompatActivity(), OnMapReadyCallback {
             val mBuilder = AlertDialog.Builder(this@DetailTenderActivity)
             val mView = layoutInflater.inflate(R.layout.dialog_custom_layout, null)
             val photoView = mView.findViewById<View>(R.id.imageView) as ImageView
-            Glide.with(this@DetailTenderActivity).load(bundle!!.getString("UpdateResaleUrl"))
+            Glide.with(this@DetailTenderActivity).load(bundle!!.getString("UpdateTenderUrl"))
                 .placeholder(R.drawable.photoplaceholder)
                 .apply(RequestOptions.circleCropTransform())
                 .into(
