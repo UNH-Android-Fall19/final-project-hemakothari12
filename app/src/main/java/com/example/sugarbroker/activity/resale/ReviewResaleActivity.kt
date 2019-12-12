@@ -62,6 +62,9 @@ class ReviewResaleActivity : AppCompatActivity() {
         confirm_button.setOnClickListener {
             val millName = mill_name_textview.text.toString()
             val uid = FirebaseAuth.getInstance().uid
+            val quantityPriceVal = quantityprice_textview.text.toString()
+            val GSTVal = GST_textview.text.toString()
+            val totalPriceVal = totalprice_textview.text.toString()
 
             firestoreDB!!.collection("users").whereEqualTo("uid", uid).get()
                 .addOnSuccessListener { documents ->
@@ -70,7 +73,7 @@ class ReviewResaleActivity : AppCompatActivity() {
                             name = document.get("name")
                             address = document.get("address")
                             email = document.get("email")
-                            addOrder(millName, price.toString(), quantity.toString(), quantityPrice.toString(), GST.toString(), totalPrice.toString(), email.toString(), name.toString(), address.toString())
+                            addOrder(millName, price.toString(), quantity.toString(), quantityPriceVal, GSTVal, totalPriceVal, email.toString(), name.toString(), address.toString())
 
                         }
                     } else {
